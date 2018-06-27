@@ -1,20 +1,18 @@
 import {bindable} from 'aurelia-framework';
 import {inject} from 'aurelia-framework';
-import {HttpClient} from 'aurelia-http-client';
-import {AureliaConfiguration} from 'aurelia-configuration';
-import moment from 'moment/moment-timezone';
+import {HttpClient} from 'aurelia-fetch-client';
+import moment from 'moment';
 
-@inject(AureliaConfiguration, moment)
+@inject(moment)
 export class TimeEntriesList {
     @bindable entries = [];
 
-    constructor(config:AureliaConfiguration, moment: moment) {
-        this.config = config;
+    constructor(moment) {
         this.moment = moment;
 
         this.http = new HttpClient();
         this.http.configure(cfg => {
-            cfg.withBaseUrl(this.config.get('api.endpoint'));
+            cfg.withBaseUrl('http://localhost:8090/api/');
         });
     }
 
