@@ -1,8 +1,9 @@
 import {inject} from 'aurelia-framework';
 import {computedFrom} from 'aurelia-framework';
 import {HttpClient} from 'aurelia-fetch-client';
+import {WebAPI} from './web-api';
 
-@inject(HttpClient)
+@inject(HttpClient, WebAPI)
 export class TimeTracker {
     descriptionPlaceholder = 'What are you working on?';
     self = this;
@@ -12,11 +13,11 @@ export class TimeTracker {
     projects = [];
     timeEntries = [];
 
-    constructor(httpClient) {
+    constructor(httpClient, webApi) {
         httpClient.configure(config => {
             config
                 .useStandardConfiguration()
-                .withBaseUrl('http://localhost:8090/api/');
+                .withBaseUrl(webApi.getAbsolutePath());
         });
         this.http = httpClient;
     }

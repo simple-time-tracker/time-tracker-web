@@ -2,17 +2,18 @@ import {bindable} from 'aurelia-framework';
 import {inject} from 'aurelia-framework';
 import {HttpClient} from 'aurelia-fetch-client';
 import moment from 'moment';
+import {WebAPI} from './web-api';
 
-@inject(moment)
+@inject(moment, WebAPI)
 export class TimeEntriesList {
     @bindable entries = [];
 
-    constructor(moment) {
+    constructor(moment, webApi) {
         this.moment = moment;
 
         this.http = new HttpClient();
         this.http.configure(cfg => {
-            cfg.withBaseUrl('http://localhost:8090/api/');
+            cfg.withBaseUrl(webApi.getAbsolutePath());
         });
     }
 
