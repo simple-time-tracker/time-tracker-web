@@ -1,16 +1,14 @@
 import {bindable} from 'aurelia-framework';
 import {inject} from 'aurelia-framework';
 import {HttpClient} from 'aurelia-fetch-client';
-import moment from 'moment';
+import {parse, format, differenceInSeconds} from 'date-fns'
 import {WebAPI} from './web-api';
 
-@inject(moment, WebAPI)
+@inject(WebAPI)
 export class TimeEntriesList {
     @bindable entries = [];
 
-    constructor(moment, webApi) {
-        this.moment = moment;
-
+    constructor(webApi) {
         this.http = new HttpClient();
         this.http.configure(cfg => {
             cfg.withBaseUrl(webApi.getAbsolutePath());
@@ -19,7 +17,8 @@ export class TimeEntriesList {
 
     getDifference(entry) {
         if (entry.endDate != null) {
-            var diff = new Date(entry.endDate).getTime() - new Date(entry.startDate).getTime();
+            var diff = differenceInSeconds(entry.endDate, entry.startDate);
+            console.log(diff)
             return this.getDuration(diff);
         }
 
@@ -27,15 +26,16 @@ export class TimeEntriesList {
     }
 
     shortDateTime(date) {
-        return date ? moment.tz(moment.utc(date), moment.tz.guess()).format('MM/DD HH:mm'): '';
+        return date ? format(parse(date), ('MM/DD HH:mm')): '';
     }
 
 
-    getDuration(date) {
-        var duration = moment.duration(date);
-        var hours = duration.days() > 0 ? Math.floor(duration.asHours()) : duration.hours();
-        var minutes = duration.minutes();
-        var seconds = duration.seconds();
+    getDuration(diffInSeconds) {
+        var hours = Math.floor(diffInSeconds / (60 * 60))
+        diffInSeconds = diffInSeconds - (hours * 60 * 60)
+        var minutes = Math.floor(diffInSeconds / 60)
+        diffInSeconds = diffInSeconds - (minutes * 60)
+        var seconds = diffInSeconds;
 
         return `${this.convertTimeUnitToString(hours)}:${this.convertTimeUnitToString(minutes)}:${this.convertTimeUnitToString(seconds)}`;
     }
