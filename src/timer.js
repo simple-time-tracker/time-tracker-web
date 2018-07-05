@@ -1,10 +1,9 @@
 import {inject} from 'aurelia-framework';
 import {computedFrom} from 'aurelia-framework';
 import {HttpClient} from 'aurelia-fetch-client';
-import {AureliaConfiguration} from 'aurelia-configuration';
-import 'fetch';
+import {WebAPI} from './web-api';
 
-@inject(HttpClient, AureliaConfiguration)
+@inject(HttpClient, WebAPI)
 export class TimeTracker {
     descriptionPlaceholder = 'What are you working on?';
     self = this;
@@ -14,14 +13,13 @@ export class TimeTracker {
     projects = [];
     timeEntries = [];
 
-    constructor(http:HttpClient, config:AureliaConfiguration) {
-        this.config = config;
-        http.configure(config => {
+    constructor(httpClient, webApi) {
+        httpClient.configure(config => {
             config
                 .useStandardConfiguration()
-                .withBaseUrl(this.config.get('api.endpoint'));
+                .withBaseUrl(webApi.getAbsolutePath());
         });
-        this.http = http;
+        this.http = httpClient;
     }
 
     activate() {
@@ -85,7 +83,7 @@ export class TimeTracker {
     @computedFrom('currentlyTrackingEntry')
     get currentlyTrackingEntryMessage() {
         if (this.currentlyTrackingEntry != null) {
-            return `Currently working on ${this.currentlyTrackingEntry.project.name} project. 
+            return `Currently working on ${this.currentlyTrackingEntry.project.name} project.
                     Current task: ${this.currentlyTrackingEntry.description}.
                     Start date  ${(new Date(this.currentlyTrackingEntry.startDate).toLocaleString())}`
         }
