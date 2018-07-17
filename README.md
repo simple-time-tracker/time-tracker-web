@@ -2,7 +2,7 @@
 
 ## Launching aplication
 
-Start [time-tracker-api]: https://github.com/dovydasvenckus/time-tracker-api first
+Start [time-tracker-api](https://github.com/dovydasvenckus/time-tracker-api) first
 Then execute:
 
     npm install
@@ -18,7 +18,7 @@ Start time-tracker-api container:
 
     docker run -it --rm -e ACTIVE_PROFILES=dev -p 8080:8080 --name time-tracker-api dovydasvenckus/time-tracker
     
-Visit [time-tracker-api]: https://github.com/dovydasvenckus/time-tracker-api for more info about api container customization.
+Visit [time-tracker-api](https://github.com/dovydasvenckus/time-tracker-api) for more info about api container customization.
     
 
 Then start time-tracker-web docker container:
