@@ -5,5 +5,5 @@ COPY . ./
 RUN npm install && \
     npm install aurelia-cli -g && \
     au build --env prod
-EXPOSE 8080
-CMD [ "npm", "start" ]
+EXPOSE 9000
+CMD ["sh", "docker/start.sh"]
