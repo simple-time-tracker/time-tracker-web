@@ -9,11 +9,7 @@ export class WebAPI {
     this.config = configuration;
   }
 
-  getRelativePath() {
-    return this.config.url
-  }
-
   getAbsolutePath() {
-    return `http://${this.config.host}:${this.config.port}${this.config.url}/`
+    return `${this.config.url}/`
   }
 }
