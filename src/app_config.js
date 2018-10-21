@@ -1,5 +1,5 @@
 export class ApplicationConfig {
   constructor () {
-    this.url = '';
+    this.url = 'http://localhost/api';
   }
 }
