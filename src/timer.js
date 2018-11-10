@@ -48,7 +48,7 @@ export class TimeTracker {
     loadTimeEntries() {
         this.http.fetch('entries')
             .then(response => response.json())
-            .then(entries =>this.timeEntries = entries.reverse())
+            .then(entries =>this.timeEntries = entries)
     }
 
     loadProjects() {
