@@ -1,24 +1,58 @@
 import {bindable} from 'aurelia-framework';
 import {inject} from 'aurelia-framework';
 import {HttpClient} from 'aurelia-fetch-client';
+import {EventAggregator} from 'aurelia-event-aggregator';
 import {parse, format, differenceInSeconds} from 'date-fns'
+import {UpdateList} from './messages';
 import {WebAPI} from './web-api';
 
-@inject(WebAPI)
+@inject(WebAPI, EventAggregator)
 export class TimeEntriesList {
-    @bindable entries = [];
+    entries = [];
 
-    constructor(webApi) {
+    constructor(webApi, eventAggregator) {
+        this.eventAggregator = eventAggregator;
         this.http = new HttpClient();
         this.http.configure(cfg => {
             cfg.withBaseUrl(webApi.getAbsolutePath());
         });
+
+        eventAggregator.subscribe(UpdateList,  ( )=> {
+            return Promise.all([
+                this.loadTimeEntries()
+            ]);
+        });
     }
+
+    created(owningView, myView) {
+        return Promise.all([
+            this.loadTimeEntries()
+        ]);
+    }
+    
+
+    loadTimeEntries() {
+        this.http.fetch('entries')
+            .then(response => response.json())
+            .then(entries =>this.entries = entries)
+    }
+
+    deleteEntry(time_entry_id) {
+        var self = this;
+  
+        this.http.delete('entries/' + time_entry_id)
+            .then(response => {
+              self.entries  = self.entries.filter(function(element) {
+                  return element.id !== time_entry_id
+              })
+  
+            })
+      }
+
 
     getDifference(entry) {
         if (entry.endDate != null) {
             var diff = differenceInSeconds(entry.endDate, entry.startDate);
-            console.log(diff)
             return this.getDuration(diff);
         }
 
@@ -44,17 +78,5 @@ export class TimeEntriesList {
         if (('' + unit).length == 1)
             return '0' + unit;
         else return unit == '0' ? '00': unit
-    }
-
-    deleteEntry(time_entry_id) {
-      var self = this;
-
-      this.http.delete('entries/' + time_entry_id)
-          .then(response => {
-            self.entries  = self.entries.filter(function(element) {
-                return element.id !== time_entry_id
-            })
-
-          })
     }
 }

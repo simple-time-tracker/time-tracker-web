@@ -1,9 +1,11 @@
 import {inject} from 'aurelia-framework';
 import {computedFrom} from 'aurelia-framework';
 import {HttpClient} from 'aurelia-fetch-client';
+import {EventAggregator} from 'aurelia-event-aggregator';
+import {UpdateList} from './messages';
 import {WebAPI} from './web-api';
 
-@inject(HttpClient, WebAPI)
+@inject(HttpClient, WebAPI, EventAggregator)
 export class TimeTracker {
     descriptionPlaceholder = 'What are you working on?';
     self = this;
@@ -11,22 +13,21 @@ export class TimeTracker {
     currentDescription = '';
     currentlyTrackingEntry = null;
     projects = [];
-    timeEntries = [];
 
-    constructor(httpClient, webApi) {
+    constructor(httpClient, webApi, eventAggregator) {
         httpClient.configure(config => {
             config
                 .useStandardConfiguration()
                 .withBaseUrl(webApi.getAbsolutePath());
         });
         this.http = httpClient;
+        this.eventAggregator = eventAggregator;
     }
 
     activate() {
         return Promise.all([
             this.loadProjects(),
             this.loadCurrentlyTrackingEntry(),
-            this.loadTimeEntries()
         ]);
     }
 
@@ -43,12 +44,6 @@ export class TimeTracker {
                 this.currentDescription = current.description;
             }
         })
-    }
-
-    loadTimeEntries() {
-        this.http.fetch('entries')
-            .then(response => response.json())
-            .then(entries =>this.timeEntries = entries)
     }
 
     loadProjects() {
@@ -114,7 +109,7 @@ export class TimeTracker {
         }).then(response => {
             if (response.status == 201) {
                 this.loadCurrentlyTrackingEntry();
-                this.loadTimeEntries();
+                this.eventAggregator.publish(new UpdateList);
             }
         })
     }
@@ -126,7 +121,7 @@ export class TimeTracker {
             if (response.status == 200) {
                 this.currentDescription = '';
                 this.loadCurrentlyTrackingEntry();
-                this.loadTimeEntries();
+                this.eventAggregator.publish(new UpdateList);
             }
         })
     }
