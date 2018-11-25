@@ -6,7 +6,7 @@ import {UpdateList} from './messages';
 import {WebAPI} from './web-api';
 
 @inject(HttpClient, WebAPI, EventAggregator)
-export class TimeTracker {
+export class Timer {
     descriptionPlaceholder = 'What are you working on?';
     self = this;
     currentProject = null;
@@ -24,7 +24,7 @@ export class TimeTracker {
         this.eventAggregator = eventAggregator;
     }
 
-    activate() {
+    created(owningView, myView) {
         return Promise.all([
             this.loadProjects(),
             this.loadCurrentlyTrackingEntry(),
