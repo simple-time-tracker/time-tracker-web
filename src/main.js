@@ -1,7 +1,8 @@
 import environment from './environment';
-import {PLATFORM} from 'aurelia-pal';
+import { PLATFORM } from 'aurelia-pal';
 import 'babel-polyfill';
 import * as Bluebird from 'bluebird';
+import 'materialize-css';
 
 // remove out if you don't want a Promise polyfill (remove also from webpack.config.js)
 Bluebird.config({ warnings: { wForgottenReturn: false } });
@@ -23,7 +24,9 @@ export function configure(aurelia) {
   }
 
   if (environment.testing) {
-    aurelia.use.plugin(PLATFORM.moduleName('aurelia-testing'));
+    aurelia.use
+      .plugin(PLATFORM.moduleName('aurelia-testing'))
+      .plugin(PLATFORM.moduleName('aurelia-materialize-bridge'), b => b.useAll());
   }
 
   aurelia.start().then(() => aurelia.setRoot(PLATFORM.moduleName('app')));

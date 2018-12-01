@@ -1,41 +1,24 @@
 <template>
-    <section class="au-animate">
-        <form role="form">
-            <div class="form">
-                <div class="row" id="tracking-row">
+  <div class="row">
+    <form class="col s12">
+      <div class="col s12 m3 l2">
+        <select id="project-selector" md-select="enable-option-observer: true" disabled.bind="isCurrentlyTracking"
+          value.bind="currentProject">
+          <option change.delegate="updateSelectBox()" repeat.for="project of projects" model.bind="project.id">${project.name}</option>
+        </select>
+      </div>
+      <div class="input-field col s12 m6 l8">
+        <input id="last_name" type="text" class="validate" disabled.bind="isCurrentlyTracking" value.bind="currentDescription">
+        <label for="last_name">${descriptionPlaceholder}</label>
+      </div>
 
-                    <div class="col-lg-8">
-                        <div id="trackerSelectDiv" class="fields col-lg-4 col-xs-12">
-                            <select class="form-control"
-                                    disabled.bind="isCurrentlyTracking"
-                                    value.bind="currentProject">
-                                <option repeat.for="project of projects" model.bind="project.id">${project.name}
-                                </option>
-                            </select>
-                        </div>
-
-                        <div id="trackerDescriptionDiv" class="col-lg-8 col-xs-12">
-                            <input id="trackerDescription"
-                                   class="form-control" type="text"
-                                   placeholder.bind="descriptionPlaceholder"
-                                   disabled.bind="isCurrentlyTracking"
-                                   value.bind="currentDescription">
-                        </div>
-                    </div>
-
-                    <div class="buttons col-lg-4 col-xs-12">
-                        <button id="toggleTracking"
-                                class="btn btn-block ${isCurrentlyTracking ? 'btn-danger' : 'btn-success'}"
-                                click.trigger="toggleTracking()"
-                                disabled.bind="!isProjectSelected"
-                                >${currentToggleLabel}
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            </div>
-        </form>
-
-    </section>
+      <div class="input-field col s12 m3 l2">
+        <button class="btn-large ${isCurrentlyTracking ? 'red darken-3' : 'green accent-4'}" type="submit" id="toggleTracking"
+          click.trigger="toggleTracking()" disabled.bind="!isProjectSelected">${currentToggleLabel}
+          <i class="material-icons right">send</i>
+        </button>
+      </div>
+  </div>
+  </form>
+  </div>
 </template>
