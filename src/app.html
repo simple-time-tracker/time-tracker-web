@@ -1,11 +1,14 @@
 <template>
-  <require from="nav-bar.html"></require>
-  <require from="./assets/styles/main.css"></require>
-  <require from="./assets/styles/styles.css"></require>
+  <div>
+    <require from="nav-bar.html"></require>
+    <require from="./assets/styles/main.css"></require>
+    <require from="./assets/styles/styles.css"></require>
 
-  <nav-bar router.bind="router"></nav-bar>
+    <nav-bar router.bind="router"></nav-bar>
 
-  <div class="page-host">
-    <router-view></router-view>
+    <div class="page-host">
+      <router-view></router-view>
+    </div>
+
   </div>
 </template>
