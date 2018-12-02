@@ -7,6 +7,8 @@ import {WebAPI} from './web-api';
 
 @inject(WebAPI, EventAggregator)
 export class TimeEntriesList {
+    currentPage = 1;
+    totalPages = 1;
     entries = [];
 
     constructor(webApi, eventAggregator) {
@@ -31,9 +33,18 @@ export class TimeEntriesList {
     
 
     loadTimeEntries() {
-        this.http.fetch('entries')
+        this.http.fetch(`entries?page=${this.currentPage - 1}`)
             .then(response => response.json())
-            .then(entries =>this.entries = entries)
+            .then(response => {
+                this.entries = response.content;
+                this.currentPage = response.number + 1;
+                this.totalPages = response.totalPages;
+            })
+    }
+
+    changePage(event) {
+        this.currentPage = event.detail;
+        this.loadTimeEntries();
     }
 
     deleteEntry(time_entry_id) {
