@@ -7,10 +7,11 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case LOAD_PROJECTS: {
+      return { ...state, projects: [...action.payload] };
+    }
     case LOAD_TIME_ENTRIES: {
-      return {
-        timeEntries: [...action.payload.content]
-      };
+      return { ...state, timeEntries: [...action.payload.content] };
     }
     default:
       return state;

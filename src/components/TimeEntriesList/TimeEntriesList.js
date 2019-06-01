@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import TimeEntryListItem from "./TimeEntryListItem";
-import { getProjects } from "../../utils/api";
 
 class TimeEntriesList extends Component {
   componentDidMount() {
     this.props.loadTimeEntries();
   }
+
   render() {
     const entries = this.props.entries.map(entry => (
       <TimeEntryListItem
