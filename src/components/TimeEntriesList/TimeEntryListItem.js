@@ -1,4 +1,5 @@
 import React from "react";
+import { getDuration } from "../../utils/time";
 
 const TimeEntryListItem = props => (
   <tr>
@@ -7,7 +8,12 @@ const TimeEntryListItem = props => (
     <td>{props.project}</td>
     <td>{props.startDate}</td>
     <td>{props.endDate}</td>
-    <td>{props.timeSpent}</td>
+    <td>
+      {getDuration(
+        new Date(props.endDate).getSeconds() -
+          new Date(props.startDate).getSeconds()
+      )}
+    </td>
   </tr>
 );
 

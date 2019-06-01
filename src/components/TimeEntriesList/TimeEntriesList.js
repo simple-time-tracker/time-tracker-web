@@ -1,37 +1,20 @@
 import React, { Component } from "react";
 import TimeEntryListItem from "./TimeEntryListItem";
+import { getProjects } from "../../utils/api";
 
 class TimeEntriesList extends Component {
-  state = {
-    entries: [
-      {
-        id: 1,
-        activity: "Programming",
-        project: "Budget-app",
-        startDate: new Date().toString(),
-        endDate: null,
-        timeSpent: "1 H"
-      },
-      {
-        id: 2,
-        activity: "Weight lifting",
-        project: "Fitness",
-        startDate: new Date().toString(),
-        endDate: null,
-        timeSpent: "1 H"
-      }
-    ]
-  };
-
+  componentDidMount() {
+    this.props.loadTimeEntries();
+  }
   render() {
-    const entries = this.state.entries.map(entry => (
+    const entries = this.props.entries.map(entry => (
       <TimeEntryListItem
         id={entry.id}
-        activity={entry.activity}
-        project={entry.project}
+        key={entry.id}
+        activity={entry.description}
+        project={entry.project.name}
         startDate={entry.startDate}
         endDate={entry.endDate}
-        timeSpent={entry.timeSpent}
       />
     ));
     return (
