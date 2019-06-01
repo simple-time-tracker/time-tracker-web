@@ -1,14 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
-
-class TimeTracker extends React.Component {
-  render() { return <div>
-    Time tracker app
-    </div>
-  }
-}
+import styles from "bulma";
+import TimeTrackerApp from "./TimeTrackerApp";
 
 let AppRoot = document.getElementById("app");
-
-ReactDOM.render(<TimeTracker/>, AppRoot);
-
+ReactDOM.render(<TimeTrackerApp />, AppRoot);
