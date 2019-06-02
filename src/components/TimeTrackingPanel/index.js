@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import { loadProjects } from "../../state/actions";
-import ProjectSelector from "./ProjectSelector";
+import TimeTrackerPanel from "./TimeTackerPanel ";
 
 const mapStateToProps = state => {
   return {
@@ -13,4 +13,4 @@ const mapDispatchToProps = { loadProjects };
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(ProjectSelector);
+)(TimeTrackerPanel);

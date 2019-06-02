@@ -1,6 +1,5 @@
 import React from "react";
-import { formatDate } from "../../utils/time";
-import { getDuration } from "../../utils/time";
+import { formatDate, getDuration } from "../../utils/time";
 
 const TimeEntryListItem = props => (
   <tr>

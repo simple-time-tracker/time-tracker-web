@@ -18,7 +18,7 @@ class TimeEntriesList extends Component {
       />
     ));
     return (
-      <div>
+      <div className="container">
         <table className="table is-fullwidth is-hoverable is-narrow">
           <thead>
             <tr>

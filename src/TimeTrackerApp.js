@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import TimeEntriesList from "./components/TimeEntriesList";
-import ProjectSelector from "./components/ProjectSelector";
+import ProjectSelector from "./components/TimeTrackingPanel";
 
 class TimeTrackerApp extends Component {
   render() {
