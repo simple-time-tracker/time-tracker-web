@@ -19,7 +19,7 @@ class TimeEntriesList extends Component {
     ));
     return (
       <div className="container">
-        <table className="table is-fullwidth is-hoverable is-narrow">
+        <table className="table is-fullwidth is-striped is-narrow">
           <thead>
             <tr>
               <th>Id</th>

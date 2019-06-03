@@ -7,12 +7,13 @@ const TimeEntryListItem = props => (
     <td>{props.activity}</td>
     <td>{props.project}</td>
     <td>{formatDate(props.startDate)}</td>
-    <td>{formatDate(props.endDate)}</td>
+    <td>{props.endDate && formatDate(props.endDate)}</td>
     <td>
-      {getDuration(
-        new Date(props.endDate).getSeconds() -
-          new Date(props.startDate).getSeconds()
-      )}
+      {props.endDate &&
+        getDuration(
+          new Date(props.endDate).getSeconds() -
+            new Date(props.startDate).getSeconds()
+        )}
     </td>
   </tr>
 );
