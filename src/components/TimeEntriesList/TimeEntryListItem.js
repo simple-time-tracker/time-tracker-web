@@ -1,5 +1,6 @@
 import React from "react";
 import { formatDate, getDuration } from "../../utils/time";
+import { differenceInSeconds } from "date-fns";
 
 const TimeEntryListItem = props => (
   <tr>
@@ -11,8 +12,10 @@ const TimeEntryListItem = props => (
     <td>
       {props.endDate &&
         getDuration(
-          new Date(props.endDate).getSeconds() -
-            new Date(props.startDate).getSeconds()
+          differenceInSeconds(
+            new Date(props.endDate),
+            new Date(props.startDate)
+          )
         )}
     </td>
   </tr>
