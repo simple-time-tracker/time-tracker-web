@@ -9,6 +9,7 @@ class TimeTrackerPanel extends Component {
     this.handleProjectChange = this.handleProjectChange.bind(this);
     this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
     this.handleToggleTracking = this.handleToggleTracking.bind(this);
+    this.handleKeyInput = this.handleKeyInput.bind(this);
   }
 
   handleProjectChange(event) {
@@ -24,6 +25,12 @@ class TimeTrackerPanel extends Component {
       this.props.startTrackingTime();
     } else {
       this.props.stopTrackingTime();
+    }
+  }
+
+  handleKeyInput(event) {
+    if (event.key === "Enter") {
+      this.handleToggleTracking(event);
     }
   }
 
@@ -53,6 +60,7 @@ class TimeTrackerPanel extends Component {
             type="text"
             value={this.props.description}
             onChange={this.handleDescriptionChange}
+            onKeyDown={this.handleKeyInput}
             placeholder="
             What are you working on?"
           />
