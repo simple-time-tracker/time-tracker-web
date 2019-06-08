@@ -1,16 +1,12 @@
 # Time tracker web
 
-## Launching aplication
+## Launching application
 
 Start [time-tracker-api](https://github.com/dovydasvenckus/time-tracker-api) first
 Then execute:
 
     npm install
-    npm install aurelia-cli -g
-
-After dependencies and aurelia cli is installed run:
-
-    au run --watch
+    npm run
 
 
 ## Run using docker
