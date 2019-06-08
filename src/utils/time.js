@@ -1,6 +1,6 @@
 import { format } from "date-fns";
 
-const DATE_FORMAT = "MM/DD H:s";
+const DATE_FORMAT = "MM/DD HH:mm";
 
 export const getDuration = diffInSeconds => {
   var hours = Math.floor(diffInSeconds / (60 * 60));
