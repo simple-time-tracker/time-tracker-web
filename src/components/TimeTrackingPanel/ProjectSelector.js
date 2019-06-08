@@ -3,7 +3,11 @@ import PropTypes from "prop-types";
 
 const ProjectSelector = props => (
   <div className="select is-fullwidth">
-    <select onChange={props.handleProjectUpdate} value={props.currentProject}>
+    <select
+      onChange={props.handleProjectUpdate}
+      value={props.currentProject}
+      disabled={props.isTracking}
+    >
       {props.projects.map(project => {
         return (
           <option key={project.id} value={project.id}>
@@ -17,6 +21,7 @@ const ProjectSelector = props => (
 
 ProjectSelector.propTypes = {
   projects: PropTypes.array,
+  isTracking: PropTypes.bool,
   handleProjectUpdate: PropTypes.func
 };
 

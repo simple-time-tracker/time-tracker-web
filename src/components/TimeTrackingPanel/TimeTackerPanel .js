@@ -43,6 +43,10 @@ class TimeTrackerPanel extends Component {
     return this.props.isTracking ? "is-danger" : "is-primary";
   }
 
+  getTrackingButtonMessage() {
+    return this.props.isTracking ? "Stop tracking" : "Start tracking";
+  }
+
   render() {
     return (
       <div className="columns">
@@ -51,6 +55,7 @@ class TimeTrackerPanel extends Component {
             projects={this.props.projects}
             handleProjectUpdate={this.handleProjectChange}
             currentProject={this.props.currentProject}
+            isTracking={this.props.isTracking}
           />
         </div>
 
@@ -61,6 +66,7 @@ class TimeTrackerPanel extends Component {
             value={this.props.description}
             onChange={this.handleDescriptionChange}
             onKeyDown={this.handleKeyInput}
+            disabled={this.props.isTracking}
             placeholder="
             What are you working on?"
           />
@@ -71,7 +77,7 @@ class TimeTrackerPanel extends Component {
             className={`button is-fullwidth ${this.getTrackingButtonClass()}`}
             onClick={this.handleToggleTracking}
           >
-            {this.props.isTracking ? "Stop tracking" : "Start tracking"}
+            {this.getTrackingButtonMessage()}
           </a>
         </div>
       </div>
