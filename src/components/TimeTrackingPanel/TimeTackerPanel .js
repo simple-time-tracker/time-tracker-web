@@ -47,6 +47,18 @@ class TimeTrackerPanel extends Component {
     return this.props.isTracking ? "Stop tracking" : "Start tracking";
   }
 
+  isThereNoExistingProjects() {
+    return this.props.currentProject === "no-id";
+  }
+
+  isDescriptionInputDisabled() {
+    return this.props.isTracking || this.isThereNoExistingProjects();
+  }
+
+  isTrackingButtonDisabled() {
+    return this.isThereNoExistingProjects() || !this.props.description;
+  }
+
   render() {
     return (
       <div className="columns">
@@ -66,19 +78,20 @@ class TimeTrackerPanel extends Component {
             value={this.props.description}
             onChange={this.handleDescriptionChange}
             onKeyDown={this.handleKeyInput}
-            disabled={this.props.isTracking}
+            disabled={this.isDescriptionInputDisabled()}
             placeholder="
             What are you working on?"
           />
         </div>
 
         <div className="column is-one-fifth is-full-mobile">
-          <a
+          <button
             className={`button is-fullwidth ${this.getTrackingButtonClass()}`}
+            disabled={this.isTrackingButtonDisabled()}
             onClick={this.handleToggleTracking}
           >
             {this.getTrackingButtonMessage()}
-          </a>
+          </button>
         </div>
       </div>
     );

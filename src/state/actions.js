@@ -20,7 +20,10 @@ export const loadProjects = () => {
     getProjects().then(response => {
       dispatch({
         type: LOAD_PROJECTS,
-        payload: response.data
+        payload:
+          response.data.length > 0
+            ? response.data
+            : [{ id: "no-id", name: "No projects" }]
       });
     });
   };

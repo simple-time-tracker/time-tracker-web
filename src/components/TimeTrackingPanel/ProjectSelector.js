@@ -6,7 +6,7 @@ const ProjectSelector = props => (
     <select
       onChange={props.handleProjectUpdate}
       value={props.currentProject}
-      disabled={props.isTracking}
+      disabled={props.isTracking || props.currentProject === "no-id"}
     >
       {props.projects.map(project => {
         return (
