@@ -3,17 +3,8 @@ const { createProxyServer } = require("http-proxy");
 const Path = require("path");
 const Bundler = require("parcel-bundler");
 
-const backendConfig = {
-  protocol: "http",
-  host: "localhost",
-  port: 8080
-};
-
-const frontendConfig = {
-  protocol: "http",
-  host: "localhost",
-  port: 1234
-};
+const backendUrl = "http://localhost:8080";
+const frontendUrl = "http://localhost:1234";
 
 const options = {};
 
@@ -28,13 +19,13 @@ const proxy = createProxyServer();
 const server = createServer((req, res) => {
   if (req.url.includes("/api/")) {
     proxy.web(req, res, {
-      target: backendConfig,
+      target: backendUrl,
       changeOrigin: true,
       autoRewrite: true
     });
   } else {
     proxy.web(req, res, {
-      target: frontendConfig,
+      target: frontendUrl,
       ws: true
     });
   }
