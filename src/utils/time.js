@@ -3,11 +3,11 @@ import { format } from "date-fns";
 const DATE_FORMAT = "MM/DD HH:mm";
 
 export const getDuration = diffInSeconds => {
-  var hours = Math.floor(diffInSeconds / (60 * 60));
+  const hours = Math.floor(diffInSeconds / (60 * 60));
   diffInSeconds = diffInSeconds - hours * 60 * 60;
-  var minutes = Math.floor(diffInSeconds / 60);
+  const minutes = Math.floor(diffInSeconds / 60);
   diffInSeconds = diffInSeconds - minutes * 60;
-  var seconds = diffInSeconds;
+  const seconds = diffInSeconds;
 
   return `${convertTimeUnitToString(hours)}:${convertTimeUnitToString(
     minutes

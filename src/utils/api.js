@@ -14,7 +14,6 @@ export const getTimeEntries = () =>
   axios.get(`${API_URL}/${TIME_ENTRIES_PATH}`);
 
 export const startTracking = (id, description) => {
-  console.log(`${API_URL}/${TIME_ENTRIES_PATH}/${id}`);
   return axios.post(`${API_URL}/${TIME_ENTRIES_PATH}/start/${id}`, {
     taskDescription: description
   });

@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { formatDate, getDuration } from "../../utils/time";
 import { differenceInSeconds } from "date-fns";
 
@@ -21,4 +22,9 @@ const TimeEntryListItem = props => (
   </tr>
 );
 
+TimeEntryListItem.propTypes = {
+  id: PropTypes.number,
+  activity: PropTypes.string,
+  project: PropTypes.string
+};
 export default TimeEntryListItem;

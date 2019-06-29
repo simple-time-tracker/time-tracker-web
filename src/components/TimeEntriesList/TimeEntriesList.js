@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import TimeEntryListItem from "./TimeEntryListItem";
+import PropTypes from "prop-types";
 
 class TimeEntriesList extends Component {
-  componentDidMount() {
+  componentDidMount = () => {
     this.props.loadTimeEntries();
-  }
+  };
 
-  render() {
+  render = () => {
     const entries = this.props.entries.map(entry => (
       <TimeEntryListItem
         id={entry.id}
@@ -28,13 +29,18 @@ class TimeEntriesList extends Component {
               <th>Start date</th>
               <th>End date</th>
               <th>Time spent</th>
+              <th />
             </tr>
           </thead>
           <tbody>{entries}</tbody>
         </table>
       </div>
     );
-  }
+  };
 }
+
+TimeEntriesList.propTypes = {
+  entries: PropTypes.array
+};
 
 export default TimeEntriesList;

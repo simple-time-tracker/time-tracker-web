@@ -3,63 +3,54 @@ import ProjectSelector from "./ProjectSelector";
 import PropTypes from "prop-types";
 
 class TimeTrackerPanel extends Component {
-  constructor(props) {
-    super(props);
-
-    this.handleProjectChange = this.handleProjectChange.bind(this);
-    this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
-    this.handleToggleTracking = this.handleToggleTracking.bind(this);
-    this.handleKeyInput = this.handleKeyInput.bind(this);
-  }
-
-  handleProjectChange(event) {
+  handleProjectChange = event => {
     this.props.changeProject(event.target.value);
-  }
+  };
 
-  handleDescriptionChange(event) {
+  handleDescriptionChange = event => {
     this.props.changeDescription(event.target.value);
-  }
+  };
 
-  handleToggleTracking(event) {
+  handleToggleTracking = event => {
     if (!this.props.isTracking) {
       this.props.startTrackingTime();
     } else {
       this.props.stopTrackingTime();
     }
-  }
+  };
 
-  handleKeyInput(event) {
+  handleKeyInput = event => {
     if (event.key === "Enter") {
       this.handleToggleTracking(event);
     }
-  }
+  };
 
-  componentDidMount() {
+  componentDidMount = () => {
     this.props.loadProjects();
     this.props.getCurrentTimeEntry();
-  }
+  };
 
-  getTrackingButtonClass() {
+  getTrackingButtonClass = () => {
     return this.props.isTracking ? "is-danger" : "is-primary";
-  }
+  };
 
-  getTrackingButtonMessage() {
+  getTrackingButtonMessage = () => {
     return this.props.isTracking ? "Stop tracking" : "Start tracking";
-  }
+  };
 
-  isThereNoExistingProjects() {
+  isThereNoExistingProjects = () => {
     return this.props.currentProject === "no-id";
-  }
+  };
 
-  isDescriptionInputDisabled() {
+  isDescriptionInputDisabled = () => {
     return this.props.isTracking || this.isThereNoExistingProjects();
-  }
+  };
 
-  isTrackingButtonDisabled() {
+  isTrackingButtonDisabled = () => {
     return this.isThereNoExistingProjects() || !this.props.description;
-  }
+  };
 
-  render() {
+  render = () => {
     return (
       <div className="columns">
         <div className="column is-one-fifths is-full-mobile">
@@ -95,7 +86,7 @@ class TimeTrackerPanel extends Component {
         </div>
       </div>
     );
-  }
+  };
 }
 
 ProjectSelector.propTypes = {
