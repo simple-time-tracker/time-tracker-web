@@ -26,8 +26,8 @@ class TimeEntriesList extends Component {
               <th>Id</th>
               <th>Activity</th>
               <th>Project</th>
-              <th>Start date</th>
-              <th>End date</th>
+              <th className="is-hidden-mobile">Start date</th>
+              <th className="is-hidden-mobile">End date</th>
               <th>Time spent</th>
               <th />
             </tr>

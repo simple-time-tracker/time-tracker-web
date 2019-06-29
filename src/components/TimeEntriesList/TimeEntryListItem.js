@@ -8,8 +8,10 @@ const TimeEntryListItem = props => (
     <td>{props.id}</td>
     <td>{props.activity}</td>
     <td>{props.project}</td>
-    <td>{formatDate(props.startDate)}</td>
-    <td>{props.endDate && formatDate(props.endDate)}</td>
+    <td className="is-hidden-mobile">{formatDate(props.startDate)}</td>
+    <td className="is-hidden-mobile">
+      {props.endDate && formatDate(props.endDate)}
+    </td>
     <td>
       {props.endDate &&
         getDuration(
