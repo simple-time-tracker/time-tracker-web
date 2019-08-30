@@ -23,10 +23,10 @@ class AddProjectModal extends React.PureComponent {
   };
 
   render = () => {
-    const { isActive, createAction, closeModalAction } = this.props;
+    const { isActive, createProjectAction, closeModalAction } = this.props;
     return (
       <div className={`modal ${isActive && "is-active"}`}>
-        <div className="modal-background"></div>
+        <div className="modal-background" />
         <div className="modal-card">
           <header className="modal-card-head">
             <p className="modal-card-title">Create new project</p>
@@ -34,7 +34,7 @@ class AddProjectModal extends React.PureComponent {
               className="delete"
               aria-label="close"
               onClick={closeModalAction}
-            ></button>
+            />
           </header>
           <section className="modal-card-body">
             <div className="field">
@@ -54,7 +54,7 @@ class AddProjectModal extends React.PureComponent {
             <button
               className="button is-success"
               onClick={() => {
-                createAction(this.state.projectName);
+                createProjectAction(this.state.projectName);
                 this.closeAndClearModal();
               }}
             >

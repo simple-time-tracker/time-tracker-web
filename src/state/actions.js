@@ -68,9 +68,12 @@ export const stopTrackingTime = () => {
 
 export const createProject = name => {
   return dispatch => {
-    createNewProject(name).then(() => {
-      loadProjects()(dispatch);
-    });
+    createNewProject(name)
+      .then(response => {
+        loadProjects()(dispatch);
+        dispatch(changeProject(response.data.id));
+      })
+      .catch(error => console.log(error));
   };
 };
 
