@@ -7,7 +7,8 @@ import {
   startTrackingTime,
   stopTrackingTime,
   openCreateProjectModal,
-  closeCreateProjectModal
+  closeCreateProjectModal,
+  createProject
 } from "../../state/actions";
 import TimeTrackerPanel from "./TimeTackerPanel ";
 
@@ -29,7 +30,8 @@ const mapDispatchToProps = {
   startTrackingTime,
   stopTrackingTime,
   openCreateProjectModal,
-  closeCreateProjectModal
+  closeCreateProjectModal,
+  createProject
 };
 
 export default connect(

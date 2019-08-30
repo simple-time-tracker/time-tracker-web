@@ -77,7 +77,7 @@ class TimeTrackerPanel extends Component {
       isTracking,
       description,
       isCreateProjectModalIsOpen,
-      closeCreateProjectModal
+      createProject
     } = this.props;
     return (
       <div className="columns">
@@ -128,6 +128,7 @@ class TimeTrackerPanel extends Component {
         </div>
         <AddProjectModal
           isActive={isCreateProjectModalIsOpen}
+          createAction={createProject}
           closeModalAction={this.closeCreateProjectModal}
         />
       </div>

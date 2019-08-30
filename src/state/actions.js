@@ -14,7 +14,8 @@ import {
   getTimeEntries,
   getActiveTimeEntry,
   startTracking,
-  stopTracking
+  stopTracking,
+  createNewProject
 } from "../utils/api";
 
 export const loadProjects = () => {
@@ -61,6 +62,14 @@ export const stopTrackingTime = () => {
         type: STOP_TRACKING
       });
       loadTimeEntries()(dispatch);
+    });
+  };
+};
+
+export const createProject = name => {
+  return dispatch => {
+    createNewProject(name).then(() => {
+      loadProjects()(dispatch);
     });
   };
 };
