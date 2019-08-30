@@ -53,16 +53,27 @@ class TimeTrackerPanel extends Component {
   render = () => {
     return (
       <div className="columns">
-        <div className="column is-one-fifths is-full-mobile">
-          <ProjectSelector
-            projects={this.props.projects}
-            handleProjectUpdate={this.handleProjectChange}
-            currentProject={this.props.currentProject}
-            isTracking={this.props.isTracking}
-          />
+        <div className="column is-two-fifths-tablet is-full-mobile">
+          <div className="columns is-mobile">
+            <div className="column is-1-widescreen is-2-tablet is-1-mobile add-project-button-container">
+              <a className="button is-primary">
+                <span className="icon">
+                  <i className="fa fa-plus" />
+                </span>
+              </a>
+            </div>
+            <div className="column is-11-widescreen is-10-tablet is-11-mobile">
+              <ProjectSelector
+                projects={this.props.projects}
+                handleProjectUpdate={this.handleProjectChange}
+                currentProject={this.props.currentProject}
+                isTracking={this.props.isTracking}
+              />
+            </div>
+          </div>
         </div>
 
-        <div className="column is-three-fifths is-full-mobile ">
+        <div className="column is-two-fifths-tablet is-full-mobile">
           <input
             className="input is-normal"
             type="text"
