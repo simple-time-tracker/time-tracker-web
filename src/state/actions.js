@@ -20,8 +20,8 @@ import {
 
 export const loadProjects = () => {
   return dispatch => {
-    getProjects().then(response => {
-      dispatch({
+    return getProjects().then(response => {
+      return dispatch({
         type: LOAD_PROJECTS,
         payload:
           response.data.length > 0
@@ -70,8 +70,9 @@ export const createProject = name => {
   return dispatch => {
     createNewProject(name)
       .then(response => {
-        loadProjects()(dispatch);
-        dispatch(changeProject(response.data.id));
+        loadProjects()(dispatch).then(value =>
+          dispatch(changeProject(response.data.id))
+        );
       })
       .catch(error => console.log(error));
   };
