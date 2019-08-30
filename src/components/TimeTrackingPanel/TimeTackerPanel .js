@@ -128,7 +128,7 @@ class TimeTrackerPanel extends Component {
         </div>
         <AddProjectModal
           isActive={isCreateProjectModalIsOpen}
-          createAction={createProject}
+          createProjectAction={createProject}
           closeModalAction={this.closeCreateProjectModal}
         />
       </div>

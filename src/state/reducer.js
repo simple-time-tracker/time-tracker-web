@@ -16,8 +16,10 @@ const initialState = {
   tracker: {
     currentProject: "",
     taskDescription: "",
-    isTracking: false,
-    isCreateProjectModalIsOpen: false
+    isTracking: false
+  },
+  createProject: {
+    isModalOpen: false
   }
 };
 
@@ -90,9 +92,9 @@ const reducer = (state = initialState, action) => {
     case OPEN_CREATE_PROJECT_MODAL: {
       return {
         ...state,
-        tracker: {
+        createProject: {
           ...state.tracker,
-          isCreateProjectModalIsOpen: true
+          isModalOpen: true
         }
       };
     }
@@ -100,9 +102,9 @@ const reducer = (state = initialState, action) => {
     case CLOSE_CREATE_PROJECT_MODAL: {
       return {
         ...state,
-        tracker: {
+        createProject: {
           ...state.tracker,
-          isCreateProjectModalIsOpen: false
+          isModalOpen: false
         }
       };
     }

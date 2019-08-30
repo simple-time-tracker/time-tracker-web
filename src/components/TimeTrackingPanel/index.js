@@ -18,7 +18,7 @@ const mapStateToProps = state => {
     currentProject: state.tracker.currentProject,
     description: state.tracker.taskDescription,
     isTracking: state.tracker.isTracking,
-    isCreateProjectModalIsOpen: state.tracker.isCreateProjectModalIsOpen
+    isCreateProjectModalIsOpen: state.createProject.isModalOpen
   };
 };
 

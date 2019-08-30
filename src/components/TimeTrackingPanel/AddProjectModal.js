@@ -72,7 +72,7 @@ class AddProjectModal extends React.PureComponent {
 
 AddProjectModal.propTypes = {
   isActive: PropTypes.bool.isRequired,
-  createAction: PropTypes.func.isRequired,
+  createProjectAction: PropTypes.func.isRequired,
   closeModalAction: PropTypes.func.isRequired
 };
 
