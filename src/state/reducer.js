@@ -5,7 +5,9 @@ import {
   LOAD_CURRENT_TIME_ENTRY,
   START_TRACKING,
   STOP_TRACKING,
-  CHANGE_DESCRIPTION
+  CHANGE_DESCRIPTION,
+  OPEN_CREATE_PROJECT_MODAL,
+  CLOSE_CREATE_PROJECT_MODAL
 } from "./actionTypes";
 
 const initialState = {
@@ -14,7 +16,8 @@ const initialState = {
   tracker: {
     currentProject: "",
     taskDescription: "",
-    isTracking: false
+    isTracking: false,
+    isCreateProjectModalIsOpen: false
   }
 };
 
@@ -81,6 +84,25 @@ const reducer = (state = initialState, action) => {
           ...state.tracker,
           isTracking: false,
           taskDescription: ""
+        }
+      };
+    }
+    case OPEN_CREATE_PROJECT_MODAL: {
+      return {
+        ...state,
+        tracker: {
+          ...state.tracker,
+          isCreateProjectModalIsOpen: true
+        }
+      };
+    }
+
+    case CLOSE_CREATE_PROJECT_MODAL: {
+      return {
+        ...state,
+        tracker: {
+          ...state.tracker,
+          isCreateProjectModalIsOpen: false
         }
       };
     }

@@ -35,6 +35,16 @@ class TimeTrackerPanel extends Component {
     getCurrentTimeEntry();
   };
 
+  openCreateProjectModal = () => {
+    const { openCreateProjectModal } = this.props;
+    openCreateProjectModal();
+  };
+
+  closeCreateProjectModal = () => {
+    const { closeCreateProjectModal } = this.props;
+    closeCreateProjectModal();
+  };
+
   getTrackingButtonClass = () => {
     const { isTracking } = this.props;
     return isTracking ? "is-danger" : "is-primary";
@@ -61,13 +71,23 @@ class TimeTrackerPanel extends Component {
   };
 
   render = () => {
-    const { projects, currentProject, isTracking, description } = this.props;
+    const {
+      projects,
+      currentProject,
+      isTracking,
+      description,
+      isCreateProjectModalIsOpen,
+      closeCreateProjectModal
+    } = this.props;
     return (
       <div className="columns">
         <div className="column is-two-fifths-tablet is-full-mobile">
           <div className="columns is-mobile">
             <div className="column is-1-widescreen is-2-tablet is-1-mobile add-project-button-container">
-              <a className="button is-primary">
+              <a
+                onClick={this.openCreateProjectModal}
+                className="button is-primary"
+              >
                 <span className="icon">
                   <i className="fa fa-plus" />
                 </span>
@@ -106,6 +126,10 @@ class TimeTrackerPanel extends Component {
             {this.getTrackingButtonMessage()}
           </button>
         </div>
+        <AddProjectModal
+          isActive={isCreateProjectModalIsOpen}
+          closeModalAction={this.closeCreateProjectModal}
+        />
       </div>
     );
   };

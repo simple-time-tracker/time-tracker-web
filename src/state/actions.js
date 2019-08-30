@@ -5,7 +5,9 @@ import {
   LOAD_TIME_ENTRIES,
   LOAD_CURRENT_TIME_ENTRY,
   START_TRACKING,
-  STOP_TRACKING
+  STOP_TRACKING,
+  OPEN_CREATE_PROJECT_MODAL,
+  CLOSE_CREATE_PROJECT_MODAL
 } from "./actionTypes";
 import {
   getProjects,
@@ -85,5 +87,17 @@ export const changeDescription = description => {
   return {
     type: CHANGE_DESCRIPTION,
     payload: description
+  };
+};
+
+export const openCreateProjectModal = () => {
+  return {
+    type: OPEN_CREATE_PROJECT_MODAL
+  };
+};
+
+export const closeCreateProjectModal = () => {
+  return {
+    type: CLOSE_CREATE_PROJECT_MODAL
   };
 };

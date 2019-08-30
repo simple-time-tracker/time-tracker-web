@@ -5,7 +5,9 @@ import {
   loadProjects,
   getCurrentTimeEntry,
   startTrackingTime,
-  stopTrackingTime
+  stopTrackingTime,
+  openCreateProjectModal,
+  closeCreateProjectModal
 } from "../../state/actions";
 import TimeTrackerPanel from "./TimeTackerPanel ";
 
@@ -14,7 +16,8 @@ const mapStateToProps = state => {
     projects: state.projects,
     currentProject: state.tracker.currentProject,
     description: state.tracker.taskDescription,
-    isTracking: state.tracker.isTracking
+    isTracking: state.tracker.isTracking,
+    isCreateProjectModalIsOpen: state.tracker.isCreateProjectModalIsOpen
   };
 };
 
@@ -24,7 +27,9 @@ const mapDispatchToProps = {
   loadProjects,
   getCurrentTimeEntry,
   startTrackingTime,
-  stopTrackingTime
+  stopTrackingTime,
+  openCreateProjectModal,
+  closeCreateProjectModal
 };
 
 export default connect(
