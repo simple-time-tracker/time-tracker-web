@@ -82,26 +82,13 @@ class TimeTrackerPanel extends Component {
     return (
       <div className="columns">
         <div className="column is-two-fifths-tablet is-full-mobile">
-          <div className="columns is-mobile">
-            <div className="column is-1-widescreen is-2-tablet is-1-mobile add-project-button-container">
-              <a
-                onClick={this.openCreateProjectModal}
-                className="button is-primary"
-              >
-                <span className="icon">
-                  <i className="fa fa-plus" />
-                </span>
-              </a>
-            </div>
-            <div className="column is-11-widescreen is-10-tablet is-11-mobile">
-              <ProjectSelector
-                projects={projects}
-                handleProjectUpdate={this.handleProjectChange}
-                currentProject={currentProject}
-                isTracking={isTracking}
-              />
-            </div>
-          </div>
+          <ProjectSelector
+            projects={projects}
+            handleProjectUpdate={this.handleProjectChange}
+            currentProject={currentProject}
+            isTracking={isTracking}
+            isCreateProjectModalIsOpen={this.openCreateProjectModal}
+          />
         </div>
 
         <div className="column is-two-fifths-tablet is-full-mobile">
