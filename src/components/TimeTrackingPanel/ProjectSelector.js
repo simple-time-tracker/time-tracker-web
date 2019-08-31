@@ -7,12 +7,12 @@ const ProjectSelector = props => {
     currentProject,
     isTracking,
     handleProjectUpdate,
-    isCreateProjectModalIsOpen
+    openCreateProjectModal
   } = props;
   return (
     <div className="columns is-mobile">
       <div className="column is-1-widescreen is-2-tablet is-1-mobile add-project-button-container">
-        <a onClick={isCreateProjectModalIsOpen} className="button is-primary">
+        <a onClick={openCreateProjectModal} className="button is-primary">
           <span className="icon">
             <i className="fa fa-plus" />
           </span>

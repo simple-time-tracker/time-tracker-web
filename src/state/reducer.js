@@ -7,7 +7,9 @@ import {
   STOP_TRACKING,
   CHANGE_DESCRIPTION,
   OPEN_CREATE_PROJECT_MODAL,
-  CLOSE_CREATE_PROJECT_MODAL
+  CLOSE_CREATE_PROJECT_MODAL,
+  SET_ADD_PROJECT_MODAL_ERROR,
+  CLEAR_ADD_PROJECT_MODAL_ERROR
 } from "./actionTypes";
 
 const initialState = {
@@ -19,7 +21,8 @@ const initialState = {
     isTracking: false
   },
   createProject: {
-    isModalOpen: false
+    isModalOpen: false,
+    error: null
   }
 };
 
@@ -28,7 +31,12 @@ const reducer = (state = initialState, action) => {
     case CHANGE_PROJECT: {
       return {
         ...state,
-        tracker: { ...state.tracker, currentProject: action.payload }
+        tracker: { ...state.tracker, currentProject: action.payload },
+        createProject: {
+          ...state.createProject,
+          isModalOpen: false,
+          error: null
+        }
       };
     }
     case CHANGE_DESCRIPTION: {
@@ -93,7 +101,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         createProject: {
-          ...state.tracker,
+          ...state.createProject,
           isModalOpen: true
         }
       };
@@ -103,11 +111,32 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         createProject: {
-          ...state.tracker,
+          ...state.createProject,
           isModalOpen: false
         }
       };
     }
+
+    case SET_ADD_PROJECT_MODAL_ERROR: {
+      return {
+        ...state,
+        createProject: {
+          ...state.createProject,
+          error: action.payload
+        }
+      };
+    }
+
+    case CLEAR_ADD_PROJECT_MODAL_ERROR: {
+      return {
+        ...state,
+        createProject: {
+          ...state.createProject,
+          error: null
+        }
+      };
+    }
+
     default:
       return state;
   }

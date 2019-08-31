@@ -1,11 +1,24 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {
+  DUPLICATE_PROJECT_NAME_ERROR,
+  UNKNOWN_ERROR
+} from "../../state/errors";
 
 class AddProjectModal extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = { projectName: "" };
   }
+
+  componentDidUpdate = () => {
+    const isClosed = !this.props.isActive;
+    if (isClosed) {
+      this.setState({
+        projectName: ""
+      });
+    }
+  };
 
   handleNameChange = ({ target }) => {
     this.setState({
@@ -26,16 +39,27 @@ class AddProjectModal extends React.PureComponent {
       projectName: ""
     });
     closeModalAction();
+    const { clearError } = this.props;
+    clearError();
   };
 
   createProject = () => {
     const { createProjectAction } = this.props;
     createProjectAction(this.state.projectName);
-    this.closeAndClearModal();
+  };
+
+  resolveErrorText = errorCode => {
+    console.log(errorCode);
+    switch (errorCode) {
+      case DUPLICATE_PROJECT_NAME_ERROR.code:
+        return DUPLICATE_PROJECT_NAME_ERROR.message;
+      default:
+        return UNKNOWN_ERROR.message;
+    }
   };
 
   render = () => {
-    const { isActive, createProjectAction, closeModalAction } = this.props;
+    const { isActive, projectModalError } = this.props;
     return (
       <div className={`modal ${isActive && "is-active"}`}>
         <div className="modal-background" />
@@ -45,10 +69,16 @@ class AddProjectModal extends React.PureComponent {
             <button
               className="delete"
               aria-label="close"
-              onClick={closeModalAction}
+              onClick={this.closeAndClearModal}
             />
           </header>
           <section className="modal-card-body">
+            {projectModalError && (
+              <div className="notification is-danger">
+                <button className="delete"></button>
+                {projectModalError && this.resolveErrorText(projectModalError)}
+              </div>
+            )}
             <div className="field">
               <label className="label">Project name</label>
               <div className="control">

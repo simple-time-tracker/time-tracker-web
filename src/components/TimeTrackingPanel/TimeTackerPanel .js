@@ -77,7 +77,9 @@ class TimeTrackerPanel extends Component {
       isTracking,
       description,
       isCreateProjectModalIsOpen,
-      createProject
+      clearAddProjectModalError,
+      createProject,
+      projectModalError
     } = this.props;
     return (
       <div className="columns">
@@ -87,7 +89,7 @@ class TimeTrackerPanel extends Component {
             handleProjectUpdate={this.handleProjectChange}
             currentProject={currentProject}
             isTracking={isTracking}
-            isCreateProjectModalIsOpen={this.openCreateProjectModal}
+            openCreateProjectModal={this.openCreateProjectModal}
           />
         </div>
 
@@ -117,6 +119,8 @@ class TimeTrackerPanel extends Component {
           isActive={isCreateProjectModalIsOpen}
           createProjectAction={createProject}
           closeModalAction={this.closeCreateProjectModal}
+          projectModalError={projectModalError}
+          clearError={clearAddProjectModalError}
         />
       </div>
     );

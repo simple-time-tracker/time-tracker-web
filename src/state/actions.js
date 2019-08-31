@@ -7,7 +7,9 @@ import {
   START_TRACKING,
   STOP_TRACKING,
   OPEN_CREATE_PROJECT_MODAL,
-  CLOSE_CREATE_PROJECT_MODAL
+  CLOSE_CREATE_PROJECT_MODAL,
+  SET_ADD_PROJECT_MODAL_ERROR,
+  CLEAR_ADD_PROJECT_MODAL_ERROR
 } from "./actionTypes";
 import {
   getProjects,
@@ -17,6 +19,7 @@ import {
   stopTracking,
   createNewProject
 } from "../utils/api";
+import { DUPLICATE_PROJECT_NAME_ERROR } from "./errors";
 
 export const loadProjects = () => {
   return dispatch => {
@@ -70,11 +73,21 @@ export const createProject = name => {
   return dispatch => {
     createNewProject(name)
       .then(response => {
-        loadProjects()(dispatch).then(value =>
+        loadProjects()(dispatch).then(() =>
           dispatch(changeProject(response.data.id))
         );
       })
-      .catch(error => console.log(error));
+      .catch(error => {
+        if (
+          error.response &&
+          error.response.data &&
+          error.response.data.status === 409
+        ) {
+          dispatch(setAddProjectModalError(DUPLICATE_PROJECT_NAME_ERROR.code));
+          return;
+        }
+        dispatch(setAddProjectModalError("OTHER"));
+      });
   };
 };
 
@@ -93,6 +106,19 @@ export const changeProject = projectId => {
   return {
     type: CHANGE_PROJECT,
     payload: projectId
+  };
+};
+
+export const setAddProjectModalError = errorCode => {
+  return {
+    type: SET_ADD_PROJECT_MODAL_ERROR,
+    payload: errorCode
+  };
+};
+
+export const clearAddProjectModalError = () => {
+  return {
+    type: CLEAR_ADD_PROJECT_MODAL_ERROR
   };
 };
 
