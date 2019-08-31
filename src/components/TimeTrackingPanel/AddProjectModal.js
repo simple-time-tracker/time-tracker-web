@@ -13,6 +13,12 @@ class AddProjectModal extends React.PureComponent {
     });
   };
 
+  handleKeyInput = event => {
+    if (event.key === "Enter") {
+      this.createProject();
+    }
+  };
+
   closeAndClearModal = () => {
     const { closeModalAction } = this.props;
     this.setState({
@@ -20,6 +26,12 @@ class AddProjectModal extends React.PureComponent {
       projectName: ""
     });
     closeModalAction();
+  };
+
+  createProject = () => {
+    const { createProjectAction } = this.props;
+    createProjectAction(this.state.projectName);
+    this.closeAndClearModal();
   };
 
   render = () => {
@@ -46,18 +58,13 @@ class AddProjectModal extends React.PureComponent {
                   placeholder="Project name"
                   value={this.state.projectName}
                   onChange={this.handleNameChange}
+                  onKeyDown={this.handleKeyInput}
                 />
               </div>
             </div>
           </section>
           <footer className="modal-card-foot">
-            <button
-              className="button is-success"
-              onClick={() => {
-                createProjectAction(this.state.projectName);
-                this.closeAndClearModal();
-              }}
-            >
+            <button className="button is-success" onClick={this.createProject}>
               Create project
             </button>
             <button className="button" onClick={this.closeAndClearModal}>
