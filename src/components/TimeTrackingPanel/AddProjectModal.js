@@ -33,13 +33,12 @@ class AddProjectModal extends React.PureComponent {
   };
 
   closeAndClearModal = () => {
-    const { closeModalAction } = this.props;
+    const { closeModalAction, clearError } = this.props;
     this.setState({
       ...this.state,
       projectName: ""
     });
     closeModalAction();
-    const { clearError } = this.props;
     clearError();
   };
 
@@ -49,7 +48,6 @@ class AddProjectModal extends React.PureComponent {
   };
 
   resolveErrorText = errorCode => {
-    console.log(errorCode);
     switch (errorCode) {
       case DUPLICATE_PROJECT_NAME_ERROR.code:
         return DUPLICATE_PROJECT_NAME_ERROR.message;
@@ -59,7 +57,7 @@ class AddProjectModal extends React.PureComponent {
   };
 
   render = () => {
-    const { isActive, projectModalError } = this.props;
+    const { isActive, projectModalError, clearError } = this.props;
     return (
       <div className={`modal ${isActive && "is-active"}`}>
         <div className="modal-background" />
@@ -75,7 +73,7 @@ class AddProjectModal extends React.PureComponent {
           <section className="modal-card-body">
             {projectModalError && (
               <div className="notification is-danger">
-                <button className="delete"></button>
+                <button className="delete" onClick={clearError}></button>
                 {projectModalError && this.resolveErrorText(projectModalError)}
               </div>
             )}
@@ -110,7 +108,8 @@ class AddProjectModal extends React.PureComponent {
 AddProjectModal.propTypes = {
   isActive: PropTypes.bool.isRequired,
   createProjectAction: PropTypes.func.isRequired,
-  closeModalAction: PropTypes.func.isRequired
+  closeModalAction: PropTypes.func.isRequired,
+  projectModalError: PropTypes.string
 };
 
 export default AddProjectModal;
