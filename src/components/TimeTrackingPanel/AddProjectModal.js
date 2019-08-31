@@ -27,7 +27,7 @@ class AddProjectModal extends React.PureComponent {
   };
 
   handleKeyInput = event => {
-    if (event.key === "Enter") {
+    if (event.key === "Enter" && !this.isSaveButtonDisabled()) {
       this.createProject();
     }
   };
@@ -45,6 +45,10 @@ class AddProjectModal extends React.PureComponent {
   createProject = () => {
     const { createProjectAction } = this.props;
     createProjectAction(this.state.projectName);
+  };
+
+  isSaveButtonDisabled = () => {
+    return !this.state.projectName.length > 0;
   };
 
   resolveErrorText = errorCode => {
@@ -92,7 +96,11 @@ class AddProjectModal extends React.PureComponent {
             </div>
           </section>
           <footer className="modal-card-foot">
-            <button className="button is-success" onClick={this.createProject}>
+            <button
+              className="button is-success"
+              onClick={this.createProject}
+              disabled={this.isSaveButtonDisabled()}
+            >
               Create project
             </button>
             <button className="button" onClick={this.closeAndClearModal}>
