@@ -5,20 +5,26 @@ import {
   LOAD_TIME_ENTRIES,
   LOAD_CURRENT_TIME_ENTRY,
   START_TRACKING,
-  STOP_TRACKING
+  STOP_TRACKING,
+  OPEN_CREATE_PROJECT_MODAL,
+  CLOSE_CREATE_PROJECT_MODAL,
+  SET_ADD_PROJECT_MODAL_ERROR,
+  CLEAR_ADD_PROJECT_MODAL_ERROR
 } from "./actionTypes";
 import {
   getProjects,
   getTimeEntries,
   getActiveTimeEntry,
   startTracking,
-  stopTracking
+  stopTracking,
+  createNewProject
 } from "../utils/api";
+import { DUPLICATE_PROJECT_NAME_ERROR } from "./errors";
 
 export const loadProjects = () => {
   return dispatch => {
-    getProjects().then(response => {
-      dispatch({
+    return getProjects().then(response => {
+      return dispatch({
         type: LOAD_PROJECTS,
         payload:
           response.data.length > 0
@@ -63,6 +69,28 @@ export const stopTrackingTime = () => {
   };
 };
 
+export const createProject = name => {
+  return dispatch => {
+    createNewProject(name)
+      .then(response => {
+        loadProjects()(dispatch).then(() =>
+          dispatch(changeProject(response.data.id))
+        );
+      })
+      .catch(error => {
+        if (
+          error.response &&
+          error.response.data &&
+          error.response.data.status === 409
+        ) {
+          dispatch(setAddProjectModalError(DUPLICATE_PROJECT_NAME_ERROR.code));
+          return;
+        }
+        dispatch(setAddProjectModalError("OTHER"));
+      });
+  };
+};
+
 export const getCurrentTimeEntry = () => {
   return dispatch => {
     getActiveTimeEntry().then(response => {
@@ -81,9 +109,34 @@ export const changeProject = projectId => {
   };
 };
 
+export const setAddProjectModalError = errorCode => {
+  return {
+    type: SET_ADD_PROJECT_MODAL_ERROR,
+    payload: errorCode
+  };
+};
+
+export const clearAddProjectModalError = () => {
+  return {
+    type: CLEAR_ADD_PROJECT_MODAL_ERROR
+  };
+};
+
 export const changeDescription = description => {
   return {
     type: CHANGE_DESCRIPTION,
     payload: description
+  };
+};
+
+export const openCreateProjectModal = () => {
+  return {
+    type: OPEN_CREATE_PROJECT_MODAL
+  };
+};
+
+export const closeCreateProjectModal = () => {
+  return {
+    type: CLOSE_CREATE_PROJECT_MODAL
   };
 };

@@ -21,3 +21,6 @@ export const startTracking = (id, description) => {
 
 export const stopTracking = () =>
   axios.post(`${API_URL}/${TIME_ENTRIES_PATH}/stop`);
+
+export const createNewProject = projectName =>
+  axios.post(`${API_URL}/${PROJECTS_PATH}`, { name: projectName });

@@ -1,21 +1,25 @@
 import React, { Component } from "react";
 import ProjectSelector from "./ProjectSelector";
 import PropTypes from "prop-types";
+import AddProjectModal from "./AddProjectModal";
 
 class TimeTrackerPanel extends Component {
   handleProjectChange = event => {
-    this.props.changeProject(event.target.value);
+    const { changeProject } = this.props;
+    changeProject(event.target.value);
   };
 
   handleDescriptionChange = event => {
-    this.props.changeDescription(event.target.value);
+    const { changeDescription } = this.props;
+    changeDescription(event.target.value);
   };
 
   handleToggleTracking = event => {
-    if (!this.props.isTracking) {
-      this.props.startTrackingTime();
+    const { isTracking, startTrackingTime, stopTrackingTime } = this.props;
+    if (!isTracking) {
+      startTrackingTime();
     } else {
-      this.props.stopTrackingTime();
+      stopTrackingTime();
     }
   };
 
@@ -26,47 +30,74 @@ class TimeTrackerPanel extends Component {
   };
 
   componentDidMount = () => {
-    this.props.loadProjects();
-    this.props.getCurrentTimeEntry();
+    const { loadProjects, getCurrentTimeEntry } = this.props;
+    loadProjects();
+    getCurrentTimeEntry();
+  };
+
+  openCreateProjectModal = () => {
+    const { openCreateProjectModal } = this.props;
+    openCreateProjectModal();
+  };
+
+  closeCreateProjectModal = () => {
+    const { closeCreateProjectModal } = this.props;
+    closeCreateProjectModal();
   };
 
   getTrackingButtonClass = () => {
-    return this.props.isTracking ? "is-danger" : "is-primary";
+    const { isTracking } = this.props;
+    return isTracking ? "is-danger" : "is-primary";
   };
 
   getTrackingButtonMessage = () => {
-    return this.props.isTracking ? "Stop tracking" : "Start tracking";
+    const { isTracking } = this.props;
+    return isTracking ? "Stop tracking" : "Start tracking";
   };
 
   isThereNoExistingProjects = () => {
-    return this.props.currentProject === "no-id";
+    const { currentProject } = this.props;
+    return currentProject === "no-id";
   };
 
   isDescriptionInputDisabled = () => {
-    return this.props.isTracking || this.isThereNoExistingProjects();
+    const { isTracking } = this.props;
+    return isTracking || this.isThereNoExistingProjects();
   };
 
   isTrackingButtonDisabled = () => {
-    return this.isThereNoExistingProjects() || !this.props.description;
+    const { description } = this.props;
+    return this.isThereNoExistingProjects() || !description;
   };
 
   render = () => {
+    const {
+      projects,
+      currentProject,
+      isTracking,
+      description,
+      isCreateProjectModalIsOpen,
+      clearAddProjectModalError,
+      createProject,
+      projectModalError
+    } = this.props;
     return (
       <div className="columns">
-        <div className="column is-one-fifths is-full-mobile">
+        <div className="column is-two-fifths-tablet is-full-mobile">
           <ProjectSelector
-            projects={this.props.projects}
+            projects={projects}
             handleProjectUpdate={this.handleProjectChange}
-            currentProject={this.props.currentProject}
-            isTracking={this.props.isTracking}
+            currentProject={currentProject}
+            isTracking={isTracking}
+            openCreateProjectModal={this.openCreateProjectModal}
           />
         </div>
 
-        <div className="column is-three-fifths is-full-mobile ">
+        <div className="column is-two-fifths-tablet is-full-mobile">
           <input
             className="input is-normal"
             type="text"
-            value={this.props.description}
+            value={description}
             onChange={this.handleDescriptionChange}
             onKeyDown={this.handleKeyInput}
             disabled={this.isDescriptionInputDisabled()}
@@ -84,13 +115,23 @@ class TimeTrackerPanel extends Component {
             {this.getTrackingButtonMessage()}
           </button>
         </div>
+        <AddProjectModal
+          isActive={isCreateProjectModalIsOpen}
+          createProjectAction={createProject}
+          closeModalAction={this.closeCreateProjectModal}
+          projectModalError={projectModalError}
+          clearError={clearAddProjectModalError}
+        />
       </div>
     );
   };
 }
 
 ProjectSelector.propTypes = {
-  projects: PropTypes.array
+  projects: PropTypes.array.isRequired,
+  currentProject: PropTypes.string,
+  description: PropTypes.string,
+  isTracking: PropTypes.bool.isRequired
 };
 
 export default TimeTrackerPanel;
