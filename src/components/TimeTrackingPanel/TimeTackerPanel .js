@@ -57,7 +57,7 @@ class TimeTrackerPanel extends Component {
 
   isThereNoExistingProjects = () => {
     const { currentProject } = this.props;
-    return currentProject === "no-id";
+    return currentProject === undefined;
   };
 
   isDescriptionInputDisabled = () => {

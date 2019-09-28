@@ -29,7 +29,7 @@ export const loadProjects = () => {
         payload:
           response.data.length > 0
             ? response.data
-            : [{ id: "no-id", name: "No projects" }]
+            : [{ id: undefined, name: "No projects" }]
       });
     });
   };

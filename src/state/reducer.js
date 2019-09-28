@@ -51,7 +51,7 @@ const reducer = (state = initialState, action) => {
         projects: action.payload,
         tracker: {
           ...state.tracker,
-          currentProject: action.payload[0].id
+          currentProject: state.tracker.currentProject === undefined ? action.payload[0].id : state.tracker.currentProject
         }
       };
     }
