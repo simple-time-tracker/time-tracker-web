@@ -1,18 +1,14 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
-import TimeEntriesList from "./components/TimeEntriesList";
-import ProjectSelector from "./components/TimeTrackingPanel";
+import TimeEntriesList from "./containers/TimeEntriesList";
+import ProjectSelector from "./containers/TimeTrackingPanel";
 
-class TimeTrackerApp extends Component {
-  render() {
-    return (
-      <div>
-        <h1 className="title">Time tracker app</h1>
-        <ProjectSelector />
-        <TimeEntriesList />
-      </div>
-    );
-  }
-}
+const TimeTrackerApp = () => (
+  <div>
+    <h1 className="title">Time tracker app</h1>
+    <ProjectSelector />
+    <TimeEntriesList />
+  </div>
+);
 
 export default TimeTrackerApp;
