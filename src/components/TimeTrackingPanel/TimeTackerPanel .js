@@ -127,9 +127,9 @@ class TimeTrackerPanel extends Component {
   };
 }
 
-ProjectSelector.propTypes = {
+TimeTrackerPanel.propTypes = {
   projects: PropTypes.array.isRequired,
-  currentProject: PropTypes.string,
+  currentProject: PropTypes.number,
   description: PropTypes.string,
   isTracking: PropTypes.bool.isRequired
 };

@@ -19,6 +19,9 @@ export const startTracking = (id, description) => {
   });
 };
 
+export const deleteTimeEntry = id =>
+  axios.delete(`${API_URL}/${TIME_ENTRIES_PATH}/${id}`);
+
 export const stopTracking = () =>
   axios.post(`${API_URL}/${TIME_ENTRIES_PATH}/stop`);
 

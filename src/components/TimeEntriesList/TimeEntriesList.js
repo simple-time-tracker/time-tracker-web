@@ -16,6 +16,7 @@ class TimeEntriesList extends Component {
         project={entry.project.name}
         startDate={entry.startDate}
         endDate={entry.endDate}
+        deleteHandler={this.props.deleteEntry}
       />
     ));
     return (
@@ -29,7 +30,11 @@ class TimeEntriesList extends Component {
               <th className="is-hidden-mobile">Start date</th>
               <th className="is-hidden-mobile">End date</th>
               <th>Time spent</th>
-              <th />
+              <th>
+                <span className="icon">
+                  <i className="fa fa-trash" />
+                </span>
+              </th>
             </tr>
           </thead>
           <tbody>{entries}</tbody>
@@ -40,7 +45,8 @@ class TimeEntriesList extends Component {
 }
 
 TimeEntriesList.propTypes = {
-  entries: PropTypes.array
+  entries: PropTypes.array,
+  deleteEntry: PropTypes.func
 };
 
 export default TimeEntriesList;

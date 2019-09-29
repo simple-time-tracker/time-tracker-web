@@ -9,7 +9,7 @@ import {
   OPEN_CREATE_PROJECT_MODAL,
   CLOSE_CREATE_PROJECT_MODAL,
   SET_ADD_PROJECT_MODAL_ERROR,
-  CLEAR_ADD_PROJECT_MODAL_ERROR
+  CLEAR_ADD_PROJECT_MODAL_ERROR,
 } from "./actionTypes";
 import {
   getProjects,
@@ -17,7 +17,8 @@ import {
   getActiveTimeEntry,
   startTracking,
   stopTracking,
-  createNewProject
+  createNewProject,
+  deleteTimeEntry
 } from "../utils/api";
 import { DUPLICATE_PROJECT_NAME_ERROR } from "./errors";
 
@@ -64,6 +65,14 @@ export const stopTrackingTime = () => {
       dispatch({
         type: STOP_TRACKING
       });
+      loadTimeEntries()(dispatch);
+    });
+  };
+};
+
+export const deleteEntry = id => {
+  return dispatch => {
+    deleteTimeEntry(id).then(() => {
       loadTimeEntries()(dispatch);
     });
   };
