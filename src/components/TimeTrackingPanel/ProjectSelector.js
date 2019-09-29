@@ -12,7 +12,11 @@ const ProjectSelector = props => {
   return (
     <div className="columns is-mobile">
       <div className="column is-1-widescreen is-2-tablet is-1-mobile add-project-button-container">
-        <button className="button is-primary" onClick={openCreateProjectModal} disabled={isTracking}>
+        <button
+          className="button is-primary"
+          onClick={openCreateProjectModal}
+          disabled={isTracking}
+        >
           <span className="icon">
             <i className="fa fa-plus" />
           </span>
@@ -40,6 +44,7 @@ const ProjectSelector = props => {
 };
 
 ProjectSelector.propTypes = {
+  currentProject: PropTypes.number,
   projects: PropTypes.array,
   isTracking: PropTypes.bool,
   handleProjectUpdate: PropTypes.func

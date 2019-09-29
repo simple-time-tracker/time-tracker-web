@@ -16,7 +16,7 @@ const initialState = {
   timeEntries: [],
   projects: [],
   tracker: {
-    currentProject: "",
+    currentProject: undefined,
     taskDescription: "",
     isTracking: false
   },
@@ -31,7 +31,10 @@ const reducer = (state = initialState, action) => {
     case CHANGE_PROJECT: {
       return {
         ...state,
-        tracker: { ...state.tracker, currentProject: action.payload },
+        tracker: {
+          ...state.tracker,
+          currentProject: parseInt(action.payload, 10)
+        },
         createProject: {
           ...state.createProject,
           isModalOpen: false,
@@ -51,7 +54,10 @@ const reducer = (state = initialState, action) => {
         projects: action.payload,
         tracker: {
           ...state.tracker,
-          currentProject: state.tracker.currentProject === undefined ? action.payload[0].id : state.tracker.currentProject
+          currentProject:
+            state.tracker.currentProject === undefined
+              ? action.payload[0].id
+              : state.tracker.currentProject
         }
       };
     }
