@@ -1,0 +1,2 @@
+export const LOAD_PROJECTS = "LOAD_PROJECTS";
+export const CHANGE_PROJECT = "CHANGE_PROJECT";

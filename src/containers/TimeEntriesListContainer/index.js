@@ -1,5 +1,8 @@
 import { connect } from "react-redux";
-import { loadTimeEntries, deleteEntry } from "../../state/actions";
+import {
+  loadTimeEntries,
+  deleteEntry
+} from "../../state/TimeEntriesList/timeEntriesActions";
 import TimeEntriesListContainer from "./TimeEntriesListContainer";
 
 const mapStateToProps = state => {

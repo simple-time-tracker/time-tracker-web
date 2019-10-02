@@ -1,16 +1,20 @@
 import {
-  CHANGE_PROJECT,
-  LOAD_PROJECTS,
-  LOAD_TIME_ENTRIES,
   LOAD_CURRENT_TIME_ENTRY,
   START_TRACKING,
   STOP_TRACKING,
-  CHANGE_DESCRIPTION,
-  OPEN_CREATE_PROJECT_MODAL,
-  CLOSE_CREATE_PROJECT_MODAL,
+  CHANGE_DESCRIPTION
+} from "./TimeTracker/timeTrackerActionTypes";
+import {
+  LOAD_PROJECTS,
+  CHANGE_PROJECT
+} from "./ProjectsSelector/projectActionTypes";
+import {
+  CLEAR_ADD_PROJECT_MODAL_ERROR,
   SET_ADD_PROJECT_MODAL_ERROR,
-  CLEAR_ADD_PROJECT_MODAL_ERROR
-} from "./actionTypes";
+  CLOSE_CREATE_PROJECT_MODAL,
+  OPEN_CREATE_PROJECT_MODAL
+} from "./NewProjectModal/newProjectModalActionTypes";
+import { LOAD_TIME_ENTRIES } from "./TimeEntriesList/timeEntriesActionTypes";
 
 const initialState = {
   timeEntries: [],
