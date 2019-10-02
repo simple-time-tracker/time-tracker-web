@@ -38,11 +38,6 @@ const reducer = (state = initialState, action) => {
         tracker: {
           ...state.tracker,
           currentProject: parseInt(action.payload, 10)
-        },
-        createProject: {
-          ...state.createProject,
-          isModalOpen: false,
-          error: null
         }
       };
     }
@@ -57,11 +52,7 @@ const reducer = (state = initialState, action) => {
         ...state,
         projects: action.payload,
         tracker: {
-          ...state.tracker,
-          currentProject:
-            state.tracker.currentProject === undefined
-              ? action.payload[0].id
-              : state.tracker.currentProject
+          ...state.tracker
         }
       };
     }

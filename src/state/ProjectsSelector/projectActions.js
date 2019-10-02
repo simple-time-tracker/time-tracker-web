@@ -1,6 +1,11 @@
 import { CHANGE_PROJECT, LOAD_PROJECTS } from "./projectActionTypes";
 import { getProjects, createNewProject } from "./projectApi";
-import { setAddProjectModalError } from "../NewProjectModal/newProjectModalActions";
+import {
+  setAddProjectModalError,
+  closeCreateProjectModal,
+  clearAddProjectModalError
+} from "../NewProjectModal/newProjectModalActions";
+import { DUPLICATE_PROJECT_NAME_ERROR } from "../errors";
 
 export const loadProjects = () => {
   return dispatch => {
@@ -39,8 +44,12 @@ export const createProject = name => {
 };
 
 export const changeProject = projectId => {
-  return {
-    type: CHANGE_PROJECT,
-    payload: projectId
+  return dispatch => {
+    dispatch({
+      type: CHANGE_PROJECT,
+      payload: projectId
+    });
+    closeCreateProjectModal();
+    clearAddProjectModalError();
   };
 };
