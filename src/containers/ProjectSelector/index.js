@@ -8,9 +8,7 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = { loadTimeEntries, deleteEntry };
-
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  null
 )(ProjectSelector);
