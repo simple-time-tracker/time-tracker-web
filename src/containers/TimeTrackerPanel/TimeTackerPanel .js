@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import ProjectSelector from "./ProjectSelector";
+import ProjectSelector from "../ProjectSelector/ProjectSelector";
 import PropTypes from "prop-types";
-import AddProjectModal from "./AddProjectModal";
+import AddProjectModal from "../../components/NewProjectModal/NewProjectModal";
 
 class TimeTrackerPanel extends Component {
   handleProjectChange = event => {

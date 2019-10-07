@@ -1,16 +1,21 @@
 import { connect } from "react-redux";
 import {
-  changeProject,
   changeDescription,
-  loadProjects,
   getCurrentTimeEntry,
   startTrackingTime,
-  stopTrackingTime,
+  stopTrackingTime
+} from "../../state/TimeTracker/timeTrackerActions";
+import {
   openCreateProjectModal,
   closeCreateProjectModal,
-  createProject,
   clearAddProjectModalError
-} from "../../state/actions";
+} from "../../state/NewProjectModal/newProjectModalActions";
+
+import {
+  createProject,
+  loadProjects
+} from "../../state/ProjectsSelector/projectSelectorActions";
+import { changeProject } from "../../state/TimeTracker/timeTrackerActions";
 import TimeTrackerPanel from "./TimeTackerPanel ";
 
 const mapStateToProps = state => {

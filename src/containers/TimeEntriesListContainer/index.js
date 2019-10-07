@@ -1,6 +1,9 @@
 import { connect } from "react-redux";
-import { loadTimeEntries, deleteEntry } from "../../state/actions";
-import TimeEntriesList from "./TimeEntriesList";
+import {
+  loadTimeEntries,
+  deleteEntry
+} from "../../state/TimeEntriesList/timeEntriesActions";
+import TimeEntriesListContainer from "./TimeEntriesListContainer";
 
 const mapStateToProps = state => {
   return {
@@ -13,4 +16,4 @@ const mapDispatchToProps = { loadTimeEntries, deleteEntry };
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(TimeEntriesList);
+)(TimeEntriesListContainer);

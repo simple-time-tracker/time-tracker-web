@@ -31,7 +31,10 @@ const ProjectSelector = props => {
           >
             {projects.map(project => {
               return (
-                <option key={project.id} value={project.id}>
+                <option
+                  key={project.id ? project.id : "empty"}
+                  value={project.id}
+                >
                   {project.name}
                 </option>
               );
