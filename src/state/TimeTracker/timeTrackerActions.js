@@ -2,7 +2,8 @@ import {
   CHANGE_DESCRIPTION,
   LOAD_CURRENT_TIME_ENTRY,
   START_TRACKING,
-  STOP_TRACKING
+  STOP_TRACKING,
+  CHANGE_PROJECT
 } from "./timeTrackerActionTypes";
 import {
   getActiveTimeEntry,
@@ -10,6 +11,11 @@ import {
   stopTracking
 } from "./timeTrackerApi";
 import { loadTimeEntries } from "../TimeEntriesList/timeEntriesActions";
+
+import {
+  closeCreateProjectModal,
+  clearAddProjectModalError
+} from "../NewProjectModal/newProjectModalActions";
 
 export const startTrackingTime = () => {
   return (dispatch, getState) => {
@@ -49,5 +55,17 @@ export const changeDescription = description => {
   return {
     type: CHANGE_DESCRIPTION,
     payload: description
+  };
+};
+
+export const changeProject = projectId => {
+  return dispatch => {
+    dispatch({
+      type: CHANGE_PROJECT,
+      payload: projectId
+    });
+
+    dispatch(closeCreateProjectModal());
+    dispatch(clearAddProjectModalError());
   };
 };

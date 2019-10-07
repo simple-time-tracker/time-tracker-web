@@ -13,9 +13,9 @@ import {
 
 import {
   createProject,
-  changeProject,
   loadProjects
-} from "../../state/ProjectsSelector/projectActions";
+} from "../../state/ProjectsSelector/projectSelectorActions";
+import { changeProject } from "../../state/TimeTracker/timeTrackerActions";
 import TimeTrackerPanel from "./TimeTackerPanel ";
 
 const mapStateToProps = state => {
