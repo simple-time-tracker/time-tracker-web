@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 # You may want to customise this file depending on your Operating System
 # and the editor that you use.
 #
@@ -33,7 +32,3 @@ node_modules
 scripts
 
 dist
-=======
-dist
-node_modules
->>>>>>> Stashed changes
