@@ -1,10 +1,10 @@
-import { connect } from "react-redux";
-import ProjectSelector from "./ProjectSelector";
+import { connect } from 'react-redux';
+import ProjectSelector from './ProjectSelector';
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     projects: state.projects,
-    currentProject: state.tracker.currentProject
+    currentProject: state.tracker.currentProject,
   };
 };
 

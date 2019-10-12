@@ -1,7 +1,7 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { formatDate, getDuration } from "../../utils/time";
-import { differenceInSeconds } from "date-fns";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { formatDate, getDuration } from '../../utils/time';
+import { differenceInSeconds } from 'date-fns';
 
 const TimeEntryListItem = ({
   id,
@@ -9,7 +9,7 @@ const TimeEntryListItem = ({
   project,
   startDate,
   endDate,
-  deleteHandler
+  deleteHandler,
 }) => (
   <tr>
     <td>{id}</td>
@@ -19,9 +19,7 @@ const TimeEntryListItem = ({
     <td className="is-hidden-mobile">{endDate && formatDate(endDate)}</td>
     <td>
       {endDate &&
-        getDuration(
-          differenceInSeconds(new Date(endDate), new Date(startDate))
-        )}
+        getDuration(differenceInSeconds(new Date(endDate), new Date(startDate)))}
     </td>
     <td>
       <span className="icon" onClick={() => deleteHandler(id)}>
@@ -37,6 +35,6 @@ TimeEntryListItem.propTypes = {
   project: PropTypes.string,
   deleteHandler: PropTypes.func,
   startDate: PropTypes.Date,
-  endDate: PropTypes.Date
+  endDate: PropTypes.Date,
 };
 export default TimeEntryListItem;

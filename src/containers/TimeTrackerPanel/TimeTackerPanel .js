@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import ProjectSelector from "../ProjectSelector/ProjectSelector";
-import PropTypes from "prop-types";
-import AddProjectModal from "../../components/NewProjectModal/NewProjectModal";
+import React, { Component } from 'react';
+import ProjectSelector from '../ProjectSelector/ProjectSelector';
+import PropTypes from 'prop-types';
+import AddProjectModal from '../../components/NewProjectModal/NewProjectModal';
 
 class TimeTrackerPanel extends Component {
   static propTypes = {
@@ -20,14 +20,14 @@ class TimeTrackerPanel extends Component {
     isCreateProjectModalIsOpen: PropTypes.func.isRequired,
     clearAddProjectModalError: PropTypes.func.isRequired,
     createProject: PropTypes.func.isRequired,
-    projectModalError: PropTypes.object
+    projectModalError: PropTypes.object,
   };
-  handleProjectChange = event => {
+  handleProjectChange = (event) => {
     const { changeProject } = this.props;
     changeProject(event.target.value);
   };
 
-  handleDescriptionChange = event => {
+  handleDescriptionChange = (event) => {
     const { changeDescription } = this.props;
     changeDescription(event.target.value);
   };
@@ -41,8 +41,8 @@ class TimeTrackerPanel extends Component {
     }
   };
 
-  handleKeyInput = event => {
-    if (event.key === "Enter") {
+  handleKeyInput = (event) => {
+    if (event.key === 'Enter') {
       this.handleToggleTracking(event);
     }
   };
@@ -65,12 +65,12 @@ class TimeTrackerPanel extends Component {
 
   getTrackingButtonClass = () => {
     const { isTracking } = this.props;
-    return isTracking ? "is-danger" : "is-primary";
+    return isTracking ? 'is-danger' : 'is-primary';
   };
 
   getTrackingButtonMessage = () => {
     const { isTracking } = this.props;
-    return isTracking ? "Stop tracking" : "Start tracking";
+    return isTracking ? 'Stop tracking' : 'Start tracking';
   };
 
   isThereNoExistingProjects = () => {
@@ -97,7 +97,7 @@ class TimeTrackerPanel extends Component {
       isCreateProjectModalIsOpen,
       clearAddProjectModalError,
       createProject,
-      projectModalError
+      projectModalError,
     } = this.props;
     return (
       <div className="columns">

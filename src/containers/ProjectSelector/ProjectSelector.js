@@ -1,13 +1,13 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
-const ProjectSelector = props => {
+const ProjectSelector = (props) => {
   const {
     projects,
     currentProject,
     isTracking,
     handleProjectUpdate,
-    openCreateProjectModal
+    openCreateProjectModal,
   } = props;
   return (
     <div className="columns is-mobile">
@@ -29,12 +29,9 @@ const ProjectSelector = props => {
             value={currentProject}
             disabled={isTracking || currentProject === undefined}
           >
-            {projects.map(project => {
+            {projects.map((project) => {
               return (
-                <option
-                  key={project.id ? project.id : "empty"}
-                  value={project.id}
-                >
+                <option key={project.id ? project.id : 'empty'} value={project.id}>
                   {project.name}
                 </option>
               );
@@ -51,7 +48,7 @@ ProjectSelector.propTypes = {
   projects: PropTypes.array,
   isTracking: PropTypes.bool,
   handleProjectUpdate: PropTypes.func,
-  openCreateProjectModal: PropTypes.func
+  openCreateProjectModal: PropTypes.func,
 };
 
 export default ProjectSelector;

@@ -1,6 +1,6 @@
-import React from "react";
-import TimeEntriesListContainer from "./containers/TimeEntriesListContainer";
-import TimeTrackerPanel from "./containers/TimeTrackerPanel";
+import React from 'react';
+import TimeEntriesListContainer from './containers/TimeEntriesListContainer';
+import TimeTrackerPanel from './containers/TimeTrackerPanel';
 
 const TimeTrackerApp = () => (
   <div>

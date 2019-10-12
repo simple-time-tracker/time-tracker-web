@@ -1,4 +1,4 @@
-import { LOAD_PROJECTS } from "./projectSelectorActionTypes";
+import { LOAD_PROJECTS } from './projectSelectorActionTypes';
 
 const initialState = [];
 

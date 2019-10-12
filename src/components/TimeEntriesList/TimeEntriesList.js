@@ -1,6 +1,6 @@
-import React from "react";
-import PropTypes from "prop-types";
-import TimeEntryListItem from "./TimeEntryListItem";
+import React from 'react';
+import PropTypes from 'prop-types';
+import TimeEntryListItem from './TimeEntryListItem';
 
 const TimeEntriesList = ({ timeEntries, deleteEntry }) => (
   <div className="container">
@@ -26,7 +26,7 @@ const TimeEntriesList = ({ timeEntries, deleteEntry }) => (
 );
 
 const mapEntries = (entries, deleteHandler) => {
-  return entries.map(entry => (
+  return entries.map((entry) => (
     <TimeEntryListItem
       id={entry.id}
       key={entry.id}
@@ -42,6 +42,6 @@ const mapEntries = (entries, deleteHandler) => {
 TimeEntriesList.propTypes = {
   timeEntries: PropTypes.array,
   deleteHandler: PropTypes.func,
-  deleteEntry: PropTypes.func
+  deleteEntry: PropTypes.func,
 };
 export default TimeEntriesList;
