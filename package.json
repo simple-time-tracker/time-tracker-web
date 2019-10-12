@@ -7,8 +7,13 @@
     "start": "node dev-server.js",
     "build": "parcel build src/index.html",
     "lint": "eslint src",
-    "format": "prettier --write \"**/*.+(js|jsx|json|css|md)\"",
+    "format": "prettier --write src/\"**/*.+(js|jsx|json|css|md)\"",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint && npm run format"
+    }
   },
   "keywords": [
     "react",
@@ -41,6 +46,7 @@
     "eslint-plugin-prettier": "^3.1.1",
     "eslint-plugin-react": "^7.16.0",
     "http-proxy": "^1.17.0",
+    "husky": "^3.0.8",
     "parcel-bundler": "^1.12.4",
     "prettier": "^1.18.2"
   }
