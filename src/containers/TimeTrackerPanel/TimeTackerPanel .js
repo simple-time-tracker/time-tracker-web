@@ -4,6 +4,24 @@ import PropTypes from "prop-types";
 import AddProjectModal from "../../components/NewProjectModal/NewProjectModal";
 
 class TimeTrackerPanel extends Component {
+  static propTypes = {
+    projects: PropTypes.array.isRequired,
+    currentProject: PropTypes.number,
+    description: PropTypes.string,
+    isTracking: PropTypes.bool.isRequired,
+    changeProject: PropTypes.func.isRequired,
+    changeDescription: PropTypes.func.isRequired,
+    startTrackingTime: PropTypes.func.isRequired,
+    stopTrackingTime: PropTypes.func.isRequired,
+    loadProjects: PropTypes.func.isRequired,
+    getCurrentTimeEntry: PropTypes.func.isRequired,
+    openCreateProjectModal: PropTypes.func.isRequired,
+    closeCreateProjectModal: PropTypes.func.isRequired,
+    isCreateProjectModalIsOpen: PropTypes.func.isRequired,
+    clearAddProjectModalError: PropTypes.func.isRequired,
+    createProject: PropTypes.func.isRequired,
+    projectModalError: PropTypes.object
+  };
   handleProjectChange = event => {
     const { changeProject } = this.props;
     changeProject(event.target.value);
@@ -14,7 +32,7 @@ class TimeTrackerPanel extends Component {
     changeDescription(event.target.value);
   };
 
-  handleToggleTracking = event => {
+  handleToggleTracking = () => {
     const { isTracking, startTrackingTime, stopTrackingTime } = this.props;
     if (!isTracking) {
       startTrackingTime();
@@ -126,12 +144,5 @@ class TimeTrackerPanel extends Component {
     );
   };
 }
-
-TimeTrackerPanel.propTypes = {
-  projects: PropTypes.array.isRequired,
-  currentProject: PropTypes.number,
-  description: PropTypes.string,
-  isTracking: PropTypes.bool.isRequired
-};
 
 export default TimeTrackerPanel;

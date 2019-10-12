@@ -50,7 +50,8 @@ ProjectSelector.propTypes = {
   currentProject: PropTypes.number,
   projects: PropTypes.array,
   isTracking: PropTypes.bool,
-  handleProjectUpdate: PropTypes.func
+  handleProjectUpdate: PropTypes.func,
+  openCreateProjectModal: PropTypes.func
 };
 
 export default ProjectSelector;

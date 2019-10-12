@@ -6,6 +6,14 @@ import {
 } from "../../state/errors";
 
 class AddProjectModal extends React.PureComponent {
+  static propTypes = {
+    isActive: PropTypes.bool.isRequired,
+    createProjectAction: PropTypes.func.isRequired,
+    closeModalAction: PropTypes.func.isRequired,
+    projectModalError: PropTypes.string,
+    clearError: PropTypes.func.isRequired
+  };
+
   constructor(props) {
     super(props);
     this.state = { projectName: "" };
@@ -112,12 +120,5 @@ class AddProjectModal extends React.PureComponent {
     );
   };
 }
-
-AddProjectModal.propTypes = {
-  isActive: PropTypes.bool.isRequired,
-  createProjectAction: PropTypes.func.isRequired,
-  closeModalAction: PropTypes.func.isRequired,
-  projectModalError: PropTypes.string
-};
 
 export default AddProjectModal;

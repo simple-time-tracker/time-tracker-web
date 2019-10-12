@@ -41,6 +41,7 @@ const mapEntries = (entries, deleteHandler) => {
 
 TimeEntriesList.propTypes = {
   timeEntries: PropTypes.array,
-  deleteHandler: PropTypes.func
+  deleteHandler: PropTypes.func,
+  deleteEntry: PropTypes.func
 };
 export default TimeEntriesList;
