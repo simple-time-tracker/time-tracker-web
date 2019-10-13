@@ -3,69 +3,55 @@ import {
   LOAD_CURRENT_TIME_ENTRY,
   START_TRACKING,
   STOP_TRACKING,
-  CHANGE_PROJECT
-} from "./timeTrackerActionTypes";
-import {
-  getActiveTimeEntry,
-  startTracking,
-  stopTracking
-} from "./timeTrackerApi";
-import { loadTimeEntries } from "../TimeEntriesList/timeEntriesActions";
+  CHANGE_PROJECT,
+} from './timeTrackerActionTypes';
+import { getActiveTimeEntry, startTracking, stopTracking } from './timeTrackerApi';
+import { loadTimeEntries } from '../TimeEntriesList/timeEntriesActions';
 
 import {
   closeCreateProjectModal,
-  clearAddProjectModalError
-} from "../NewProjectModal/newProjectModalActions";
+  clearAddProjectModalError,
+} from '../NewProjectModal/newProjectModalActions';
 
-export const startTrackingTime = () => {
-  return (dispatch, getState) => {
-    const state = getState().tracker;
-    startTracking(state.currentProject, state.taskDescription).then(() => {
-      dispatch({
-        type: START_TRACKING
-      });
-      loadTimeEntries()(dispatch);
-    });
-  };
-};
-
-export const stopTrackingTime = () => {
-  return dispatch => {
-    stopTracking().then(() => {
-      dispatch({
-        type: STOP_TRACKING
-      });
-      loadTimeEntries()(dispatch);
-    });
-  };
-};
-
-export const getCurrentTimeEntry = () => {
-  return dispatch => {
-    getActiveTimeEntry().then(response => {
-      dispatch({
-        type: LOAD_CURRENT_TIME_ENTRY,
-        payload: response.data
-      });
-    });
-  };
-};
-
-export const changeDescription = description => {
-  return {
-    type: CHANGE_DESCRIPTION,
-    payload: description
-  };
-};
-
-export const changeProject = projectId => {
-  return dispatch => {
+export const startTrackingTime = () => (dispatch, getState) => {
+  const state = getState().tracker;
+  startTracking(state.currentProject, state.taskDescription).then(() => {
     dispatch({
-      type: CHANGE_PROJECT,
-      payload: projectId
+      type: START_TRACKING,
     });
+    loadTimeEntries()(dispatch);
+  });
+};
 
-    dispatch(closeCreateProjectModal());
-    dispatch(clearAddProjectModalError());
-  };
+export const stopTrackingTime = () => (dispatch) => {
+  stopTracking().then(() => {
+    dispatch({
+      type: STOP_TRACKING,
+    });
+    loadTimeEntries()(dispatch);
+  });
+};
+
+export const getCurrentTimeEntry = () => (dispatch) => {
+  getActiveTimeEntry().then((response) => {
+    dispatch({
+      type: LOAD_CURRENT_TIME_ENTRY,
+      payload: response.data,
+    });
+  });
+};
+
+export const changeDescription = (description) => ({
+  type: CHANGE_DESCRIPTION,
+  payload: description,
+});
+
+export const changeProject = (projectId) => (dispatch) => {
+  dispatch({
+    type: CHANGE_PROJECT,
+    payload: projectId,
+  });
+
+  dispatch(closeCreateProjectModal());
+  dispatch(clearAddProjectModalError());
 };

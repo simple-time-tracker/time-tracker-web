@@ -1,33 +1,38 @@
-import React from "react";
-import PropTypes from "prop-types";
-import {
-  DUPLICATE_PROJECT_NAME_ERROR,
-  UNKNOWN_ERROR
-} from "../../state/errors";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { DUPLICATE_PROJECT_NAME_ERROR, UNKNOWN_ERROR } from '../../state/errors';
 
 class AddProjectModal extends React.PureComponent {
+  static propTypes = {
+    isActive: PropTypes.bool.isRequired,
+    createProjectAction: PropTypes.func.isRequired,
+    closeModalAction: PropTypes.func.isRequired,
+    projectModalError: PropTypes.string,
+    clearError: PropTypes.func.isRequired,
+  };
+
   constructor(props) {
     super(props);
-    this.state = { projectName: "" };
+    this.state = { projectName: '' };
   }
 
   componentDidUpdate = () => {
     const isClosed = !this.props.isActive;
     if (isClosed) {
       this.setState({
-        projectName: ""
+        projectName: '',
       });
     }
   };
 
   handleNameChange = ({ target }) => {
     this.setState({
-      projectName: target.value
+      projectName: target.value,
     });
   };
 
-  handleKeyInput = event => {
-    if (event.key === "Enter" && !this.isSaveButtonDisabled()) {
+  handleKeyInput = (event) => {
+    if (event.key === 'Enter' && !this.isSaveButtonDisabled()) {
       this.createProject();
     }
   };
@@ -36,7 +41,7 @@ class AddProjectModal extends React.PureComponent {
     const { closeModalAction, clearError } = this.props;
     this.setState({
       ...this.state,
-      projectName: ""
+      projectName: '',
     });
     closeModalAction();
     clearError();
@@ -47,11 +52,9 @@ class AddProjectModal extends React.PureComponent {
     createProjectAction(this.state.projectName);
   };
 
-  isSaveButtonDisabled = () => {
-    return !this.state.projectName.length > 0;
-  };
+  isSaveButtonDisabled = () => !this.state.projectName.length > 0;
 
-  resolveErrorText = errorCode => {
+  resolveErrorText = (errorCode) => {
     switch (errorCode) {
       case DUPLICATE_PROJECT_NAME_ERROR.code:
         return DUPLICATE_PROJECT_NAME_ERROR.message;
@@ -63,7 +66,7 @@ class AddProjectModal extends React.PureComponent {
   render = () => {
     const { isActive, projectModalError, clearError } = this.props;
     return (
-      <div className={`modal ${isActive && "is-active"}`}>
+      <div className={`modal ${isActive && 'is-active'}`}>
         <div className="modal-background" />
         <div className="modal-card">
           <header className="modal-card-head">
@@ -112,12 +115,5 @@ class AddProjectModal extends React.PureComponent {
     );
   };
 }
-
-AddProjectModal.propTypes = {
-  isActive: PropTypes.bool.isRequired,
-  createProjectAction: PropTypes.func.isRequired,
-  closeModalAction: PropTypes.func.isRequired,
-  projectModalError: PropTypes.string
-};
 
 export default AddProjectModal;

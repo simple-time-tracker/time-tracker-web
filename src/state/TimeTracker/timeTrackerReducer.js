@@ -2,14 +2,14 @@ import {
   LOAD_CURRENT_TIME_ENTRY,
   START_TRACKING,
   STOP_TRACKING,
-  CHANGE_DESCRIPTION
-} from "./timeTrackerActionTypes";
-import { CHANGE_PROJECT } from "./timeTrackerActionTypes";
+  CHANGE_DESCRIPTION,
+  CHANGE_PROJECT,
+} from './timeTrackerActionTypes';
 
 const initialState = {
   currentProject: undefined,
-  taskDescription: "",
-  isTracking: false
+  taskDescription: '',
+  isTracking: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -20,40 +20,40 @@ const reducer = (state = initialState, action) => {
           ...state,
           isTracking: true,
           currentProject: action.payload.project.id,
-          taskDescription: action.payload.description
+          taskDescription: action.payload.description,
         };
       }
       return {
         ...state,
-        isTracking: false
+        isTracking: false,
       };
     }
 
     case START_TRACKING: {
       return {
         ...state,
-        isTracking: true
+        isTracking: true,
       };
     }
     case STOP_TRACKING: {
       return {
         ...state,
         isTracking: false,
-        taskDescription: ""
+        taskDescription: '',
       };
     }
 
     case CHANGE_PROJECT: {
       return {
         ...state,
-        currentProject: parseInt(action.payload, 10)
+        currentProject: parseInt(action.payload, 10),
       };
     }
 
     case CHANGE_DESCRIPTION: {
       return {
         ...state,
-        taskDescription: action.payload
+        taskDescription: action.payload,
       };
     }
 
