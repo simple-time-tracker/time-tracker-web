@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import TimeEntriesList from '../../components/TimeEntriesList/TimeEntriesList';
 import PropTypes from 'prop-types';
+import TimeEntriesList from '../../components/TimeEntriesList/TimeEntriesList';
 
 class TimeEntriesListContainer extends Component {
   static propTypes = {
@@ -8,6 +8,7 @@ class TimeEntriesListContainer extends Component {
     deleteEntry: PropTypes.func,
     loadTimeEntries: PropTypes.func,
   };
+
   componentDidMount = () => {
     this.props.loadTimeEntries();
   };

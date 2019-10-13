@@ -29,13 +29,11 @@ const ProjectSelector = (props) => {
             value={currentProject}
             disabled={isTracking || currentProject === undefined}
           >
-            {projects.map((project) => {
-              return (
-                <option key={project.id ? project.id : 'empty'} value={project.id}>
-                  {project.name}
-                </option>
-              );
-            })}
+            {projects.map((project) => (
+              <option key={project.id ? project.id : 'empty'} value={project.id}>
+                {project.name}
+              </option>
+            ))}
           </select>
         </div>
       </div>

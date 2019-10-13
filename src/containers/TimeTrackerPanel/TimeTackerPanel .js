@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import ProjectSelector from '../ProjectSelector/ProjectSelector';
 import PropTypes from 'prop-types';
+import ProjectSelector from '../ProjectSelector/ProjectSelector';
 import AddProjectModal from '../../components/NewProjectModal/NewProjectModal';
 
 class TimeTrackerPanel extends Component {
@@ -22,6 +22,7 @@ class TimeTrackerPanel extends Component {
     createProject: PropTypes.func.isRequired,
     projectModalError: PropTypes.object,
   };
+
   handleProjectChange = (event) => {
     const { changeProject } = this.props;
     changeProject(event.target.value);

@@ -52,9 +52,7 @@ class AddProjectModal extends React.PureComponent {
     createProjectAction(this.state.projectName);
   };
 
-  isSaveButtonDisabled = () => {
-    return !this.state.projectName.length > 0;
-  };
+  isSaveButtonDisabled = () => !this.state.projectName.length > 0;
 
   resolveErrorText = (errorCode) => {
     switch (errorCode) {

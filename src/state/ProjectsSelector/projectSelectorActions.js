@@ -4,43 +4,36 @@ import { setAddProjectModalError } from '../NewProjectModal/newProjectModalActio
 import { DUPLICATE_PROJECT_NAME_ERROR } from '../errors';
 import { changeProject } from '../TimeTracker/timeTrackerActions';
 
-export const loadProjects = () => {
-  return (dispatch) => {
-    return getProjects().then((response) => {
-      if (response.data.length > 0) {
-        dispatch({
-          type: LOAD_PROJECTS,
-          payload: response.data,
-        });
-        dispatch(changeProject(response.data[0].id));
-      } else {
-        dispatch({
-          type: LOAD_PROJECTS,
-          payload: [{ id: undefined, key: 'empty', name: 'No projects' }],
-        });
-      }
-    });
-  };
-};
-
-export const createProject = (name) => {
-  return (dispatch) => {
-    createNewProject(name)
-      .then((response) => {
-        loadProjects()(dispatch).then(() =>
-          dispatch(changeProject(response.data.id))
-        );
-      })
-      .catch((error) => {
-        if (
-          error.response &&
-          error.response.data &&
-          error.response.data.status === 409
-        ) {
-          dispatch(setAddProjectModalError(DUPLICATE_PROJECT_NAME_ERROR.code));
-          return;
-        }
-        dispatch(setAddProjectModalError('OTHER'));
+export const loadProjects = () => (dispatch) =>
+  getProjects().then((response) => {
+    if (response.data.length > 0) {
+      dispatch({
+        type: LOAD_PROJECTS,
+        payload: response.data,
       });
-  };
+      dispatch(changeProject(response.data[0].id));
+    } else {
+      dispatch({
+        type: LOAD_PROJECTS,
+        payload: [{ id: undefined, key: 'empty', name: 'No projects' }],
+      });
+    }
+  });
+
+export const createProject = (name) => (dispatch) => {
+  createNewProject(name)
+    .then((response) => {
+      loadProjects()(dispatch).then(() => dispatch(changeProject(response.data.id)));
+    })
+    .catch((error) => {
+      if (
+        error.response &&
+        error.response.data &&
+        error.response.data.status === 409
+      ) {
+        dispatch(setAddProjectModalError(DUPLICATE_PROJECT_NAME_ERROR.code));
+        return;
+      }
+      dispatch(setAddProjectModalError('OTHER'));
+    });
 };

@@ -25,8 +25,8 @@ const TimeEntriesList = ({ timeEntries, deleteEntry }) => (
   </div>
 );
 
-const mapEntries = (entries, deleteHandler) => {
-  return entries.map((entry) => (
+const mapEntries = (entries, deleteHandler) =>
+  entries.map((entry) => (
     <TimeEntryListItem
       id={entry.id}
       key={entry.id}
@@ -37,7 +37,6 @@ const mapEntries = (entries, deleteHandler) => {
       deleteHandler={deleteHandler}
     />
   ));
-};
 
 TimeEntriesList.propTypes = {
   timeEntries: PropTypes.array,

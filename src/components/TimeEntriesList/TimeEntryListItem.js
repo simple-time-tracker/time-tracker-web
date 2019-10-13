@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { formatDate, getDuration } from '../../utils/time';
 import { differenceInSeconds } from 'date-fns';
+
+import { formatDate, getDuration } from '../../utils/time';
 
 const TimeEntryListItem = ({
   id,

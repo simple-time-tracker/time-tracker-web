@@ -3,8 +3,8 @@ import {
   START_TRACKING,
   STOP_TRACKING,
   CHANGE_DESCRIPTION,
+  CHANGE_PROJECT,
 } from './timeTrackerActionTypes';
-import { CHANGE_PROJECT } from './timeTrackerActionTypes';
 
 const initialState = {
   currentProject: undefined,
