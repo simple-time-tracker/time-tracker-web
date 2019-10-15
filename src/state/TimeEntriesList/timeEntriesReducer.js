@@ -1,4 +1,4 @@
-import { LOAD_TIME_ENTRIES } from "./timeEntriesActionTypes";
+import { LOAD_TIME_ENTRIES } from './timeEntriesActionTypes';
 
 const initialState = [];
 

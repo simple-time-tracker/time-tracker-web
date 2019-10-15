@@ -1,0 +1,40 @@
+{
+  "env": {
+    "browser": true,
+    "jest": true,
+    "es6": true
+  },
+  "plugins": ["import", "react"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:prettier/recommended",
+    ".eslintrules/best-practices.js",
+    ".eslintrules/errors.js",
+    ".eslintrules/es6.js",
+    ".eslintrules/imports.js",
+    ".eslintrules/node.js",
+    ".eslintrules/strict.js",
+    ".eslintrules/style.js",
+    ".eslintrules/variables.js"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "settings": {
+    "react": {
+      "createClass": "createReactClass",
+      "pragma": "React",
+      "version": "detect"
+    }
+  },
+  "rules": {
+    "no-console": "warn",
+    "no-eval": "error",
+  },
+
+  "parser": "babel-eslint"
+}

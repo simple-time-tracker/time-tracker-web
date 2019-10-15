@@ -1,20 +1,39 @@
-import React, { Component } from "react";
-import ProjectSelector from "../ProjectSelector/ProjectSelector";
-import PropTypes from "prop-types";
-import AddProjectModal from "../../components/NewProjectModal/NewProjectModal";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import ProjectSelector from '../ProjectSelector/ProjectSelector';
+import AddProjectModal from '../../components/NewProjectModal/NewProjectModal';
 
 class TimeTrackerPanel extends Component {
-  handleProjectChange = event => {
+  static propTypes = {
+    projects: PropTypes.array.isRequired,
+    currentProject: PropTypes.number,
+    description: PropTypes.string,
+    isTracking: PropTypes.bool.isRequired,
+    changeProject: PropTypes.func.isRequired,
+    changeDescription: PropTypes.func.isRequired,
+    startTrackingTime: PropTypes.func.isRequired,
+    stopTrackingTime: PropTypes.func.isRequired,
+    loadProjects: PropTypes.func.isRequired,
+    getCurrentTimeEntry: PropTypes.func.isRequired,
+    openCreateProjectModal: PropTypes.func.isRequired,
+    closeCreateProjectModal: PropTypes.func.isRequired,
+    isCreateProjectModalIsOpen: PropTypes.func.isRequired,
+    clearAddProjectModalError: PropTypes.func.isRequired,
+    createProject: PropTypes.func.isRequired,
+    projectModalError: PropTypes.object,
+  };
+
+  handleProjectChange = (event) => {
     const { changeProject } = this.props;
     changeProject(event.target.value);
   };
 
-  handleDescriptionChange = event => {
+  handleDescriptionChange = (event) => {
     const { changeDescription } = this.props;
     changeDescription(event.target.value);
   };
 
-  handleToggleTracking = event => {
+  handleToggleTracking = () => {
     const { isTracking, startTrackingTime, stopTrackingTime } = this.props;
     if (!isTracking) {
       startTrackingTime();
@@ -23,8 +42,8 @@ class TimeTrackerPanel extends Component {
     }
   };
 
-  handleKeyInput = event => {
-    if (event.key === "Enter") {
+  handleKeyInput = (event) => {
+    if (event.key === 'Enter') {
       this.handleToggleTracking(event);
     }
   };
@@ -47,12 +66,12 @@ class TimeTrackerPanel extends Component {
 
   getTrackingButtonClass = () => {
     const { isTracking } = this.props;
-    return isTracking ? "is-danger" : "is-primary";
+    return isTracking ? 'is-danger' : 'is-primary';
   };
 
   getTrackingButtonMessage = () => {
     const { isTracking } = this.props;
-    return isTracking ? "Stop tracking" : "Start tracking";
+    return isTracking ? 'Stop tracking' : 'Start tracking';
   };
 
   isThereNoExistingProjects = () => {
@@ -79,7 +98,7 @@ class TimeTrackerPanel extends Component {
       isCreateProjectModalIsOpen,
       clearAddProjectModalError,
       createProject,
-      projectModalError
+      projectModalError,
     } = this.props;
     return (
       <div className="columns">
@@ -126,12 +145,5 @@ class TimeTrackerPanel extends Component {
     );
   };
 }
-
-TimeTrackerPanel.propTypes = {
-  projects: PropTypes.array.isRequired,
-  currentProject: PropTypes.number,
-  description: PropTypes.string,
-  isTracking: PropTypes.bool.isRequired
-};
 
 export default TimeTrackerPanel;
