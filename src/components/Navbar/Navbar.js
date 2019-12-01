@@ -45,6 +45,11 @@ class Navbar extends React.PureComponent {
             Projects
           </Link>
         </div>
+        <div className="navbar-end">
+          <Link to="/logout" className="navbar-item">
+            Sign out
+          </Link>
+        </div>
       </div>
     </nav>
   );
