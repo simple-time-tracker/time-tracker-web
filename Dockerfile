@@ -1,11 +1,9 @@
-FROM node:12-alpine
+FROM node:12-alpine AS build-js
 ENV APP_ROOT=/usr/src/app
 WORKDIR $APP_ROOT
 COPY . ./
-RUN npm install http-server -g && \
-    npm install && \
-    npm run build && \
-    rm -rf node_modules
-EXPOSE 9000
-USER nobody
-CMD ["sh", "docker/start.sh"]
+RUN npm install && \
+    npm run build
+
+FROM nginx:1.17-alpine
+COPY --from=build-js /usr/src/app/dist /usr/share/nginx/html
