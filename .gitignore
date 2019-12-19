@@ -32,3 +32,4 @@ node_modules
 scripts
 
 dist
+env-config.js
