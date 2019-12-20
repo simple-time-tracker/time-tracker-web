@@ -2,3 +2,4 @@ src/env-config.js
 dist
 node_modules
 .cache
+.git
