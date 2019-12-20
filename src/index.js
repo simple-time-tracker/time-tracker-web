@@ -4,8 +4,6 @@ import ReactDOM from 'react-dom';
 import styles from 'bulma';
 import '@babel/polyfill';
 import { Provider } from 'react-redux';
-// eslint-disable-next-line no-unused-vars
-import env from './env-config';
 import TimeTrackerApp from './TimeTrackerApp';
 import store from './state/store';
 import { AuthProvider } from './utils/auth/authProvider';
