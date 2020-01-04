@@ -35,7 +35,7 @@ TimeEntryListItem.propTypes = {
   activity: PropTypes.string,
   project: PropTypes.string,
   deleteHandler: PropTypes.func,
-  startDate: PropTypes.Date,
-  endDate: PropTypes.Date,
+  startDate: PropTypes.string,
+  endDate: PropTypes.string,
 };
 export default TimeEntryListItem;

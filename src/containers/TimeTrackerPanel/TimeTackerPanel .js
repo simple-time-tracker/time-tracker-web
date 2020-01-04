@@ -17,7 +17,7 @@ class TimeTrackerPanel extends Component {
     getCurrentTimeEntry: PropTypes.func.isRequired,
     openCreateProjectModal: PropTypes.func.isRequired,
     closeCreateProjectModal: PropTypes.func.isRequired,
-    isCreateProjectModalIsOpen: PropTypes.func.isRequired,
+    isCreateProjectModalIsOpen: PropTypes.bool.isRequired,
     clearAddProjectModalError: PropTypes.func.isRequired,
     createProject: PropTypes.func.isRequired,
     projectModalError: PropTypes.object,
