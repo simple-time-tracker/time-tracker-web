@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { differenceInSeconds } from 'date-fns';
 
 import { formatDate, getDuration } from '../../utils/time';
+// eslint-disable-next-line no-unused-vars
+import style from './TimeEntryListItem.scss';
 
 const TimeEntryListItem = ({
   id,

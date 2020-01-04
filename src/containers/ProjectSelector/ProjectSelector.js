@@ -10,8 +10,8 @@ const ProjectSelector = (props) => {
     openCreateProjectModal,
   } = props;
   return (
-    <div className="columns is-mobile">
-      <div className="column is-1-widescreen is-2-tablet is-1-mobile add-project-button-container">
+    <div className="field has-addons">
+      <div className="control">
         <button
           className="button is-primary"
           onClick={openCreateProjectModal}
@@ -22,20 +22,18 @@ const ProjectSelector = (props) => {
           </span>
         </button>
       </div>
-      <div className="column is-11-widescreen is-10-tablet is-11-mobile">
-        <div className="select is-fullwidth">
-          <select
-            onChange={handleProjectUpdate}
-            value={currentProject}
-            disabled={isTracking || currentProject === undefined}
-          >
-            {projects.map((project) => (
-              <option key={project.id ? project.id : 'empty'} value={project.id}>
-                {project.name}
-              </option>
-            ))}
-          </select>
-        </div>
+      <div className="select is-fullwidth">
+        <select
+          onChange={handleProjectUpdate}
+          value={currentProject}
+          disabled={isTracking || currentProject === undefined}
+        >
+          {projects.map((project) => (
+            <option key={project.id ? project.id : 'empty'} value={project.id}>
+              {project.name}
+            </option>
+          ))}
+        </select>
       </div>
     </div>
   );

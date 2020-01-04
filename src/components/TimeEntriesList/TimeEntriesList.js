@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import TimeEntryListItem from './TimeEntryListItem';
 
 const TimeEntriesList = ({ timeEntries, deleteEntry }) => (
-  <div className="container">
+  <div id="time-entries-table" className="container">
     <table className="table is-fullwidth is-striped is-narrow">
       <thead>
         <tr>
