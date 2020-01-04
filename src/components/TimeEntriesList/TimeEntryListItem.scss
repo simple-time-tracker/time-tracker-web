@@ -1,0 +1,13 @@
+@import '~bulma/sass/utilities/_all.sass';
+@import '~bulma/sass/base/_all.sass';
+
+#time-entries-table tbody tr td {
+  word-wrap: break-word;
+  @include mobile {
+    max-width: 10rem;
+  }
+
+  @include tablet {
+    max-width: 25rem;
+  }
+}
