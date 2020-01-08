@@ -82,6 +82,15 @@ export default class AuthService {
     return !!accessToken;
   };
 
+  loginIfExpired = async () => {
+    const user = await this.UserManager.getUser();
+    if (user.expired) {
+      localStorage.removeItem('access_token');
+      localStorage.removeItem('id_token');
+      this.navigateToScreen();
+    }
+  };
+
   logout = () => {
     this.UserManager.signoutRedirect({
       id_token_hint: localStorage.getItem('id_token'),
