@@ -7,6 +7,18 @@ const interceptors = {
       config.headers.Authorization = `Bearer ${localStorage.access_token}`;
       return config;
     }),
+
+  createUnauthorizedRequestInterceptor: () => {
+    Axios.interceptors.response.use(
+      (response) => response,
+      (error) => {
+        localStorage.removeItem('access_token');
+        localStorage.removeItem('id_token');
+        window.location = '/login';
+        return Promise.reject(error);
+      }
+    );
+  },
 };
 
 export default interceptors;

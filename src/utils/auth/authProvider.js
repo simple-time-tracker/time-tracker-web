@@ -8,7 +8,6 @@ const AuthContext = React.createContext({
   logout: () => ({}),
   signOutRedirectCallback: () => ({}),
   isAuthenticated: () => ({}),
-  loginIfExpired: () => ({}),
   signInRedirect: () => ({}),
   signInSilentCallback: () => ({}),
   createSignInRequest: () => ({}),
@@ -27,7 +26,7 @@ export class AuthProvider extends Component {
     super(props);
     this.authService = new AuthService();
     axiosInterceptors.createAuthTokenInterceptor();
-    this.authService.loginIfExpired();
+    axiosInterceptors.createUnauthorizedRequestInterceptor();
   }
 
   render() {
