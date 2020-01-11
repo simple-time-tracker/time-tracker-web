@@ -1,7 +1,7 @@
 language: node_js
 
 node_js:
-  - 10.12.0
+  - 12.4.0
 
 build:
   ci:
@@ -19,8 +19,10 @@ build:
 
 integrations:
   notifications:
-    - integrationName: time-tracker-web-dockerhub-build-trigger
+    - integrationName: time-tracker-web-dockerhub-build-webhook
       type: webhook
       on_success: always
       on_failure: never
       on_cancel: never
+      branches:
+        only: master
