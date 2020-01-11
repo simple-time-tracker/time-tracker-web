@@ -32,4 +32,5 @@ node_modules
 scripts
 
 dist
+coverage
 env-config.js
