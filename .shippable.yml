@@ -16,3 +16,11 @@ build:
   on_failure:
     - cp ./coverage/junit.xml shippable/testresults/
     - cp ./coverage/junit.xml shippable/codecoverage/
+
+integrations:
+  notifications:
+    - integrationName: time-tracker-web-dockerhub-build-trigger
+      type: webhook
+      on_success: always
+      on_failure: never
+      on_cancel: never
