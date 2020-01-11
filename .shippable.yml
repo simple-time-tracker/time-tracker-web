@@ -9,10 +9,10 @@ build:
     - npm build
     - npm test
 
-    post_ci:
-        - cp ./coverage/junit.xml shippable/testresults/
-        - cp ./coverage/junit.xml shippable/codecoverage/
+  post_ci:
+    - cp ./coverage/junit.xml shippable/testresults/
+    - cp ./coverage/junit.xml shippable/codecoverage/
 
-    on_failure:
-        - cp ./coverage/junit.xml shippable/testresults/
-        - cp ./coverage/junit.xml shippable/codecoverage/
+  on_failure:
+    - cp ./coverage/junit.xml shippable/testresults/
+    - cp ./coverage/junit.xml shippable/codecoverage/
