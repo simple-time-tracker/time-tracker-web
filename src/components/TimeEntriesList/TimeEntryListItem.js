@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { differenceInSeconds } from 'date-fns';
 
-import { formatDate, getDuration } from '../../utils/time';
+import { formatDate, formatDuration } from '../../utils/time/time';
 // eslint-disable-next-line no-unused-vars
 import style from './TimeEntryListItem.scss';
 
@@ -22,7 +22,7 @@ const TimeEntryListItem = ({
     <td className="is-hidden-mobile">{endDate && formatDate(endDate)}</td>
     <td>
       {endDate &&
-        getDuration(differenceInSeconds(new Date(endDate), new Date(startDate)))}
+        formatDuration(differenceInSeconds(new Date(endDate), new Date(startDate)))}
     </td>
     <td>
       <span className="icon" onClick={() => deleteHandler(id)}>
