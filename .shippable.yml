@@ -21,8 +21,9 @@ integrations:
   notifications:
     - integrationName: time-tracker-web-dockerhub-build-webhook
       type: webhook
+      branches:
+        only:
+          - master
       on_success: always
       on_failure: never
       on_cancel: never
-      branches:
-        only: master
