@@ -19,7 +19,7 @@ build:
 
 integrations:
   notifications:
-    - integrationName: time-tracker-web-dockerhub-build-trigger
+    - integrationName: webhook
       type: webhook
       on_success: always
       on_failure: never
