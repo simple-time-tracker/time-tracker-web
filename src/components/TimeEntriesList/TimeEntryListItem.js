@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { differenceInSeconds } from 'date-fns';
 
-import { formatDate, formatDuration } from '../../utils/time/time';
+import { formatShortDate, formatDuration } from '../../utils/time/time';
 // eslint-disable-next-line no-unused-vars
 import style from './TimeEntryListItem.scss';
 
@@ -18,8 +18,8 @@ const TimeEntryListItem = ({
     <td>{id}</td>
     <td>{activity}</td>
     <td>{project}</td>
-    <td className="is-hidden-mobile">{formatDate(startDate)}</td>
-    <td className="is-hidden-mobile">{endDate && formatDate(endDate)}</td>
+    <td className="is-hidden-mobile">{formatShortDate(startDate)}</td>
+    <td className="is-hidden-mobile">{endDate && formatShortDate(endDate)}</td>
     <td>
       {endDate &&
         formatDuration(differenceInSeconds(new Date(endDate), new Date(startDate)))}

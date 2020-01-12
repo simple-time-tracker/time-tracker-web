@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { formatLongDate } from '../../utils/time/time';
 
 const ProjectListItem = ({ id, name, dateCreated }) => (
   <tr>
     <td>{id}</td>
     <td>{name}</td>
-    <td>{dateCreated}</td>
+    <td>{formatLongDate(new Date(dateCreated))}</td>
   </tr>
 );
 
