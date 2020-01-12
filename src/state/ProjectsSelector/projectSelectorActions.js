@@ -1,4 +1,4 @@
-import { LOAD_PROJECTS } from './projectSelectorActionTypes';
+import { PROJECT_SELECTOR_LOAD_PROJECTS } from './projectSelectorActionTypes';
 import { getProjects, createNewProject } from './projectApi';
 import { setAddProjectModalError } from '../NewProjectModal/newProjectModalActions';
 import { DUPLICATE_PROJECT_NAME_ERROR } from '../errors';
@@ -8,13 +8,13 @@ export const loadProjects = () => (dispatch) =>
   getProjects().then((response) => {
     if (response.data.length > 0) {
       dispatch({
-        type: LOAD_PROJECTS,
+        type: PROJECT_SELECTOR_LOAD_PROJECTS,
         payload: response.data,
       });
       dispatch(changeProject(response.data[0].id));
     } else {
       dispatch({
-        type: LOAD_PROJECTS,
+        type: PROJECT_SELECTOR_LOAD_PROJECTS,
         payload: [{ id: undefined, key: 'empty', name: 'No projects' }],
       });
     }
