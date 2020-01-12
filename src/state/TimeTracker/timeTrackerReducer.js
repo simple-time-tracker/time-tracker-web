@@ -10,22 +10,26 @@ const initialState = {
   currentProject: undefined,
   taskDescription: '',
   isTracking: false,
+  startDate: null,
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case LOAD_CURRENT_TIME_ENTRY: {
       if (action.payload) {
+        const { project, description, startDate } = action.payload;
         return {
           ...state,
           isTracking: true,
-          currentProject: action.payload.project.id,
-          taskDescription: action.payload.description,
+          currentProject: project.id,
+          taskDescription: description,
+          startDate: new Date(startDate),
         };
       }
       return {
         ...state,
         isTracking: false,
+        startDate: null,
       };
     }
 
@@ -40,6 +44,7 @@ const reducer = (state = initialState, action) => {
         ...state,
         isTracking: false,
         taskDescription: '',
+        startDate: null,
       };
     }
 

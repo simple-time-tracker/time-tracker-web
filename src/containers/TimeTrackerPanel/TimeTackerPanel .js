@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ProjectSelector from '../ProjectSelector/ProjectSelector';
 import AddProjectModal from '../../components/NewProjectModal/NewProjectModal';
+import Timer from '../../components/Timer/Timer';
 
 class TimeTrackerPanel extends Component {
   static propTypes = {
@@ -9,6 +10,7 @@ class TimeTrackerPanel extends Component {
     currentProject: PropTypes.number,
     description: PropTypes.string,
     isTracking: PropTypes.bool.isRequired,
+    startDate: PropTypes.instanceOf(Date),
     changeProject: PropTypes.func.isRequired,
     changeDescription: PropTypes.func.isRequired,
     startTrackingTime: PropTypes.func.isRequired,
@@ -94,6 +96,7 @@ class TimeTrackerPanel extends Component {
       projects,
       currentProject,
       isTracking,
+      startDate,
       description,
       isCreateProjectModalIsOpen,
       clearAddProjectModalError,
@@ -102,7 +105,7 @@ class TimeTrackerPanel extends Component {
     } = this.props;
     return (
       <div className="columns">
-        <div className="column is-two-fifths-tablet is-full-mobile">
+        <div className="column is-3-tablet is-full-mobile">
           <ProjectSelector
             projects={projects}
             handleProjectUpdate={this.handleProjectChange}
@@ -112,7 +115,7 @@ class TimeTrackerPanel extends Component {
           />
         </div>
 
-        <div className="column is-two-fifths-tablet is-full-mobile">
+        <div className="column is-5-tablet is-full-mobile">
           <input
             className="input is-normal"
             type="text"
@@ -124,8 +127,11 @@ class TimeTrackerPanel extends Component {
             What are you working on?"
           />
         </div>
+        <div className="column is-2-tablet is-full-mobile">
+          <Timer isTracking={isTracking} startDate={startDate} />
+        </div>
 
-        <div className="column is-one-fifth is-full-mobile">
+        <div className="column is-2-tablet is-full-mobile">
           <button
             className={`button is-fullwidth ${this.getTrackingButtonClass()}`}
             disabled={this.isTrackingButtonDisabled()}

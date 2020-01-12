@@ -24,6 +24,7 @@ const mapStateToProps = (state) => ({
   currentProject: state.tracker.currentProject,
   description: state.tracker.taskDescription,
   isTracking: state.tracker.isTracking,
+  startDate: state.tracker.startDate,
   isCreateProjectModalIsOpen: state.createProject.isModalOpen,
   projectModalError: state.createProject.error,
 });
@@ -41,7 +42,4 @@ const mapDispatchToProps = {
   clearAddProjectModalError,
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(TimeTrackerPanel);
+export default connect(mapStateToProps, mapDispatchToProps)(TimeTrackerPanel);
