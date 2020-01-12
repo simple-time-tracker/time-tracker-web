@@ -1,9 +1,11 @@
+import { differenceInSeconds } from 'date-fns';
 import {
   LOAD_CURRENT_TIME_ENTRY,
   START_TRACKING,
   STOP_TRACKING,
   CHANGE_DESCRIPTION,
   CHANGE_PROJECT,
+  INCREMENT_TIMER,
 } from './timeTrackerActionTypes';
 
 const initialState = {
@@ -11,19 +13,22 @@ const initialState = {
   taskDescription: '',
   isTracking: false,
   startDate: null,
+  secondsElapsed: 0,
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case LOAD_CURRENT_TIME_ENTRY: {
       if (action.payload) {
-        const { project, description, startDate } = action.payload;
+        const { project, description, startDate: startDateString } = action.payload;
+        const startDate = new Date(startDateString);
         return {
           ...state,
           isTracking: true,
           currentProject: project.id,
           taskDescription: description,
-          startDate: new Date(startDate),
+          startDate,
+          secondsElapsed: differenceInSeconds(new Date(), startDate),
         };
       }
       return {
@@ -39,12 +44,21 @@ const reducer = (state = initialState, action) => {
         isTracking: true,
       };
     }
+
     case STOP_TRACKING: {
       return {
         ...state,
         isTracking: false,
         taskDescription: '',
         startDate: null,
+        secondsElapsed: 0,
+      };
+    }
+
+    case INCREMENT_TIMER: {
+      return {
+        ...state,
+        secondsElapsed: state.secondsElapsed + 1,
       };
     }
 

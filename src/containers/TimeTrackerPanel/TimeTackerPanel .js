@@ -10,11 +10,12 @@ class TimeTrackerPanel extends Component {
     currentProject: PropTypes.number,
     description: PropTypes.string,
     isTracking: PropTypes.bool.isRequired,
-    startDate: PropTypes.instanceOf(Date),
+    secondsElapsed: PropTypes.number.isRequired,
     changeProject: PropTypes.func.isRequired,
     changeDescription: PropTypes.func.isRequired,
     startTrackingTime: PropTypes.func.isRequired,
     stopTrackingTime: PropTypes.func.isRequired,
+    incrementTimer: PropTypes.func.isRequired,
     loadProjects: PropTypes.func.isRequired,
     getCurrentTimeEntry: PropTypes.func.isRequired,
     openCreateProjectModal: PropTypes.func.isRequired,
@@ -25,6 +26,10 @@ class TimeTrackerPanel extends Component {
     projectModalError: PropTypes.object,
   };
 
+  state = {
+    timerUpdaterJob: null,
+  };
+
   handleProjectChange = (event) => {
     const { changeProject } = this.props;
     changeProject(event.target.value);
@@ -33,6 +38,16 @@ class TimeTrackerPanel extends Component {
   handleDescriptionChange = (event) => {
     const { changeDescription } = this.props;
     changeDescription(event.target.value);
+  };
+
+  createTimerUpdateInterval = () => {
+    const { incrementTimer } = this.props;
+    this.setState({ timerUpdaterJob: setInterval(() => incrementTimer(), 1000) });
+  };
+
+  tearDownTimerUpdateInterval = () => {
+    clearInterval(this.state.timerUpdaterJob);
+    this.setState({ timerUpdaterJob: null });
   };
 
   handleToggleTracking = () => {
@@ -51,9 +66,35 @@ class TimeTrackerPanel extends Component {
   };
 
   componentDidMount = () => {
-    const { loadProjects, getCurrentTimeEntry } = this.props;
+    const { loadProjects, getCurrentTimeEntry, isTracking } = this.props;
+    const { timerUpdaterJob } = this.state;
     loadProjects();
     getCurrentTimeEntry();
+
+    if (isTracking && !timerUpdaterJob) {
+      this.createTimerUpdateInterval();
+    }
+  };
+
+  componentDidUpdate = (prevProps) => {
+    const { isTracking: wasTracking } = prevProps;
+    const { isTracking } = this.props;
+    const { timerUpdaterJob } = this.state;
+
+    if (!wasTracking && isTracking && !timerUpdaterJob) {
+      this.createTimerUpdateInterval();
+      return;
+    }
+
+    if (wasTracking && !isTracking && timerUpdaterJob) {
+      this.tearDownTimerUpdateInterval();
+    }
+  };
+
+  componentWillUnmount = () => {
+    if (this.state.timerUpdaterJob) {
+      this.tearDownTimerUpdateInterval();
+    }
   };
 
   openCreateProjectModal = () => {
@@ -96,7 +137,7 @@ class TimeTrackerPanel extends Component {
       projects,
       currentProject,
       isTracking,
-      startDate,
+      secondsElapsed,
       description,
       isCreateProjectModalIsOpen,
       clearAddProjectModalError,
@@ -128,7 +169,7 @@ class TimeTrackerPanel extends Component {
           />
         </div>
         <div className="column is-2-tablet is-full-mobile">
-          <Timer isTracking={isTracking} startDate={startDate} />
+          <Timer secondsPassed={secondsElapsed} />
         </div>
 
         <div className="column is-2-tablet is-full-mobile">
