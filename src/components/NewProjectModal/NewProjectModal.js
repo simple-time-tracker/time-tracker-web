@@ -11,10 +11,7 @@ class AddProjectModal extends React.PureComponent {
     clearError: PropTypes.func.isRequired,
   };
 
-  constructor(props) {
-    super(props);
-    this.state = { projectName: '' };
-  }
+  state = { projectName: '' };
 
   componentDidUpdate = () => {
     const isClosed = !this.props.isActive;

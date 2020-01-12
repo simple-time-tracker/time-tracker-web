@@ -4,6 +4,7 @@ import {
   START_TRACKING,
   STOP_TRACKING,
   CHANGE_PROJECT,
+  INCREMENT_TIMER,
 } from './timeTrackerActionTypes';
 import { getActiveTimeEntry, startTracking, stopTracking } from './timeTrackerApi';
 import { loadTimeEntries } from '../TimeEntriesList/timeEntriesActions';
@@ -31,6 +32,10 @@ export const stopTrackingTime = () => (dispatch) => {
     loadTimeEntries()(dispatch);
   });
 };
+
+export const incrementTimer = () => ({
+  type: INCREMENT_TIMER,
+});
 
 export const getCurrentTimeEntry = () => (dispatch) => {
   getActiveTimeEntry().then((response) => {
