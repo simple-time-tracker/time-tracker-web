@@ -1,4 +1,4 @@
-import { parse } from 'date-fns';
+import { parseISO } from 'date-fns';
 import { formatDuration, formatShortDate, formatLongDate } from '../time';
 
 describe('format duration', () => {
@@ -32,12 +32,10 @@ describe('format duration', () => {
 
 describe('format short date', () => {
   it('should use MM/DD HH:mm format', () => {
-    expect(formatShortDate(parse('2014-02-11 11:30:30'))).toBe('02/11 11:30');
+    expect(formatShortDate(parseISO('2014-02-11 11:30:30'))).toBe('02/11 11:30');
   });
 
   it('should use YYYY-MM-DD HH:mm format', () => {
-    expect(formatLongDate(parse('2020-01-12T13:51:54.141854Z'))).toBe(
-      '2020-01-12 15:51'
-    );
+    expect(formatLongDate(parseISO('2020-01-12 13:51:54'))).toBe('2020-01-12 13:51');
   });
 });
