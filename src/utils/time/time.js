@@ -1,7 +1,7 @@
 import { format } from 'date-fns';
 
-const SHORT_DATE_FORMAT = 'MM/DD HH:mm';
-const LONG_DATE_FORMAT = 'YYYY-MM-DD HH:mm';
+const SHORT_DATE_FORMAT = 'MM/dd HH:mm';
+const LONG_DATE_FORMAT = 'yyyy-MM-dd HH:mm';
 
 export const formatDuration = (diffInSeconds) => {
   if (Number.isNaN(diffInSeconds) || diffInSeconds < 0) {
