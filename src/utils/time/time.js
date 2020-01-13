@@ -1,6 +1,7 @@
 import { format } from 'date-fns';
 
-const DATE_FORMAT = 'MM/DD HH:mm';
+const SHORT_DATE_FORMAT = 'MM/dd HH:mm';
+const LONG_DATE_FORMAT = 'yyyy-MM-dd HH:mm';
 
 export const formatDuration = (diffInSeconds) => {
   if (Number.isNaN(diffInSeconds) || diffInSeconds < 0) {
@@ -19,7 +20,9 @@ export const formatDuration = (diffInSeconds) => {
   )}`;
 };
 
-export const formatDate = (date) => format(date, DATE_FORMAT);
+export const formatShortDate = (date) => format(date, SHORT_DATE_FORMAT);
+
+export const formatLongDate = (date) => format(date, LONG_DATE_FORMAT);
 
 const convertTimeUnitToString = (unit) => {
   if (`${unit}`.length === 1) return `0${unit}`;

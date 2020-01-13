@@ -21,7 +21,7 @@ import {
 import TimeTrackerPanel from './TimeTackerPanel ';
 
 const mapStateToProps = (state) => ({
-  projects: state.projects,
+  projects: state.projectSelector.projects,
   currentProject: state.tracker.currentProject,
   description: state.tracker.taskDescription,
   isTracking: state.tracker.isTracking,
