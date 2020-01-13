@@ -16,6 +16,8 @@ class ProjectList extends PureComponent {
             <tr>
               <th>Id</th>
               <th>Name</th>
+              <th>Time spent</th>
+              <th>Is archived</th>
               <th>Creation date</th>
             </tr>
           </thead>
@@ -32,6 +34,8 @@ const mapEntries = (projects) =>
       key={entry.id}
       id={entry.id}
       name={entry.name}
+      isArchived={entry.archived}
+      timeSpentInMilliseconds={entry.timeSpentInMilliseconds}
       dateCreated={entry.dateCreated}
     />
   ));
