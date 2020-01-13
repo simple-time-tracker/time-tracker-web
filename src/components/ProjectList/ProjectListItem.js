@@ -15,7 +15,7 @@ const ProjectListItem = ({
     <td>{name}</td>
     <td>{formatDistance(new Date(0), new Date(timeSpentInMilliseconds))}</td>
     <td>{isArchived}</td>
-    <td>{formatLongDate(new Date(dateCreated))}</td>
+    <td>{formatLongDate(dateCreated)}</td>
   </tr>
 );
 
