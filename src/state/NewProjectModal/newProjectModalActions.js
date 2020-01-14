@@ -1,12 +1,12 @@
 import {
-  SET_ADD_PROJECT_MODAL_ERROR,
+  SET_CREATE_PROJECT_MODAL_ERROR,
   CLEAR_ADD_PROJECT_MODAL_ERROR,
   OPEN_CREATE_PROJECT_MODAL,
   CLOSE_CREATE_PROJECT_MODAL,
 } from './newProjectModalActionTypes';
 
 export const setAddProjectModalError = (errorCode) => ({
-  type: SET_ADD_PROJECT_MODAL_ERROR,
+  type: SET_CREATE_PROJECT_MODAL_ERROR,
   payload: errorCode,
 });
 
