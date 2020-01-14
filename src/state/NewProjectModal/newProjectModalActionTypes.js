@@ -1,4 +1,4 @@
-export const OPEN_CREATE_PROJECT_MODAL = 'OPEN_CREATE_PROJECT_MODAL';
-export const CLOSE_CREATE_PROJECT_MODAL = 'CLOSE_CREATE_PROJECT_MODAL';
-export const SET_ADD_PROJECT_MODAL_ERROR = 'SET_ADD_PROJECT_MODAL_ERROR';
-export const CLEAR_ADD_PROJECT_MODAL_ERROR = 'CLEAR_ADD_PROJECT_MODAL_ERROR';
+export const OPEN_CREATE_PROJECT_MODAL = 'create-project-modal/open';
+export const CLOSE_CREATE_PROJECT_MODAL = 'create-project-modal/close';
+export const SET_CREATE_PROJECT_MODAL_ERROR = 'create-project-modal/set-error';
+export const CLEAR_ADD_PROJECT_MODAL_ERROR = 'create-project-modal/clear-error';

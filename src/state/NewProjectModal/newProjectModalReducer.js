@@ -1,7 +1,7 @@
 import {
   OPEN_CREATE_PROJECT_MODAL,
   CLOSE_CREATE_PROJECT_MODAL,
-  SET_ADD_PROJECT_MODAL_ERROR,
+  SET_CREATE_PROJECT_MODAL_ERROR,
   CLEAR_ADD_PROJECT_MODAL_ERROR,
 } from './newProjectModalActionTypes';
 
@@ -26,7 +26,7 @@ const reducer = (state = initialState, action) => {
       };
     }
 
-    case SET_ADD_PROJECT_MODAL_ERROR: {
+    case SET_CREATE_PROJECT_MODAL_ERROR: {
       return {
         ...state,
         error: action.payload,

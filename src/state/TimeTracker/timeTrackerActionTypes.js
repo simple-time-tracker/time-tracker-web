@@ -1,6 +1,6 @@
-export const START_TRACKING = 'START_TRACKING';
-export const STOP_TRACKING = 'STOP_TRACKING';
-export const CHANGE_DESCRIPTION = 'CHANGE_DESCRIPTION';
-export const CHANGE_PROJECT = 'CHANGE_PROJECT';
-export const LOAD_CURRENT_TIME_ENTRY = 'LOAD_CURRENT_TIME_ENTRY';
-export const INCREMENT_TIMER = 'INCREMENT_TIMER';
+export const START_TRACKING = 'time-tracker/start';
+export const STOP_TRACKING = 'time-tracker/stop';
+export const CHANGE_DESCRIPTION = 'time-tracker/change-project-description';
+export const CHANGE_PROJECT = 'time-tracker/change-project';
+export const LOAD_CURRENT_TIME_ENTRY = 'time-tracker/load-current-entry';
+export const INCREMENT_TIMER = 'time-tracker/increment-timer';
