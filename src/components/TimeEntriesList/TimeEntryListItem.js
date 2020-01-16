@@ -25,7 +25,7 @@ const TimeEntryListItem = ({
         formatDuration(differenceInSeconds(new Date(endDate), new Date(startDate)))}
     </td>
     <td>
-      <span className="icon" onClick={() => deleteHandler(id)}>
+      <span className="icon delete-icon" onClick={() => deleteHandler(id)}>
         <i className="fa fa-trash" />
       </span>
     </td>
