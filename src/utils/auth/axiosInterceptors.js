@@ -12,9 +12,11 @@ const interceptors = {
     Axios.interceptors.response.use(
       (response) => response,
       (error) => {
-        localStorage.removeItem('access_token');
-        localStorage.removeItem('id_token');
-        window.location = '/login';
+        if (error.response.data.status === 401) {
+          localStorage.removeItem('access_token');
+          localStorage.removeItem('id_token');
+          window.location = '/login';
+        }
         return Promise.reject(error);
       }
     );
