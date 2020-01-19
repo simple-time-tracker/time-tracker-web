@@ -10,7 +10,7 @@ export const deleteEntry = (id) => (dispatch) => {
 };
 
 export const loadTimeEntries = (page) => (dispatch) => {
-  getTimeEntries(page, MAX_PAGE_SIZE).then((response) => {
+  getTimeEntries(page - 1, MAX_PAGE_SIZE).then((response) => {
     dispatch({
       type: LOAD_TIME_ENTRIES,
       payload: response.data,

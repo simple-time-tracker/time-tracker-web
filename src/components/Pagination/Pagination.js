@@ -8,6 +8,7 @@ class Pagination extends Component {
     totalPages: PropTypes.number.isRequired,
     activePage: PropTypes.number.isRequired,
     maxPages: PropTypes.number.isRequired,
+    loadPage: PropTypes.func.isRequired,
   };
 
   render = () => {
@@ -32,10 +33,10 @@ class Pagination extends Component {
   };
 
   renderItems = () => {
-    const { totalPages, activePage, maxPages } = this.props;
+    const { totalPages, activePage, maxPages, loadPage } = this.props;
 
     if (totalPages <= maxPages) {
-      return renderItemsRange(1, totalPages, activePage);
+      return renderItemsRange(1, totalPages, activePage, loadPage);
     }
 
     const twoEllipses =
@@ -44,59 +45,62 @@ class Pagination extends Component {
       activePage + maxPages - 1 <= totalPages;
 
     if (twoEllipses) {
-      return renderTwoEllipsisCase(totalPages, maxPages, activePage);
+      return renderTwoEllipsisCase(totalPages, maxPages, activePage, loadPage);
     }
 
     const isNearerToFirstPage = totalPages - activePage > activePage;
     return isNearerToFirstPage
-      ? renderNearerStartCase(totalPages, maxPages, activePage)
-      : renderNearerEndCase(totalPages, maxPages, activePage);
+      ? renderNearerStartCase(totalPages, maxPages, activePage, loadPage)
+      : renderNearerEndCase(totalPages, maxPages, activePage, loadPage);
   };
 }
 
-const renderItemsRange = (from, to, activePage) =>
+const renderItemsRange = (from, to, activePage, loadPage) =>
   range(from, to + 1).map((currentPage) => (
     <PaginationItem
       key={currentPage}
       pageNumber={currentPage}
       isActive={currentPage === activePage}
+      loadPage={loadPage}
     />
   ));
 
-const renderTwoEllipsisCase = (totalPages, maxPages, activePage) => {
+const renderTwoEllipsisCase = (totalPages, maxPages, activePage, loadPage) => {
   const numberOfPagesBeforeAndAfter = Math.floor((maxPages - 2) / 2);
   const paginatedItems = renderItemsRange(
     activePage - numberOfPagesBeforeAndAfter,
     activePage + numberOfPagesBeforeAndAfter,
-    activePage
+    activePage,
+    loadPage
   );
 
   return [
-    <PaginationItem key={1} pageNumber={1} />,
+    <PaginationItem key={1} pageNumber={1} loadPage={loadPage} />,
     <PaginationItem key="first-ellipsis" isEllipsis={true} />,
     paginatedItems,
     <PaginationItem key="second-ellipsis" isEllipsis={true} />,
-    <PaginationItem key={totalPages} pageNumber={totalPages} />,
+    <PaginationItem key={totalPages} pageNumber={totalPages} loadPage={loadPage} />,
   ];
 };
 
-const renderNearerStartCase = (totalPages, maxPages, activePage) => {
-  const paginatedItems = renderItemsRange(1, maxPages - 2, activePage);
+const renderNearerStartCase = (totalPages, maxPages, activePage, loadPage) => {
+  const paginatedItems = renderItemsRange(1, maxPages - 2, activePage, loadPage);
   return [
     paginatedItems,
     <PaginationItem key="first-ellipsis" isEllipsis={true} />,
-    <PaginationItem key={totalPages} pageNumber={totalPages} />,
+    <PaginationItem key={totalPages} pageNumber={totalPages} loadPage={loadPage} />,
   ];
 };
 
-const renderNearerEndCase = (totalPages, maxPages, activePage) => {
+const renderNearerEndCase = (totalPages, maxPages, activePage, loadPage) => {
   const paginatedItems = renderItemsRange(
     totalPages - maxPages + 2,
     totalPages,
-    activePage
+    activePage,
+    loadPage
   );
   return [
-    <PaginationItem key={1} pageNumber={1} />,
+    <PaginationItem key={1} pageNumber={1} loadPage={loadPage} />,
     <PaginationItem key="first-ellipsis" isEllipsis={true} />,
     paginatedItems,
   ];

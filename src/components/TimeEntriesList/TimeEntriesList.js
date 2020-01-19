@@ -1,8 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import TimeEntryListItem from './TimeEntryListItem';
+import Pagination from '../Pagination/Pagination';
 
-const TimeEntriesList = ({ timeEntries, deleteEntry }) => (
+const TimeEntriesList = ({
+  timeEntries,
+  totalPages,
+  currentPage,
+  deleteEntry,
+  loadTimeEntries,
+}) => (
   <div id="time-entries-table" className="container">
     <table className="table is-fullwidth is-striped is-narrow">
       <thead>
@@ -22,6 +29,13 @@ const TimeEntriesList = ({ timeEntries, deleteEntry }) => (
       </thead>
       <tbody>{mapEntries(timeEntries, deleteEntry)}</tbody>
     </table>
+
+    <Pagination
+      totalPages={totalPages}
+      activePage={currentPage}
+      maxPages={5}
+      loadPage={loadTimeEntries}
+    />
   </div>
 );
 
@@ -40,7 +54,10 @@ const mapEntries = (entries, deleteHandler) =>
 
 TimeEntriesList.propTypes = {
   timeEntries: PropTypes.array,
+  totalPages: PropTypes.number.isRequired,
+  currentPage: PropTypes.number.isRequired,
   deleteHandler: PropTypes.func,
+  loadTimeEntries: PropTypes.func.isRequired,
   deleteEntry: PropTypes.func,
 };
 export default TimeEntriesList;
