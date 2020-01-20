@@ -12,7 +12,7 @@ const interceptors = {
     Axios.interceptors.response.use(
       (response) => response,
       (error) => {
-        if (error.response.data.status === 401) {
+        if (error.response.status === 401) {
           localStorage.removeItem('access_token');
           localStorage.removeItem('id_token');
           window.location = '/login';
