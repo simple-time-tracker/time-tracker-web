@@ -55,6 +55,12 @@ class Pagination extends Component {
   };
 }
 
+const renderEllipsis = (key) => (
+  <li key={key}>
+    <span className="pagination-ellipsis">&hellip;</span>
+  </li>
+);
+
 const renderItemsRange = (from, to, activePage, loadPage) =>
   range(from, to + 1).map((currentPage) => (
     <PaginationItem
@@ -76,9 +82,9 @@ const renderTwoEllipsisCase = (totalPages, maxPages, activePage, loadPage) => {
 
   return [
     <PaginationItem key={1} pageNumber={1} loadPage={loadPage} />,
-    <PaginationItem key="first-ellipsis" isEllipsis={true} />,
+    renderEllipsis('first-ellipsis'),
     paginatedItems,
-    <PaginationItem key="second-ellipsis" isEllipsis={true} />,
+    renderEllipsis('second-ellipsis'),
     <PaginationItem key={totalPages} pageNumber={totalPages} loadPage={loadPage} />,
   ];
 };
@@ -87,7 +93,7 @@ const renderNearerStartCase = (totalPages, maxPages, activePage, loadPage) => {
   const paginatedItems = renderItemsRange(1, maxPages - 2, activePage, loadPage);
   return [
     paginatedItems,
-    <PaginationItem key="first-ellipsis" isEllipsis={true} />,
+    renderEllipsis('first-ellipsis'),
     <PaginationItem key={totalPages} pageNumber={totalPages} loadPage={loadPage} />,
   ];
 };
@@ -101,7 +107,7 @@ const renderNearerEndCase = (totalPages, maxPages, activePage, loadPage) => {
   );
   return [
     <PaginationItem key={1} pageNumber={1} loadPage={loadPage} />,
-    <PaginationItem key="first-ellipsis" isEllipsis={true} />,
+    renderEllipsis('first-ellipsis'),
     paginatedItems,
   ];
 };
