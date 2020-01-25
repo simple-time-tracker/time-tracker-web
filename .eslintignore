@@ -1,2 +1,4 @@
 dev-server.js
+env-config.js
+setupTests.js
 src/utils/auth/authConstants.js

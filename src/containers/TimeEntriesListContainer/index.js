@@ -6,7 +6,9 @@ import {
 import TimeEntriesListContainer from './TimeEntriesListContainer';
 
 const mapStateToProps = (state) => ({
-  entries: state.timeEntries,
+  entries: state.timeEntriesList.items,
+  currentPage: state.timeEntriesList.currentPage,
+  totalPages: state.timeEntriesList.totalPages,
 });
 
 const mapDispatchToProps = { loadTimeEntries, deleteEntry };

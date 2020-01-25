@@ -15,21 +15,22 @@ import {
 } from '../NewProjectModal/newProjectModalActions';
 
 export const startTrackingTime = () => (dispatch, getState) => {
-  const state = getState().tracker;
-  startTracking(state.currentProject, state.taskDescription).then(() => {
+  const { timeEntriesList, tracker } = getState();
+  startTracking(tracker.currentProject, tracker.taskDescription).then(() => {
     dispatch({
       type: START_TRACKING,
     });
-    loadTimeEntries()(dispatch);
+    loadTimeEntries(timeEntriesList.currentPage)(dispatch);
   });
 };
 
-export const stopTrackingTime = () => (dispatch) => {
+export const stopTrackingTime = () => (dispatch, getState) => {
+  const { timeEntriesList } = getState();
   stopTracking().then(() => {
     dispatch({
       type: STOP_TRACKING,
     });
-    loadTimeEntries()(dispatch);
+    loadTimeEntries(timeEntriesList.currentPage)(dispatch);
   });
 };
 

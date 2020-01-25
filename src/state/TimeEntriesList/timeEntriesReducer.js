@@ -1,11 +1,18 @@
 import { LOAD_TIME_ENTRIES } from './timeEntriesActionTypes';
 
-const initialState = [];
+const initialState = { items: [], totalPages: 1, currentPage: 0 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case LOAD_TIME_ENTRIES: {
-      return [...action.payload.content];
+      return {
+        ...state,
+        currentPage: action.payload.number + 1,
+        totalPages: action.payload.totalPages,
+        totalElements: action.payload.totalElements,
+        pageSize: action.payload.size,
+        items: action.payload.content,
+      };
     }
 
     default:
