@@ -11,6 +11,30 @@ class Pagination extends Component {
     loadPage: PropTypes.func.isRequired,
   };
 
+  isPreviousButtonDisabled = () => {
+    const { activePage } = this.props;
+    return activePage === 1;
+  };
+
+  isNextButtonDisabled = () => {
+    const { activePage, totalPages } = this.props;
+    return activePage === totalPages;
+  };
+
+  onPreviousButtonClickAction = () => {
+    const { loadPage, activePage } = this.props;
+    if (!this.isPreviousButtonDisabled()) {
+      loadPage(activePage - 1);
+    }
+  };
+
+  onNextButtonClickAction = () => {
+    const { loadPage, activePage } = this.props;
+    if (!this.isNextButtonDisabled()) {
+      loadPage(activePage + 1);
+    }
+  };
+
   render = () => {
     const { totalPages, activePage } = this.props;
     return (
@@ -20,11 +44,21 @@ class Pagination extends Component {
         aria-label="pagination"
       >
         <ul className="pagination-list">
-          <li key="lessThan" className="pagination-link">
+          <li
+            key="lessThan"
+            className="pagination-link"
+            disabled={this.isPreviousButtonDisabled()}
+            onClick={() => this.onPreviousButtonClickAction()}
+          >
             &lt;
           </li>
           {this.renderItems(totalPages, activePage)}
-          <li key="greaterThan" className="pagination-link">
+          <li
+            key="greaterThan"
+            className="pagination-link"
+            disabled={this.isNextButtonDisabled()}
+            onClick={() => this.onNextButtonClickAction()}
+          >
             &gt;
           </li>
         </ul>
