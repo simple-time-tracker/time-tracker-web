@@ -19,7 +19,7 @@ class TimeEntriesListContainer extends Component {
     <TimeEntriesList
       timeEntries={this.props.entries}
       totalPages={this.props.totalPages}
-      currentPage={this.props.currentPage + 1}
+      currentPage={this.props.currentPage}
       loadTimeEntries={this.props.loadTimeEntries}
       deleteEntry={this.props.deleteEntry}
     />

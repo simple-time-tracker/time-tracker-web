@@ -33,6 +33,114 @@ describe('Pagination buttons component', () => {
     assertSimpleLink(paginationButtons.at(3), '>');
   });
 
+  it('should render pagination buttons, when single page', () => {
+    const wrapper = shallow(
+      <Pagination
+        totalPages={1}
+        activePage={1}
+        maxPages={5}
+        loadPage={mockLoadPage}
+      />
+    );
+
+    const paginationButtonsContainer = wrapper.find(
+      'nav.pagination ul.pagination-list'
+    );
+    const paginationButtons = paginationButtonsContainer.children();
+
+    expect(paginationButtonsContainer.hasClass('pagination-list')).toBe(true);
+    expect(paginationButtons).toHaveLength(3);
+
+    assertSimpleLink(paginationButtons.at(0), '<', true);
+    assertPageButton(paginationButtons.at(1), 1, true);
+    assertSimpleLink(paginationButtons.at(2), '>', true);
+  });
+
+  it('should render pagination buttons, on 1st of 9 pages, when maxPages = 5', () => {
+    const wrapper = shallow(
+      <Pagination
+        totalPages={9}
+        activePage={1}
+        maxPages={5}
+        loadPage={mockLoadPage}
+      />
+    );
+
+    const paginationButtonsContainer = wrapper.find(
+      'nav.pagination ul.pagination-list'
+    );
+    const paginationButtons = paginationButtonsContainer.children();
+
+    expect(paginationButtonsContainer.hasClass('pagination-list')).toBe(true);
+    expect(paginationButtons).toHaveLength(8);
+
+    assertSimpleLink(paginationButtons.at(0), '<', true);
+    assertPageButton(paginationButtons.at(1), 1, true);
+    assertPageButton(paginationButtons.at(2), 2);
+    assertPageButton(paginationButtons.at(3), 3);
+    assertPageButton(paginationButtons.at(4), 4);
+    expect(paginationButtons.at(5).text()).toBe('…');
+    assertPageButton(paginationButtons.at(6), 9);
+    assertSimpleLink(paginationButtons.at(7), '>');
+  });
+
+  it('should render two ellipses, on 4st of 9 pages, when maxPages = 5', () => {
+    const wrapper = shallow(
+      <Pagination
+        totalPages={9}
+        activePage={4}
+        maxPages={5}
+        loadPage={mockLoadPage}
+      />
+    );
+
+    const paginationButtonsContainer = wrapper.find(
+      'nav.pagination ul.pagination-list'
+    );
+    const paginationButtons = paginationButtonsContainer.children();
+
+    expect(paginationButtonsContainer.hasClass('pagination-list')).toBe(true);
+    expect(paginationButtons).toHaveLength(9);
+
+    assertSimpleLink(paginationButtons.at(0), '<');
+    assertPageButton(paginationButtons.at(1), 1);
+    expect(paginationButtons.at(2).text()).toBe('…');
+    assertPageButton(paginationButtons.at(3), 3);
+    assertPageButton(paginationButtons.at(4), 4);
+    assertPageButton(paginationButtons.at(5), 5);
+    expect(paginationButtons.at(6).text()).toBe('…');
+    assertPageButton(paginationButtons.at(7), 9);
+    assertSimpleLink(paginationButtons.at(8), '>');
+  });
+
+  it('should render correct buttons, on 6st of 9 pages, when maxPages = 5', () => {
+    const wrapper = shallow(
+      <Pagination
+        totalPages={9}
+        activePage={6}
+        maxPages={5}
+        loadPage={mockLoadPage}
+      />
+    );
+
+    const paginationButtonsContainer = wrapper.find(
+      'nav.pagination ul.pagination-list'
+    );
+    const paginationButtons = paginationButtonsContainer.children();
+
+    expect(paginationButtonsContainer.hasClass('pagination-list')).toBe(true);
+    expect(paginationButtons).toHaveLength(8);
+
+    assertSimpleLink(paginationButtons.at(0), '<');
+    assertPageButton(paginationButtons.at(1), 1);
+    expect(paginationButtons.at(2).text()).toBe('…');
+    assertPageButton(paginationButtons.at(3), 6);
+    assertPageButton(paginationButtons.at(4), 7);
+    assertPageButton(paginationButtons.at(5), 8);
+    assertPageButton(paginationButtons.at(6), 9);
+    assertSimpleLink(paginationButtons.at(7), '>');
+  });
+
   it('should disable prev page button if in first page', () => {
     const wrapper = shallow(
       <Pagination
@@ -139,9 +247,12 @@ describe('Pagination buttons component', () => {
     expect(mockLoadPage.mock.calls.length).toBe(0);
   });
 
-  const assertSimpleLink = (link, expectedText) => {
+  const assertSimpleLink = (link, expectedText, disabled) => {
     expect(link.text()).toBe(expectedText);
     expect(link.hasClass('pagination-link')).toBe(true);
+    if (disabled) {
+      expect(link.props()).toHaveProperty('disabled', disabled);
+    }
   };
 
   const assertPageButton = (button, expectedText, isActive) => {

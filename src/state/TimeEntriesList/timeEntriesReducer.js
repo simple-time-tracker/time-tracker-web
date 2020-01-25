@@ -7,7 +7,7 @@ const reducer = (state = initialState, action) => {
     case LOAD_TIME_ENTRIES: {
       return {
         ...state,
-        currentPage: action.payload.number,
+        currentPage: action.payload.number + 1,
         totalPages: action.payload.totalPages,
         totalElements: action.payload.totalElements,
         pageSize: action.payload.size,

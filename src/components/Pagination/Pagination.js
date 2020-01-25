@@ -128,7 +128,7 @@ const renderTwoEllipsisCase = (totalPages, maxPages, activePage, loadPage) => {
 };
 
 const renderNearerStartCase = (totalPages, maxPages, activePage, loadPage) => {
-  const paginatedItems = renderItemsRange(1, maxPages - 2, activePage, loadPage);
+  const paginatedItems = renderItemsRange(1, maxPages - 1, activePage, loadPage);
   return [
     paginatedItems,
     renderEllipsis('first-ellipsis'),
