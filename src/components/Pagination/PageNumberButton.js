@@ -6,7 +6,7 @@ const PageNumberButton = ({ pageNumber, isActive, loadPage }) => (
     <a
       className={`pagination-link ${getIsActiveCssClass(isActive)}`}
       aria-label={`Go to page ${pageNumber}`}
-      onClick={() => loadPage(pageNumber)}
+      onClick={() => !isActive && loadPage(pageNumber)}
     >
       {pageNumber}
     </a>
