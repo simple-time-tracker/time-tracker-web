@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { range } from 'underscore';
-import PaginationItem from './PaginationItem';
+import PageNumberButton from './PageNumberButton';
 
 class Pagination extends Component {
   static propTypes = {
@@ -63,7 +63,7 @@ const renderEllipsis = (key) => (
 
 const renderItemsRange = (from, to, activePage, loadPage) =>
   range(from, to + 1).map((currentPage) => (
-    <PaginationItem
+    <PageNumberButton
       key={currentPage}
       pageNumber={currentPage}
       isActive={currentPage === activePage}
@@ -81,11 +81,15 @@ const renderTwoEllipsisCase = (totalPages, maxPages, activePage, loadPage) => {
   );
 
   return [
-    <PaginationItem key={1} pageNumber={1} loadPage={loadPage} />,
+    <PageNumberButton key={1} pageNumber={1} loadPage={loadPage} />,
     renderEllipsis('first-ellipsis'),
     paginatedItems,
     renderEllipsis('second-ellipsis'),
-    <PaginationItem key={totalPages} pageNumber={totalPages} loadPage={loadPage} />,
+    <PageNumberButton
+      key={totalPages}
+      pageNumber={totalPages}
+      loadPage={loadPage}
+    />,
   ];
 };
 
@@ -94,7 +98,11 @@ const renderNearerStartCase = (totalPages, maxPages, activePage, loadPage) => {
   return [
     paginatedItems,
     renderEllipsis('first-ellipsis'),
-    <PaginationItem key={totalPages} pageNumber={totalPages} loadPage={loadPage} />,
+    <PageNumberButton
+      key={totalPages}
+      pageNumber={totalPages}
+      loadPage={loadPage}
+    />,
   ];
 };
 
@@ -106,7 +114,7 @@ const renderNearerEndCase = (totalPages, maxPages, activePage, loadPage) => {
     loadPage
   );
   return [
-    <PaginationItem key={1} pageNumber={1} loadPage={loadPage} />,
+    <PageNumberButton key={1} pageNumber={1} loadPage={loadPage} />,
     renderEllipsis('first-ellipsis'),
     paginatedItems,
   ];

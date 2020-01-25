@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const PaginationItem = ({ pageNumber, isActive, loadPage }) => (
+const PageNumberButton = ({ pageNumber, isActive, loadPage }) => (
   <li>
     <a
       className={`pagination-link ${getIsActiveCssClass(isActive)}`}
@@ -15,14 +15,14 @@ const PaginationItem = ({ pageNumber, isActive, loadPage }) => (
 
 const getIsActiveCssClass = (isActive) => (isActive ? 'is-current' : '');
 
-PaginationItem.defaultProps = {
+PageNumberButton.defaultProps = {
   isActive: false,
 };
 
-PaginationItem.propTypes = {
+PageNumberButton.propTypes = {
   pageNumber: PropTypes.number.isRequired,
   isActive: PropTypes.bool.isRequired,
   loadPage: PropTypes.func.isRequired,
 };
 
-export default PaginationItem;
+export default PageNumberButton;
