@@ -52,6 +52,8 @@
     "@babel/preset-react": "7.8.3",
     "babel-eslint": "10.0.3",
     "confusing-browser-globals": "1.0.9",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
     "eslint": "6.8.0",
     "eslint-config-prettier": "6.9.0",
     "eslint-plugin-import": "2.20.0",
@@ -65,6 +67,7 @@
     "parcel": "1.12.4",
     "parcel-bundler": "1.12.4",
     "prettier": "1.19.1",
+    "react-test-renderer": "^16.12.0",
     "sass": "^1.24.4"
   }
 }
