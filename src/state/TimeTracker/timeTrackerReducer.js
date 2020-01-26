@@ -42,6 +42,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         isTracking: true,
+        startDate: new Date(),
       };
     }
 
@@ -58,7 +59,7 @@ const reducer = (state = initialState, action) => {
     case INCREMENT_TIMER: {
       return {
         ...state,
-        secondsElapsed: state.secondsElapsed + 1,
+        secondsElapsed: differenceInSeconds(new Date(), state.startDate),
       };
     }
 
