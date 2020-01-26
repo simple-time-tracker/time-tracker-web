@@ -91,7 +91,7 @@ class Pagination extends Component {
 
 const renderEllipsis = (key) => (
   <li key={key}>
-    <span className="pagination-ellipsis">&hellip;</span>
+    <span className="pagination-ellipsis">&#8230;</span>
   </li>
 );
 
