@@ -10,7 +10,6 @@ const reducer = (state = initialState, action) => {
         currentPage: action.payload.number + 1,
         totalPages: action.payload.totalPages,
         totalElements: action.payload.totalElements,
-        pageSize: action.payload.size,
         items: action.payload.content,
       };
     }

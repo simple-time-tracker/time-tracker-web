@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import TimeEntryListItem from './TimeEntryListItem';
 import Pagination from '../Pagination/Pagination';
+import { DEFAULT_MAX_PAGES } from '../../constants/pagination';
 
 const TimeEntriesList = ({
   timeEntries,
@@ -33,7 +34,7 @@ const TimeEntriesList = ({
     <Pagination
       totalPages={totalPages}
       activePage={currentPage}
-      maxPages={5}
+      maxPages={DEFAULT_MAX_PAGES}
       loadPage={loadTimeEntries}
     />
   </div>
