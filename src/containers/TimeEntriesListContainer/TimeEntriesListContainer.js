@@ -7,8 +7,8 @@ class TimeEntriesListContainer extends Component {
     entries: PropTypes.array,
     totalPages: PropTypes.number.isRequired,
     currentPage: PropTypes.number.isRequired,
-    deleteEntry: PropTypes.func,
-    loadTimeEntries: PropTypes.func,
+    deleteEntry: PropTypes.func.isRequired,
+    loadTimeEntries: PropTypes.func.isRequired,
   };
 
   componentDidMount = () => {

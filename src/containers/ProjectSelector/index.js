@@ -6,7 +6,4 @@ const mapStateToProps = (state) => ({
   currentProject: state.tracker.currentProject,
 });
 
-export default connect(
-  mapStateToProps,
-  null
-)(ProjectSelector);
+export default connect(mapStateToProps, null)(ProjectSelector);
