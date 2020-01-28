@@ -1,20 +1,29 @@
-import React, { PureComponent } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { formatDuration } from '../../utils/time/time';
 
-class Timer extends PureComponent {
-  static propTypes = {
-    secondsPassed: PropTypes.number,
-  };
+const Timer = ({ secondsPassed }) => {
+  useEffect(() => {
+    document.title = getTitle(secondsPassed);
+  });
 
-  render = () => (
+  return (
     <span
       className="is-block is-fullwidth"
       style={{ fontSize: '1.25em', textAlign: 'center' }}
     >
-      {formatDuration(this.props.secondsPassed)}
+      {formatDuration(secondsPassed)}
     </span>
   );
-}
+};
+// eslint-disable-next-line
+const getTitle = (secondsElapsed) =>
+  secondsElapsed
+    ? `${formatDuration(secondsElapsed)} - Time tracker`
+    : 'Time tracker';
+
+Timer.propTypes = {
+  secondsPassed: PropTypes.number,
+};
 
 export default Timer;
