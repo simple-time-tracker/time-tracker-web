@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import TimeEntriesList from '../../components/TimeEntriesList/TimeEntriesList';
+import ConfirmModal from '../../components/Modal/ConfirmModal';
 
 class TimeEntriesListContainer extends Component {
   static propTypes = {
@@ -9,6 +10,10 @@ class TimeEntriesListContainer extends Component {
     currentPage: PropTypes.number.isRequired,
     deleteEntry: PropTypes.func.isRequired,
     loadTimeEntries: PropTypes.func.isRequired,
+    isDeleteModalOpen: PropTypes.bool.isRequired,
+    itemToDelete: PropTypes.object,
+    openDeleteModal: PropTypes.func.isRequired,
+    closeModal: PropTypes.func.isRequired,
   };
 
   componentDidMount = () => {
@@ -16,13 +21,22 @@ class TimeEntriesListContainer extends Component {
   };
 
   render = () => (
-    <TimeEntriesList
-      timeEntries={this.props.entries}
-      totalPages={this.props.totalPages}
-      currentPage={this.props.currentPage}
-      loadTimeEntries={this.props.loadTimeEntries}
-      deleteEntry={this.props.deleteEntry}
-    />
+    <div>
+      <TimeEntriesList
+        timeEntries={this.props.entries}
+        totalPages={this.props.totalPages}
+        currentPage={this.props.currentPage}
+        loadTimeEntries={this.props.loadTimeEntries}
+        openDeleteModal={this.props.openDeleteModal}
+      />
+      <ConfirmModal
+        isOpen={this.props.isDeleteModalOpen}
+        closeModal={() => this.props.closeModal()}
+        confirmAction={() => this.props.deleteEntry(this.props.itemToDelete.id)}
+        message={'Are you sure you want to delete?'}
+        title={`Delete #${this.props.itemToDelete.id} time entry?`}
+      />
+    </div>
   );
 }
 
