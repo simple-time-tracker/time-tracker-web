@@ -2,9 +2,10 @@ import { LOAD_TIME_ENTRIES } from './timeEntriesActionTypes';
 import { getTimeEntries, deleteTimeEntry } from './timeEntriesApi';
 import { DEFAULT_PAGE_SIZE } from '../../constants/pagination';
 
-export const deleteEntry = (id) => (dispatch) => {
+export const deleteEntry = (id) => (dispatch, getState) => {
   deleteTimeEntry(id).then(() => {
-    loadTimeEntries()(dispatch);
+    const { timeEntriesList } = getState();
+    loadTimeEntries(timeEntriesList.currentPage)(dispatch);
   });
 };
 
