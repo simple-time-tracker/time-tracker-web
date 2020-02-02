@@ -11,6 +11,11 @@
     max-width: 25rem;
   }
 }
+
 .delete-icon:hover {
   color: $danger;
+}
+
+select option {
+  background-color: #ffffff;
 }
