@@ -12,7 +12,7 @@ const TimeEntryListItem = ({
   project,
   startDate,
   endDate,
-  deleteHandler,
+  openDeleteModal,
 }) => (
   <tr>
     <td>{id}</td>
@@ -25,7 +25,7 @@ const TimeEntryListItem = ({
         formatDuration(differenceInSeconds(new Date(endDate), new Date(startDate)))}
     </td>
     <td>
-      <span className="icon delete-icon" onClick={() => deleteHandler(id)}>
+      <span className="icon delete-icon" onClick={() => openDeleteModal({ id })}>
         <i className="fa fa-trash" />
       </span>
     </td>
@@ -36,7 +36,7 @@ TimeEntryListItem.propTypes = {
   id: PropTypes.number,
   activity: PropTypes.string,
   project: PropTypes.string,
-  deleteHandler: PropTypes.func,
+  openDeleteModal: PropTypes.func,
   startDate: PropTypes.string,
   endDate: PropTypes.string,
 };

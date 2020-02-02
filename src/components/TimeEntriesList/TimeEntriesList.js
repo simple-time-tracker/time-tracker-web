@@ -8,8 +8,8 @@ const TimeEntriesList = ({
   timeEntries,
   totalPages,
   currentPage,
-  deleteEntry,
   loadTimeEntries,
+  openDeleteModal,
 }) => (
   <div id="time-entries-table" className="container">
     <table className="table is-fullwidth is-striped is-narrow">
@@ -28,7 +28,7 @@ const TimeEntriesList = ({
           </th>
         </tr>
       </thead>
-      <tbody>{mapEntries(timeEntries, deleteEntry)}</tbody>
+      <tbody>{mapEntries(timeEntries, openDeleteModal)}</tbody>
     </table>
 
     <Pagination
@@ -40,7 +40,7 @@ const TimeEntriesList = ({
   </div>
 );
 
-const mapEntries = (entries, deleteHandler) =>
+const mapEntries = (entries, openDeleteModal) =>
   entries.map((entry) => (
     <TimeEntryListItem
       id={entry.id}
@@ -49,7 +49,7 @@ const mapEntries = (entries, deleteHandler) =>
       project={entry.project.name}
       startDate={entry.startDate}
       endDate={entry.endDate}
-      deleteHandler={deleteHandler}
+      openDeleteModal={openDeleteModal}
     />
   ));
 
@@ -59,6 +59,6 @@ TimeEntriesList.propTypes = {
   currentPage: PropTypes.number.isRequired,
   deleteHandler: PropTypes.func,
   loadTimeEntries: PropTypes.func.isRequired,
-  deleteEntry: PropTypes.func,
+  openDeleteModal: PropTypes.func.isRequired,
 };
 export default TimeEntriesList;

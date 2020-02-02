@@ -1,6 +1,15 @@
-import { LOAD_TIME_ENTRIES } from './timeEntriesActionTypes';
+import {
+  LOAD_TIME_ENTRIES,
+  OPEN_DELETE_MODAL,
+  CLOSE_DELETE_MODAL,
+} from './timeEntriesActionTypes';
 
-const initialState = { items: [], totalPages: 1, currentPage: 0 };
+const initialState = {
+  items: [],
+  totalPages: 1,
+  currentPage: 0,
+  deleteModal: { isOpen: false, itemToDelete: { id: undefined } },
+};
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
@@ -13,6 +22,25 @@ const reducer = (state = initialState, action) => {
         items: action.payload.content,
       };
     }
+
+    case OPEN_DELETE_MODAL: {
+      return {
+        ...state,
+        deleteModal: {
+          isOpen: true,
+          itemToDelete: action.payload,
+        },
+      };
+    }
+
+    case CLOSE_DELETE_MODAL:
+      return {
+        ...state,
+        deleteModal: {
+          isOpen: false,
+          itemToDelete: { id: undefined },
+        },
+      };
 
     default:
       return state;

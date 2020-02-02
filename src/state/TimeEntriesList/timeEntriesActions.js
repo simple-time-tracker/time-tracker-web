@@ -1,10 +1,18 @@
-import { LOAD_TIME_ENTRIES } from './timeEntriesActionTypes';
+import {
+  LOAD_TIME_ENTRIES,
+  OPEN_DELETE_MODAL,
+  CLOSE_DELETE_MODAL,
+} from './timeEntriesActionTypes';
 import { getTimeEntries, deleteTimeEntry } from './timeEntriesApi';
 import { DEFAULT_PAGE_SIZE } from '../../constants/pagination';
+import PagingUtils from '../../utils/paging/paging';
 
-export const deleteEntry = (id) => (dispatch) => {
+export const deleteEntry = (id) => (dispatch, getState) => {
   deleteTimeEntry(id).then(() => {
-    loadTimeEntries()(dispatch);
+    const { timeEntriesList } = getState();
+    const { items, currentPage } = timeEntriesList;
+    dispatch({ type: CLOSE_DELETE_MODAL });
+    loadTimeEntries(PagingUtils.resolvePageNumber(items, currentPage))(dispatch);
   });
 };
 
@@ -16,3 +24,10 @@ export const loadTimeEntries = (page) => (dispatch) => {
     });
   });
 };
+
+export const openDeleteModal = (item) => ({
+  type: OPEN_DELETE_MODAL,
+  payload: item,
+});
+
+export const closeModal = () => ({ type: CLOSE_DELETE_MODAL });
