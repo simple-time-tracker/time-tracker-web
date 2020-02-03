@@ -1,4 +1,9 @@
-import { formatDuration, formatShortDate, formatLongDate } from '../time';
+import {
+  formatDuration,
+  formatShortDate,
+  formatLongDate,
+  formatDurationInWords,
+} from '../time';
 
 describe('format duration', () => {
   const testData = [
@@ -36,5 +41,25 @@ describe('format short date', () => {
 
   it('should use YYYY-MM-DD HH:mm format', () => {
     expect(formatLongDate('2020-01-12 13:51:54')).toBe('2020-01-12 13:51');
+  });
+
+  describe('format distance in words', () => {
+    const testData = [
+      { milliseconds: 100, distanceInWords: '0 seconds' },
+      { milliseconds: 1000, distanceInWords: '1 second' },
+      { milliseconds: 2000, distanceInWords: '2 seconds' },
+      { milliseconds: 59000, distanceInWords: '59 seconds' },
+      { milliseconds: 60000, distanceInWords: '1 minute' },
+      { milliseconds: 3540000, distanceInWords: '59 minutes' },
+      { milliseconds: 5400000, distanceInWords: '1 hour' },
+      { milliseconds: 1800000000, distanceInWords: '500 hours' },
+    ];
+    testData.forEach((testCase) => {
+      it(`${testCase.milliseconds} second should be formated as ${testCase.distanceInWords}`, () => {
+        expect(formatDurationInWords(testCase.milliseconds)).toBe(
+          testCase.distanceInWords
+        );
+      });
+    });
   });
 });
