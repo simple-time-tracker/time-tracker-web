@@ -1,6 +1,12 @@
-import { LOAD_PROJECTS } from './projectListActionTypes';
+import { LOAD_PROJECTS, CHANGE_FILTER } from './projectListActionTypes';
+import ProjectStatus from './ProjectStatus';
 
-const initialState = { projects: [], totalPages: 1, currentPage: 0 };
+const initialState = {
+  projects: [],
+  totalPages: 1,
+  currentPage: 0,
+  statusFilter: ProjectStatus.ACTIVE,
+};
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
@@ -12,6 +18,9 @@ const reducer = (state = initialState, action) => {
         totalPages: action.payload.totalPages,
         totalElements: action.payload.totalElements,
       };
+    }
+    case CHANGE_FILTER: {
+      return { ...state, statusFilter: action.payload };
     }
     default:
       return state;

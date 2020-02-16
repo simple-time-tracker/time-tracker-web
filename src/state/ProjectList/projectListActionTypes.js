@@ -1,2 +1,2 @@
-// eslint-disable-next-line import/prefer-default-export
 export const LOAD_PROJECTS = 'projects-list/load';
+export const CHANGE_FILTER = 'projects-list/change-filter';
