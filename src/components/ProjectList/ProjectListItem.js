@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { formatLongDate, formatDurationInWords } from '../../utils/time/time';
 // eslint-disable-next-line no-unused-vars
 import style from './ProjectListItem.scss';
+import ArchiveRestoreButton from './ArchiveRestoreButton';
 
 const ProjectListItem = ({
   id,
@@ -11,6 +12,8 @@ const ProjectListItem = ({
   isArchived,
   timeSpentInMilliseconds,
   dateCreated,
+  archiveAction,
+  restoreAction,
 }) => (
   <tr>
     <td>{id}</td>
@@ -21,13 +24,11 @@ const ProjectListItem = ({
     <td>{isArchived}</td>
     <td>{formatLongDate(dateCreated)}</td>
     <td>
-      <span
-        className="icon archive-icon"
-        data-tooltip="Archive project"
-        onClick={() => {}}
-      >
-        <i className="fa fa-archive" />
-      </span>
+      <ArchiveRestoreButton
+        isArchived={isArchived}
+        restoreAction={() => restoreAction(id)}
+        archiveAction={() => archiveAction(id)}
+      />
     </td>
   </tr>
 );
@@ -38,5 +39,7 @@ ProjectListItem.propTypes = {
   dateCreated: PropTypes.string.isRequired,
   isArchived: PropTypes.bool.isRequired,
   timeSpentInMilliseconds: PropTypes.number.isRequired,
+  archiveAction: PropTypes.func.isRequired,
+  restoreAction: PropTypes.func.isRequired,
 };
 export default ProjectListItem;

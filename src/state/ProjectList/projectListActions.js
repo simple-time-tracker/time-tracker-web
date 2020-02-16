@@ -13,3 +13,17 @@ export const changeFilter = (newStatusFilter) => ({
   type: CHANGE_FILTER,
   payload: newStatusFilter,
 });
+
+export const archiveProject = (projectId) => (dispatch, getState) => {
+  const { projectList } = getState();
+  return projectListApi
+    .archiveProject(projectId)
+    .then(() => loadProjects(1, projectList.statusFilter)(dispatch));
+};
+
+export const restoreProject = (projectId) => (dispatch, getState) => {
+  const { projectList } = getState();
+  return projectListApi
+    .restoreProject(projectId)
+    .then(() => loadProjects(1, projectList.statusFilter)(dispatch));
+};
