@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
 import {
-  loadTimeEntries,
   deleteEntry,
   openDeleteModal,
   closeModal,
+  clearItems,
 } from '../../state/TimeEntriesList/timeEntriesActions';
 import TimeEntriesListContainer from './TimeEntriesListContainer';
 
@@ -16,10 +16,10 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-  loadTimeEntries,
   deleteEntry,
   openDeleteModal,
   closeModal,
+  clearItems,
 };
 
 export default connect(

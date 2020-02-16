@@ -14,30 +14,54 @@ class TimeEntriesListContainer extends Component {
     itemToDelete: PropTypes.object,
     openDeleteModal: PropTypes.func.isRequired,
     closeModal: PropTypes.func.isRequired,
+    clearItems: PropTypes.func.isRequired,
   };
 
   componentDidMount = () => {
+    this.props.clearItems();
     this.props.loadTimeEntries(1);
   };
 
-  render = () => (
-    <div>
-      <TimeEntriesList
-        timeEntries={this.props.entries}
-        totalPages={this.props.totalPages}
-        currentPage={this.props.currentPage}
-        loadTimeEntries={this.props.loadTimeEntries}
-        openDeleteModal={this.props.openDeleteModal}
-      />
-      <ConfirmModal
-        isOpen={this.props.isDeleteModalOpen}
-        closeModal={() => this.props.closeModal()}
-        confirmAction={() => this.props.deleteEntry(this.props.itemToDelete.id)}
-        message={'Are you sure you want to delete?'}
-        title={`Delete #${this.props.itemToDelete.id} time entry?`}
-      />
-    </div>
-  );
+  componentDidUpdate = (prevProps) => {
+    const { loadTimeEntries, currentPage } = this.props;
+    if (!(prevProps.loadTimeEntries === loadTimeEntries)) {
+      this.props.clearItems();
+      this.props.loadTimeEntries(currentPage);
+    }
+  };
+
+  render = () => {
+    const {
+      entries,
+      currentPage,
+      totalPages,
+      isDeleteModalOpen,
+      loadTimeEntries,
+      openDeleteModal,
+      closeModal,
+      deleteEntry,
+    } = this.props;
+    return (
+      <div>
+        <TimeEntriesList
+          timeEntries={entries}
+          totalPages={totalPages}
+          currentPage={currentPage}
+          loadTimeEntries={loadTimeEntries}
+          openDeleteModal={openDeleteModal}
+        />
+        <ConfirmModal
+          isOpen={isDeleteModalOpen}
+          closeModal={() => closeModal()}
+          confirmAction={() =>
+            deleteEntry(this.props.itemToDelete.id, loadTimeEntries)
+          }
+          message={'Are you sure you want to delete?'}
+          title={`Delete #${this.props.itemToDelete.id} time entry?`}
+        />
+      </div>
+    );
+  };
 }
 
 export default TimeEntriesListContainer;

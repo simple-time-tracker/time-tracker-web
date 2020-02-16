@@ -3,7 +3,7 @@ import ProjectsListContainer from '../containers/ProjectsListContainer';
 
 const ProjectListPage = () => (
   <div>
-    <h1 className="title">Projects</h1>
+    <h1 className="title is-2">Projects</h1>
     <ProjectsListContainer />
   </div>
 );

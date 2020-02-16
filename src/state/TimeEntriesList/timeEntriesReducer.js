@@ -2,6 +2,7 @@ import {
   LOAD_TIME_ENTRIES,
   OPEN_DELETE_MODAL,
   CLOSE_DELETE_MODAL,
+  CLEAR_TIME_ENTRIES,
 } from './timeEntriesActionTypes';
 
 const initialState = {
@@ -20,6 +21,15 @@ const reducer = (state = initialState, action) => {
         totalPages: action.payload.totalPages,
         totalElements: action.payload.totalElements,
         items: action.payload.content,
+      };
+    }
+
+    case CLEAR_TIME_ENTRIES: {
+      return {
+        ...state,
+        currentPage: 1,
+        totalPages: 1,
+        items: [],
       };
     }
 
