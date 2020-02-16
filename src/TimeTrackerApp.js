@@ -11,6 +11,7 @@ import LogoutCallbackPage from './page/Auth/LogoutCallbackPage';
 import SilentRenewPage from './page/Auth/SilentRenewCallbackPage';
 import LoginRedirectPage from './page/Auth/LoginRedirectPage';
 import ProjectListPage from './page/ProjectsListPage';
+import ProjectPage from './page/ProjectPage';
 
 const TimeTrackerApp = () => (
   <Router>
@@ -23,6 +24,7 @@ const TimeTrackerApp = () => (
         <Route exact={true} path="/logout-callback" component={LogoutCallbackPage} />
         <Route exact={true} path="/silent-renew" component={SilentRenewPage} />
         <PrivateRoute exact path="/" component={TimeTrackerPage} />
+        <PrivateRoute path="/projects/:id/" component={ProjectPage} />
         <PrivateRoute path="/projects" component={ProjectListPage} />
         <Route to="*">
           <NotFoundPage />

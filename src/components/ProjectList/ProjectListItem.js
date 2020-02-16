@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { formatLongDate, formatDurationInWords } from '../../utils/time/time';
 
 const ProjectListItem = ({
@@ -11,7 +12,9 @@ const ProjectListItem = ({
 }) => (
   <tr>
     <td>{id}</td>
-    <td>{name}</td>
+    <td>
+      <Link to={`/projects/${id}`}>{name}</Link>
+    </td>
     <td>{formatDurationInWords(timeSpentInMilliseconds)}</td>
     <td>{isArchived}</td>
     <td>{formatLongDate(dateCreated)}</td>
