@@ -4,14 +4,18 @@ import { setAddProjectModalError } from '../NewProjectModal/newProjectModalActio
 import { DUPLICATE_PROJECT_NAME_ERROR } from '../errors';
 import { changeProject } from '../TimeTracker/timeTrackerActions';
 
-export const loadProjects = () => (dispatch) =>
+export const loadProjects = () => (dispatch, getState) =>
   getProjects().then((response) => {
     if (response.data.length > 0) {
       dispatch({
         type: LOAD_PROJECTS,
         payload: response.data,
       });
-      dispatch(changeProject(response.data[0].id));
+
+      const { tracker } = getState();
+      if (!tracker.currentProject) {
+        dispatch(changeProject(response.data[0].id));
+      }
     } else {
       dispatch({
         type: LOAD_PROJECTS,
