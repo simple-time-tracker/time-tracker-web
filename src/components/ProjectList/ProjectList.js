@@ -24,6 +24,7 @@ class ProjectList extends PureComponent {
               <th>Time spent</th>
               <th>Is archived</th>
               <th>Creation date</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>{mapEntries(projects)}</tbody>

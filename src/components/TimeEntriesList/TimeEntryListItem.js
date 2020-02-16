@@ -25,7 +25,11 @@ const TimeEntryListItem = ({
         formatDuration(differenceInSeconds(new Date(endDate), new Date(startDate)))}
     </td>
     <td>
-      <span className="icon delete-icon" onClick={() => openDeleteModal({ id })}>
+      <span
+        className="icon delete-icon"
+        data-tooltip="Delete entry"
+        onClick={() => openDeleteModal({ id })}
+      >
         <i className="fa fa-trash" />
       </span>
     </td>
