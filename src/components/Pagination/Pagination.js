@@ -43,25 +43,27 @@ class Pagination extends Component {
         role="navigation"
         aria-label="pagination"
       >
-        <ul className="pagination-list">
-          <li
-            key="lessThan"
-            className="pagination-link"
-            disabled={this.isPreviousButtonDisabled()}
-            onClick={() => this.onPreviousButtonClickAction()}
-          >
-            &lt;
-          </li>
-          {this.renderItems(totalPages, activePage)}
-          <li
-            key="greaterThan"
-            className="pagination-link"
-            disabled={this.isNextButtonDisabled()}
-            onClick={() => this.onNextButtonClickAction()}
-          >
-            &gt;
-          </li>
-        </ul>
+        {totalPages > 1 && (
+          <ul className="pagination-list">
+            <li
+              key="lessThan"
+              className="pagination-link"
+              disabled={this.isPreviousButtonDisabled()}
+              onClick={() => this.onPreviousButtonClickAction()}
+            >
+              &lt;
+            </li>
+            {this.renderItems(totalPages, activePage)}
+            <li
+              key="greaterThan"
+              className="pagination-link"
+              disabled={this.isNextButtonDisabled()}
+              onClick={() => this.onNextButtonClickAction()}
+            >
+              &gt;
+            </li>
+          </ul>
+        )}
       </nav>
     );
   };
