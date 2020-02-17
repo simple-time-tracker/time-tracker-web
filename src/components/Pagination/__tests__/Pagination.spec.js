@@ -43,17 +43,9 @@ describe('Pagination buttons component', () => {
       />
     );
 
-    const paginationButtonsContainer = wrapper.find(
-      'nav.pagination ul.pagination-list'
-    );
-    const paginationButtons = paginationButtonsContainer.children();
+    const paginationButtonsContainer = wrapper.find('nav.pagination');
 
-    expect(paginationButtonsContainer.hasClass('pagination-list')).toBe(true);
-    expect(paginationButtons).toHaveLength(3);
-
-    assertSimpleLink(paginationButtons.at(0), '<', true);
-    assertPageButton(paginationButtons.at(1), 1, true);
-    assertSimpleLink(paginationButtons.at(2), '>', true);
+    expect(paginationButtonsContainer.children().exists()).toBe(false);
   });
 
   it('should render pagination buttons, on 1st of 9 pages, when maxPages = 5', () => {
