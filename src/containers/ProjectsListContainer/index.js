@@ -3,6 +3,8 @@ import ProjectListContainer from './ProjectsListContainer';
 import {
   loadProjects,
   changeFilter,
+  archiveProject,
+  restoreProject,
 } from '../../state/ProjectList/projectListActions';
 
 const mapStateToProps = (state) => ({
@@ -12,6 +14,11 @@ const mapStateToProps = (state) => ({
   statusFilter: state.projectList.statusFilter,
 });
 
-const mapDispatchToProps = { loadProjects, changeFilter };
+const mapDispatchToProps = {
+  loadProjects,
+  changeFilter,
+  archiveProject,
+  restoreProject,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProjectListContainer);

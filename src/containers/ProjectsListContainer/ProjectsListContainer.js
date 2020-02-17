@@ -11,6 +11,8 @@ class ProjectListContainer extends Component {
     statusFilter: PropTypes.string.isRequired,
     loadProjects: PropTypes.func.isRequired,
     changeFilter: PropTypes.func.isRequired,
+    archiveProject: PropTypes.func.isRequired,
+    restoreProject: PropTypes.func.isRequired,
   };
 
   componentDidMount = () => {
@@ -46,7 +48,14 @@ class ProjectListContainer extends Component {
   };
 
   render = () => {
-    const { projects, currentPage, totalPages, loadProjects } = this.props;
+    const {
+      projects,
+      currentPage,
+      totalPages,
+      loadProjects,
+      archiveProject,
+      restoreProject,
+    } = this.props;
     return (
       <div className="projects-container">
         <div className="tabs">
@@ -70,6 +79,8 @@ class ProjectListContainer extends Component {
           currentPage={currentPage}
           totalPages={totalPages}
           loadProjects={loadProjects}
+          archiveAction={archiveProject}
+          restoreAction={restoreProject}
         />
       </div>
     );

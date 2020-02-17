@@ -10,10 +10,19 @@ class ProjectList extends PureComponent {
     totalPages: PropTypes.number.isRequired,
     currentPage: PropTypes.number.isRequired,
     loadProjects: PropTypes.func.isRequired,
+    archiveAction: PropTypes.func.isRequired,
+    restoreAction: PropTypes.func.isRequired,
   };
 
   render = () => {
-    const { projects, totalPages, currentPage, loadProjects } = this.props;
+    const {
+      projects,
+      totalPages,
+      currentPage,
+      loadProjects,
+      archiveAction,
+      restoreAction,
+    } = this.props;
     return (
       <div id="projects-table">
         <table className="table is-fullwidth is-striped is-narrow">
@@ -24,9 +33,10 @@ class ProjectList extends PureComponent {
               <th>Time spent</th>
               <th>Is archived</th>
               <th>Creation date</th>
+              <th>Actions</th>
             </tr>
           </thead>
-          <tbody>{mapEntries(projects)}</tbody>
+          <tbody>{mapEntries(projects, archiveAction, restoreAction)}</tbody>
         </table>
         <Pagination
           totalPages={totalPages}
@@ -39,7 +49,7 @@ class ProjectList extends PureComponent {
   };
 }
 
-const mapEntries = (projects) =>
+const mapEntries = (projects, archiveAction, restoreAction) =>
   projects.map((entry) => (
     <ProjectListItem
       key={entry.id}
@@ -48,6 +58,8 @@ const mapEntries = (projects) =>
       isArchived={entry.archived}
       timeSpentInMilliseconds={entry.timeSpentInMilliseconds}
       dateCreated={entry.dateCreated}
+      archiveAction={archiveAction}
+      restoreAction={restoreAction}
     />
   ));
 

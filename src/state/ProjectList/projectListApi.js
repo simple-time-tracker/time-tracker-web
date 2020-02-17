@@ -14,4 +14,10 @@ export default {
         isArchived: status === ProjectStatus.ARCHIVED,
       },
     }),
+
+  archiveProject: (projectId) =>
+    axios.post(`${API_URL}/${PROJECTS_PATH}/${projectId}/archive`),
+
+  restoreProject: (projectId) =>
+    axios.post(`${API_URL}/${PROJECTS_PATH}/${projectId}/restore`),
 };
