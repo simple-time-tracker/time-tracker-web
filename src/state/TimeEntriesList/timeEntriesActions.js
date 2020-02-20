@@ -7,6 +7,7 @@ import {
 import { getTimeEntries, deleteTimeEntry } from './timeEntriesApi';
 import { DEFAULT_PAGE_SIZE } from '../../constants/pagination';
 import PagingUtils from '../../utils/paging/paging';
+import { successNotification } from '../../utils/notifications/toastUtils';
 
 export const deleteEntry = (id, reloadEntriesAction) => (dispatch, getState) => {
   deleteTimeEntry(id).then(() => {
@@ -14,6 +15,7 @@ export const deleteEntry = (id, reloadEntriesAction) => (dispatch, getState) => 
     const { items, currentPage } = timeEntriesList;
     dispatch({ type: CLOSE_DELETE_MODAL });
     reloadEntriesAction(PagingUtils.resolvePageNumber(items, currentPage));
+    successNotification('Time entry was deleted successfully');
   });
 };
 
