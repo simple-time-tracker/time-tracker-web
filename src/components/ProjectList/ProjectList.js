@@ -31,7 +31,6 @@ class ProjectList extends PureComponent {
               <th>Id</th>
               <th>Name</th>
               <th>Time spent</th>
-              <th>Is archived</th>
               <th>Creation date</th>
               <th>Actions</th>
             </tr>

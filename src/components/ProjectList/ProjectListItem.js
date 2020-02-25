@@ -21,7 +21,6 @@ const ProjectListItem = ({
       <Link to={`/projects/${id}`}>{name}</Link>
     </td>
     <td>{formatDurationInWords(timeSpentInMilliseconds)}</td>
-    <td>{isArchived}</td>
     <td>{formatLongDate(dateCreated)}</td>
     <td>
       <ArchiveRestoreButton
