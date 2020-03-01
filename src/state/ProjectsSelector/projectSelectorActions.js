@@ -24,10 +24,12 @@ export const loadProjects = () => (dispatch, getState) =>
     }
   });
 
-export const createProject = (name) => (dispatch) => {
+export const createProject = (name) => (dispatch, getState) => {
   createNewProject(name)
     .then((response) => {
-      loadProjects()(dispatch).then(() => dispatch(changeProject(response.data.id)));
+      loadProjects()(dispatch, getState).then(() => {
+        dispatch(changeProject(response.data.id));
+      });
     })
     .catch((error) => {
       if (
