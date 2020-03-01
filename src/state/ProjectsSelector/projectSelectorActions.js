@@ -3,6 +3,7 @@ import { getProjects, createNewProject } from './projectApi';
 import { setAddProjectModalError } from '../NewProjectModal/newProjectModalActions';
 import { DUPLICATE_PROJECT_NAME_ERROR } from '../errors';
 import { changeProject } from '../TimeTracker/timeTrackerActions';
+import { successNotification } from '../../utils/notifications/toastUtils';
 
 export const loadProjects = () => (dispatch, getState) =>
   getProjects().then((response) => {
@@ -29,6 +30,9 @@ export const createProject = (name) => (dispatch, getState) => {
     .then((response) => {
       loadProjects()(dispatch, getState).then(() => {
         dispatch(changeProject(response.data.id));
+        successNotification(
+          `Project "${response.data.name}" was successfully created`
+        );
       });
     })
     .catch((error) => {
