@@ -5,7 +5,7 @@ COPY . ./
 RUN npm install && \
   npm run build
 
-FROM nginx:1.20-alpine
+FROM nginx:1-alpine
 WORKDIR /usr/share/nginx/html
 RUN apk add --no-cache bash
 COPY --from=build-js /usr/src/app/dist .
