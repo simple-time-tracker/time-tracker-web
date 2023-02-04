@@ -1,27 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Route } from 'react-router-dom';
-import { AuthConsumer } from '../../utils/auth/authProvider';
+import { Navigate } from 'react-router-dom';
+import { useAuth } from 'react-oidc-context';
 
-const PrivateRoute = ({ component, ...rest }) => {
-  const renderFn = (Component) => (props) => (
-    <AuthConsumer>
-      {({ isAuthenticated, signInRedirect }) => {
-        if (!!Component && isAuthenticated()) {
-          return <Component {...props} />;
-        }
-
-        signInRedirect();
-        return <span>loading</span>;
-      }}
-    </AuthConsumer>
-  );
-
-  return <Route {...rest} render={renderFn(component)} />;
+const PrivateRoute = ({ children }) => {
+  const auth = useAuth();
+  return auth.isAuthenticated ? children : <Navigate to={'/'} />;
 };
 
 PrivateRoute.propTypes = {
-  component: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+  children: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 };
 
 export default PrivateRoute;

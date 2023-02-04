@@ -1,13 +1,18 @@
-import React from 'react';
-import { AuthConsumer } from '../../utils/auth/authProvider';
+import React, { useEffect } from 'react';
+import { useAuth } from 'react-oidc-context';
+import { Navigate } from 'react-router-dom';
+import authTokenApi from '../../utils/auth/authTokenApi';
 
-const LogoutPage = () => (
-  <AuthConsumer>
-    {({ logout }) => {
-      logout();
-      return <span>loading</span>;
-    }}
-  </AuthConsumer>
-);
+const LogoutPage = () => {
+  const auth = useAuth();
+  useEffect(() => {
+    if (auth.isAuthenticated) {
+      authTokenApi.clearToken();
+      auth.signoutPopup();
+    }
+  });
+
+  return <Navigate to={'/'} />;
+};
 
 export default LogoutPage;

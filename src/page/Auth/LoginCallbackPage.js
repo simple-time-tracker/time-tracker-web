@@ -1,13 +1,6 @@
 import React from 'react';
-import { AuthConsumer } from '../../utils/auth/authProvider';
+import { Navigate } from 'react-router-dom';
 
-const LoginCallbackPage = () => (
-  <AuthConsumer>
-    {({ signInRedirectCallback }) => {
-      signInRedirectCallback();
-      return <span>loading</span>;
-    }}
-  </AuthConsumer>
-);
+const LoginCallbackPage = () => <Navigate to={'/'} />;
 
 export default LoginCallbackPage;
