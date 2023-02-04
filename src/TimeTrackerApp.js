@@ -47,7 +47,7 @@ const TimeTrackerApp = () => {
             <Route path="/" element={<TimeTrackerPage />} />
             <Route path="/login-callback" element={<LoginCallbackPage />} />
             <Route path="/logout" element={<LogoutPage />} />
-            <Route path="/projects/:id/" element={<ProjectPage />} />
+            <Route path="/projects/:id" element={<ProjectPage />} />
             <Route path="/projects" element={<ProjectListPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
