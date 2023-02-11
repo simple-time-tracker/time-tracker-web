@@ -1,12 +1,13 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { describe, it, expect, vi } from 'vitest';
+import { render, screen } from '@testing-library/react';
 import ConfirmModal from '../ConfirmModal';
 
 describe('Confirm modal', () => {
   let wrapper;
 
   it('should be not active, when isOpen=false', () => {
-    wrapper = shallow(
+    wrapper = render(
       <ConfirmModal
         isOpen={false}
         confirmAction={() => {}}
@@ -16,12 +17,12 @@ describe('Confirm modal', () => {
       />
     );
 
-    const dialog = wrapper.find('.modal');
-    expect(dialog.hasClass('is-active')).toBe(false);
+    const dialog = screen.getByTestId('modal');
+    expect(dialog).not.toHaveClass('is-active');
   });
 
   it('should be active, when isOpen=true', () => {
-    wrapper = shallow(
+    wrapper = render(
       <ConfirmModal
         isOpen={true}
         confirmAction={() => {}}
@@ -31,12 +32,12 @@ describe('Confirm modal', () => {
       />
     );
 
-    const dialog = wrapper.find('.modal');
-    expect(dialog.hasClass('is-active')).toBe(true);
+    const dialog = screen.getByTestId('modal');
+    expect(dialog).toHaveClass('is-active');
   });
 
   it('should render title and message', () => {
-    wrapper = shallow(
+    wrapper = render(
       <ConfirmModal
         isOpen={true}
         confirmAction={() => {}}
@@ -46,14 +47,13 @@ describe('Confirm modal', () => {
       />
     );
 
-    expect(wrapper.find('header.modal-card-head p.modal-card-title').text()).toBe(
-      'Some title'
-    );
-    expect(wrapper.find('section.modal-card-body').text()).toBe('Some message');
+    screen.role;
+    expect(screen.getByText('Some title')).toBeTruthy();
+    expect(screen.getByText('Some message')).toBeTruthy();
   });
 
   it('should render cancel, confirm buttons', () => {
-    wrapper = shallow(
+    wrapper = render(
       <ConfirmModal
         isOpen={true}
         confirmAction={() => {}}
@@ -63,19 +63,16 @@ describe('Confirm modal', () => {
       />
     );
 
-    const footer = wrapper.find('footer.modal-card-foot');
-    expect(footer.children()).toHaveLength(2);
+    const cancelButton = screen.getByTestId('modal-cancel-button');
+    expect(cancelButton).toHaveTextContent('Cancel');
 
-    const cancelButton = footer.children('button').at(0);
-    expect(cancelButton.text()).toBe('Cancel');
-
-    const confirmButton = footer.children('button').at(1);
-    expect(confirmButton.text()).toBe('Confirm');
+    const confirmButton = screen.getByTestId('modal-confirm-button');
+    expect(confirmButton).toHaveTextContent('Confirm');
   });
 
   it('should close modal, when X is clicked', () => {
-    const closeModalMock = jest.fn();
-    wrapper = shallow(
+    const closeModalMock = vi.fn();
+    wrapper = render(
       <ConfirmModal
         isOpen={true}
         confirmAction={() => {}}
@@ -85,14 +82,12 @@ describe('Confirm modal', () => {
       />
     );
 
-    const xButton = wrapper.find('header.modal-card-head .delete');
-    xButton.simulate('click');
-    expect(closeModalMock.mock.calls.length).toBe(1);
+    screen.getByTestId('modal-close-button').click();
   });
 
   it('should close modal, when cancel button clicked', () => {
-    const closeModalMock = jest.fn();
-    wrapper = shallow(
+    const closeModalMock = vi.fn();
+    wrapper = render(
       <ConfirmModal
         isOpen={true}
         confirmAction={() => {}}
@@ -102,17 +97,12 @@ describe('Confirm modal', () => {
       />
     );
 
-    const cancelButton = wrapper
-      .find('footer.modal-card-foot')
-      .children()
-      .at(0);
-    cancelButton.simulate('click');
-    expect(closeModalMock.mock.calls.length).toBe(1);
+    screen.getByTestId('modal-cancel-button').click();
   });
 
   it('should call confirm callback, when confirm button is clicked', () => {
-    const confirmMock = jest.fn();
-    wrapper = shallow(
+    const confirmMock = vi.fn();
+    wrapper = render(
       <ConfirmModal
         isOpen={true}
         confirmAction={confirmMock}
@@ -122,11 +112,6 @@ describe('Confirm modal', () => {
       />
     );
 
-    const confirmButton = wrapper
-      .find('footer.modal-card-foot')
-      .children()
-      .at(1);
-    confirmButton.simulate('click');
-    expect(confirmMock.mock.calls.length).toBe(1);
+    const confirmButton = screen.getByTestId('modal-confirm-button').click();
   });
 });

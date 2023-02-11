@@ -37,16 +37,16 @@ class Navbar extends React.PureComponent {
         className={`navbar-menu ${this.getHamburgerActiveCss()}`}
       >
         <div className="navbar-start">
-          <Link to="/" className="navbar-item">
+          <Link to="/" data-testid="home-link" className="navbar-item">
             Time tracker
           </Link>
 
-          <Link to="/projects" className="navbar-item">
+          <Link to="/projects" data-testid="projects-link" className="navbar-item">
             Projects
           </Link>
         </div>
         <div className="navbar-end">
-          <Link to="/logout" className="navbar-item">
+          <Link to="/logout" data-testid="logout-link" className="navbar-item">
             Sign out
           </Link>
         </div>

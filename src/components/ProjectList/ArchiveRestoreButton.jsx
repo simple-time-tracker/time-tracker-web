@@ -11,20 +11,22 @@ const ArchiveRestoreButton = (props) => {
 const renderArchiveButton = (archiveAction) => (
   <span
     className="icon archive-icon"
+    data-testid="archive-button"
     data-tooltip="Archive project"
     onClick={archiveAction}
   >
-    <i className="fa fa-archive" />
+    <i className="fa fa-archive" data-testid="archive-icon" />
   </span>
 );
 
 const renderRestoreButton = (restoreAction) => (
   <span
     className="icon undo-icon"
+    data-testid="archive-undo-button"
     data-tooltip="Restore archived project"
     onClick={restoreAction}
   >
-    <i className="fa fa-undo" />
+    <i className="fa fa-undo" data-testid="archive-undo-icon" />
   </span>
 );
 

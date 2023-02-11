@@ -7,7 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 // eslint-disable-next-line no-unused-vars
 import stylesTooltip from 'bulma-tooltip';
 import { Provider } from 'react-redux';
-import { ToastContainer } from 'react-toastify/esm/react-toastify';
+import { ToastContainer } from 'react-toastify';
 import { AuthProvider } from 'react-oidc-context';
 import TimeTrackerApp from './TimeTrackerApp';
 import store from './state/store';

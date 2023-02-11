@@ -2,19 +2,32 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const ConfirmModal = ({ isOpen, title, message, closeModal, confirmAction }) => (
-  <div className={`modal ${resolveIsActiveClass(isOpen)}`}>
+  <div className={`modal ${resolveIsActiveClass(isOpen)}`} data-testid="modal">
     <div className="modal-background"></div>
     <div className="modal-card">
       <header className="modal-card-head">
         <p className="modal-card-title">{title}</p>
-        <button className="delete" aria-label="close" onClick={closeModal}></button>
+        <button
+          className="delete"
+          data-testid="modal-close-button"
+          aria-label="close"
+          onClick={closeModal}
+        ></button>
       </header>
       <section className="modal-card-body">{message}</section>
       <footer className="modal-card-foot">
-        <button className="button" onClick={closeModal}>
+        <button
+          className="button"
+          data-testid="modal-cancel-button"
+          onClick={closeModal}
+        >
           Cancel
         </button>
-        <button className="button is-danger" onClick={confirmAction}>
+        <button
+          className="button is-danger"
+          data-testid="modal-confirm-button"
+          onClick={confirmAction}
+        >
           Confirm
         </button>
       </footer>
