@@ -18,7 +18,7 @@ import {
   loadProjects,
 } from '../../state/ProjectsSelector/projectSelectorActions';
 
-import TimeTrackerPanel from './TimeTackerPanel ';
+import TimeTrackerPanel from './TimeTackerPanel';
 
 const mapStateToProps = (state) => ({
   projects: state.projectSelector.projects,

@@ -4,72 +4,39 @@
   "description": "Time tracker web app",
   "main": "index.js",
   "scripts": {
-    "start": "NODE_ENV=local node dev-server.js",
-    "build": "parcel build src/index.html",
-    "lint": "eslint src",
-    "format": "prettier --write src/\"**/*.+(js|jsx|json|css|md)\"",
-    "test": "jest --coverage"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.+(js|jsx)": [
-      "eslint"
-    ],
-    "*.+(js|jsx|json|css|md)": [
-      "prettier --write",
-      "git add"
-    ]
+    "start": "vite",
+    "build": "vite build",
+    "test": "vitest"
   },
   "keywords": [
-    "react",
-    "parcel"
+    "react"
   ],
   "author": "Dovydas Venckus",
   "license": "GPL-2.0",
   "dependencies": {
-    "@babel/polyfill": "7.8.3",
-    "axios": "0.27.2",
-    "bulma": "0.8.0",
+    "axios": "1.3.2",
+    "bulma": "0.9.4",
     "bulma-tooltip": "3.0.2",
-    "date-fns": "2.9.0",
-    "oidc-client": "1.11.5",
-    "prop-types": "15.7.2",
-    "react": "16.12.0",
-    "react-dom": "16.12.0",
-    "react-redux": "7.1.3",
-    "react-router-dom": "5.1.2",
-    "react-toastify": "5.5.0",
-    "redux": "4.0.5",
-    "redux-thunk": "2.3.0",
-    "underscore": "1.13.0"
+    "date-fns": "2.29.3",
+    "oidc-client-ts": "2.2.1",
+    "prop-types": "15.8.1",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-oidc-context": "2.2.1",
+    "react-redux": "8.0.5",
+    "react-router-dom": "6.8.1",
+    "react-toastify": "9.1.1",
+    "redux": "4.2.1",
+    "redux-thunk": "2.4.2",
+    "underscore": "1.13.6"
   },
   "devDependencies": {
-    "@babel/core": "7.8.4",
-    "@babel/plugin-proposal-class-properties": "7.8.3",
-    "@babel/preset-env": "7.8.3",
-    "@babel/preset-react": "7.8.3",
-    "babel-eslint": "10.0.3",
-    "confusing-browser-globals": "1.0.9",
-    "enzyme": "3.11.0",
-    "enzyme-adapter-react-16": "1.15.2",
-    "eslint": "6.8.0",
-    "eslint-config-prettier": "6.9.0",
-    "eslint-plugin-import": "2.20.0",
-    "eslint-plugin-prettier": "3.1.2",
-    "eslint-plugin-react": "7.18.0",
-    "http-proxy": "^1.18.1",
-    "husky": "4.0.10",
-    "jest": "24.9.0",
-    "jest-junit": "10.0.0",
-    "lint-staged": "9.5.0",
-    "parcel": "1.12.4",
-    "parcel-bundler": "1.12.4",
-    "prettier": "1.19.1",
-    "react-test-renderer": "16.12.0",
-    "sass": "1.25.0"
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@vitejs/plugin-react": "3.1.0",
+    "jsdom": "^21.1.0",
+    "sass": "1.58.0",
+    "vite": "4.1.1",
+    "vitest": "^0.28.4"
   }
 }

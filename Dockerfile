@@ -1,11 +1,11 @@
-FROM node:12-alpine AS build-js
+FROM node:18-alpine AS build-js
 ENV APP_ROOT=/usr/src/app
 WORKDIR $APP_ROOT
 COPY . ./
-RUN npm install && \
+RUN npm ci && \
   npm run build
 
-FROM nginx:1.22.0-alpine
+FROM nginx:1.23.3-alpine
 WORKDIR /usr/share/nginx/html
 RUN apk add --no-cache bash
 COPY --from=build-js /usr/src/app/dist .
