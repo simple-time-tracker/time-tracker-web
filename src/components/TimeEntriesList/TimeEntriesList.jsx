@@ -46,7 +46,7 @@ const mapEntries = (entries, openDeleteModal) =>
       id={entry.id}
       key={entry.id}
       activity={entry.description}
-      project={entry.project.name}
+      projectName={entry.projectName}
       startDate={entry.startDate}
       endDate={entry.endDate}
       openDeleteModal={openDeleteModal}

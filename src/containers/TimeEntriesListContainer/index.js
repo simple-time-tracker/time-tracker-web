@@ -8,6 +8,7 @@ import {
 import TimeEntriesListContainer from './TimeEntriesListContainer';
 
 const mapStateToProps = (state) => ({
+  projects: state.projectSelector.projects,
   entries: state.timeEntriesList.items,
   currentPage: state.timeEntriesList.currentPage,
   totalPages: state.timeEntriesList.totalPages,
