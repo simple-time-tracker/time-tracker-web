@@ -5,6 +5,7 @@ import ConfirmModal from '../../components/Modal/ConfirmModal';
 
 class TimeEntriesListContainer extends Component {
   static propTypes = {
+    projects: PropTypes.array,
     entries: PropTypes.array,
     totalPages: PropTypes.number.isRequired,
     currentPage: PropTypes.number.isRequired,
@@ -33,6 +34,7 @@ class TimeEntriesListContainer extends Component {
   render = () => {
     const {
       entries,
+      projects,
       currentPage,
       totalPages,
       isDeleteModalOpen,
@@ -44,7 +46,7 @@ class TimeEntriesListContainer extends Component {
     return (
       <div>
         <TimeEntriesList
-          timeEntries={entries}
+          timeEntries={mapProjectNameToEntries(entries, projects)}
           totalPages={totalPages}
           currentPage={currentPage}
           loadTimeEntries={loadTimeEntries}
@@ -63,5 +65,13 @@ class TimeEntriesListContainer extends Component {
     );
   };
 }
+
+// Refactor using selectors #135
+const mapProjectNameToEntries = (entries, projects) => {
+  return entries.map((entry) => ({
+    ...entry,
+    projectName: projects?.find((project) => (project.id = entry.projectId)).name,
+  }));
+};
 
 export default TimeEntriesListContainer;

@@ -9,7 +9,7 @@ import style from './TimeEntryListItem.scss';
 const TimeEntryListItem = ({
   id,
   activity,
-  project,
+  projectName,
   startDate,
   endDate,
   openDeleteModal,
@@ -17,7 +17,7 @@ const TimeEntryListItem = ({
   <tr>
     <td>{id}</td>
     <td>{activity}</td>
-    <td>{project}</td>
+    <td>{projectName}</td>
     <td className="is-hidden-mobile">{formatShortDate(startDate)}</td>
     <td className="is-hidden-mobile">{endDate && formatShortDate(endDate)}</td>
     <td>
@@ -39,7 +39,7 @@ const TimeEntryListItem = ({
 TimeEntryListItem.propTypes = {
   id: PropTypes.number,
   activity: PropTypes.string,
-  project: PropTypes.string,
+  projectName: PropTypes.string,
   openDeleteModal: PropTypes.func,
   startDate: PropTypes.string,
   endDate: PropTypes.string,

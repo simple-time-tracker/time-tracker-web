@@ -20,12 +20,16 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case LOAD_CURRENT_TIME_ENTRY: {
       if (action.payload) {
-        const { project, description, startDate: startDateString } = action.payload;
+        const {
+          projectId,
+          description,
+          startDate: startDateString,
+        } = action.payload;
         const startDate = new Date(startDateString);
         return {
           ...state,
           isTracking: true,
-          currentProject: project.id,
+          currentProject: projectId,
           taskDescription: description,
           startDate,
           secondsElapsed: differenceInSeconds(new Date(), startDate),
