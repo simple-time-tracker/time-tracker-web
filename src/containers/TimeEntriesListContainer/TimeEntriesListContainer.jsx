@@ -70,7 +70,7 @@ class TimeEntriesListContainer extends Component {
 const mapProjectNameToEntries = (entries, projects) => {
   return entries.map((entry) => ({
     ...entry,
-    projectName: projects?.find((project) => (project.id = entry.projectId)).name,
+    projectName: projects?.find((project) => project.id === entry.projectId)?.name,
   }));
 };
 
